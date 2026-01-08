@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/sheet'
 import SanityImage from '@/components/sanity-image'
 import { Button } from '@/components/ui/button'
+import { LocaleSwitch } from '@/components/locale-switch'
 import { ChevronDown, Menu } from 'lucide-react'
 
 import { useIsMobile } from '@/hooks/use-mobile'
@@ -76,7 +77,10 @@ export function Navigation({ nav }: NavigationProps) {
               )
             }
           })}
-          <NavigationMenuItem>langswitcher</NavigationMenuItem>
+          <NavigationMenuItem>
+            {' '}
+            <LocaleSwitch />
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 
@@ -143,7 +147,9 @@ export function Navigation({ nav }: NavigationProps) {
               }
             })}
           </div>
-          <SheetFooter>langswitcher</SheetFooter>
+          <SheetFooter className="mt-10 border-t">
+            <LocaleSwitch className="w-fit" />
+          </SheetFooter>
         </SheetContent>
       </Sheet>
     </div>
