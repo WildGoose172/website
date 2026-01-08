@@ -1,0 +1,44 @@
+name: Pull request
+on:
+  pull_request:
+    branches: ["main", "staging", "staging/*"]
+
+jobs:
+  linting:
+    name: ✨ Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run eslint
+        run: pnpm run lint
+
+  typechecking:
+    name: 🕵 Typechecking
+    needs: linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run typechecking
+        run: pnpm run typecheck

@@ -1,0 +1,79 @@
+name: Production deploy
+
+# env:
+#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  linting:
+    name: ✨ Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run eslint
+        run: pnpm run lint
+
+  typechecking:
+    name: 🕵 Typechecking
+    needs: linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run typechecking
+        run: pnpm run typecheck
+
+  # deploy:
+  #   name: 🚀 Deploying
+  #   needs: typechecking
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: production
+  #     url: https://admin.wildgoose.be
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v4
+  #       name: Install pnpm
+  #       with:
+  #         version: 10
+
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version-file: .nvmrc
+
+  #     - name: Vercel deploy
+  #       id: deployment
+  #       uses: amondnet/vercel-action@v25
+  #       with:
+  #         vercel-args: --prod
+  #         vercel-token: ${{ secrets.VERCEL_TOKEN }}
+  #         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+  #         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+  #         scope: wild-goose
