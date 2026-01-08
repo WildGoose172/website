@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+
 import type { SanityDocument } from 'next-sanity'
 import { client } from '@/sanity/client'
 

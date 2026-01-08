@@ -42,11 +42,6 @@ const navigationType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
-      type: 'string',
-      validation: rule => rule.required(),
-    }),
-    defineField({
       name: 'image',
       type: 'image',
     }),
@@ -55,7 +50,26 @@ const navigationType = defineType({
       type: 'array',
       of: [{ type: 'navigationLink' }, { type: 'navigationDropdown' }],
     }),
+    defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
   ],
+  preview: {
+    select: {
+      language: 'language',
+    },
+    prepare(selection) {
+      const { language } = selection
+
+      return {
+        title: 'Navigation',
+        subtitle: (language ?? '').toUpperCase(),
+      }
+    },
+  },
 })
 
 export const navigationTypes = [

@@ -13,6 +13,59 @@
  */
 
 // Source: schema.json
+export type TranslationMetadata = {
+  _id: string
+  _type: 'translation.metadata'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  translations?: InternationalizedArrayReference
+  schemaTypes?: Array<string>
+}
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string
+  } & InternationalizedArrayReferenceValue
+>
+
+export type NavigationReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'navigation'
+}
+
+export type NavigationLinkReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'navigationLink'
+}
+
+export type NavigationDropdownReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'navigationDropdown'
+}
+
+export type PostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
+}
+
+export type InternationalizedArrayReferenceValue = {
+  _type: 'internationalizedArrayReferenceValue'
+  value?:
+    | NavigationReference
+    | NavigationLinkReference
+    | NavigationDropdownReference
+    | PostReference
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -100,7 +153,6 @@ export type Navigation = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  name?: string
   image?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -116,6 +168,7 @@ export type Navigation = {
         _key: string
       } & NavigationDropdown)
   >
+  language?: string
 }
 
 export type SanityImagePaletteSwatch = {
@@ -215,6 +268,13 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | TranslationMetadata
+  | InternationalizedArrayReference
+  | NavigationReference
+  | NavigationLinkReference
+  | NavigationDropdownReference
+  | PostReference
+  | InternationalizedArrayReferenceValue
   | SanityImageAssetReference
   | Post
   | SanityImageCrop
@@ -234,30 +294,54 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol
 
-// Source: ../web/lib/sanity/queries.ts
+// Source: ../web/sanity/queries.ts
 // Variable: navigationQuery
-// Query: *[_type == "navigation"][0]
+// Query: *[_type == "navigation" && language == $language]{  image,  links,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    image,    links  },}[0]
 export type NavigationQueryResult = {
-  _id: string
-  _type: 'navigation'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  image?: {
+  image: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
-  }
-  links?: Array<
+  } | null
+  links: Array<
     | ({
         _key: string
       } & NavigationDropdown)
     | ({
         _key: string
       } & NavigationLink)
+  > | null
+  _translations: Array<
+    | {
+        image: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+        links: Array<
+          | ({
+              _key: string
+            } & NavigationDropdown)
+          | ({
+              _key: string
+            } & NavigationLink)
+        > | null
+      }
+    | null
+    | {
+        image: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+        links: null
+      }
   >
 } | null
 
@@ -265,6 +349,6 @@ export type NavigationQueryResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "navigation"][0]': NavigationQueryResult
+    '*[_type == "navigation" && language == $language]{\n  image,\n  links,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    image,\n    links\n  },\n}[0]': NavigationQueryResult
   }
 }
