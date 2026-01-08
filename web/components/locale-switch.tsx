@@ -27,7 +27,7 @@ export function LocaleSwitch({ className }: LocaleSwitchProps) {
   }
 
   return (
-    <div className={cn('flex rounded-full border', className)}>
+    <div className={cn('flex rounded-full border p-0.5', className)}>
       {routing.locales.map(locale => {
         const current = currentLocale === locale
 
@@ -37,7 +37,7 @@ export function LocaleSwitch({ className }: LocaleSwitchProps) {
             disabled={current}
             className={[
               'rounded-full px-2 py-0.5 text-sm uppercase transition-colors duration-300',
-              current ? 'bg-muted' : 'bg-background text-muted-foreground',
+              current ? 'bg-muted' : 'bg-transparent',
             ].join(' ')}
             onClick={() => setLocale(locale)}
           >

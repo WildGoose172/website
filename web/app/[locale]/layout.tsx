@@ -66,7 +66,7 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <div className="flex min-h-dvh flex-col">
             <Navigation nav={navigation} />
-            <main className="flex flex-1 flex-col gap-16 pb-40 pt-20 lg:gap-20">
+            <main className="flex flex-1 flex-col gap-16 pb-40 lg:gap-20">
               {children}
             </main>
           </div>
