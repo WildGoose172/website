@@ -1,3 +1,4 @@
-import { postType } from './postType'
+import { navigationTypes } from './navigation'
+import { postType } from './post'
 
-export const schemaTypes = [postType]
+export const schemaTypes = [...navigationTypes, postType]

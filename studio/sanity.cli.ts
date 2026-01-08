@@ -10,7 +10,7 @@ export default defineCliConfig({
     autoUpdates: true,
   },
   typegen: {
-    path: '../web/app/**/*.{ts,tsx,js,jsx}',
+    path: '../web/lib/sanity/queries.ts',
     schema: './schema.json',
     generates: '../web/types/sanity.ts',
   },

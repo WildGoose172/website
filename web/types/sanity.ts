@@ -78,6 +78,46 @@ export type Slug = {
   source?: string
 }
 
+export type NavigationDropdown = {
+  _type: 'navigationDropdown'
+  name?: string
+  links?: Array<
+    {
+      _key: string
+    } & NavigationLink
+  >
+}
+
+export type NavigationLink = {
+  _type: 'navigationLink'
+  name?: string
+  slug?: Slug
+}
+
+export type Navigation = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  links?: Array<
+    | ({
+        _key: string
+      } & NavigationLink)
+    | ({
+        _key: string
+      } & NavigationDropdown)
+  >
+}
+
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
   background?: string
@@ -180,6 +220,9 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Slug
+  | NavigationDropdown
+  | NavigationLink
+  | Navigation
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -190,3 +233,38 @@ export type AllSanitySchemaTypes =
   | Geopoint
 
 export declare const internalGroqTypeReferenceTo: unique symbol
+
+// Source: ../web/lib/sanity/queries.ts
+// Variable: navigationQuery
+// Query: *[_type == "navigation"][0]
+export type NavigationQueryResult = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  links?: Array<
+    | ({
+        _key: string
+      } & NavigationDropdown)
+    | ({
+        _key: string
+      } & NavigationLink)
+  >
+} | null
+
+// Query TypeMap
+import '@sanity/client'
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '*[_type == "navigation"][0]': NavigationQueryResult
+  }
+}
