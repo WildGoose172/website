@@ -17,7 +17,7 @@
     "web:preview": "pnpm --filter ./web run preview",
     "lint": "pnpm --stream -r run lint",
     "format": "pnpm --stream -r run format",
-    "typegen": "pnpm --filter ./studio run typegen",
+    "typegen": "pnpm --filter ./studio run typegen && pnpm --filter ./web run typegen",
     "typecheck": "pnpm --stream -r run typecheck"
   },
   "resolutions": {

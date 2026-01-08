@@ -70,6 +70,8 @@ pnpm studio:dev
 - `pnpm build` - Build both applications
 - `pnpm lint` - Lint all packages
 - `pnpm format` - Format code in all packages
+- `pnpm typegen` - Generate types for Sanity schemas and next routes
+- `pnpm typecheck` - Run TypeScript type checking
 
 ### Web Scripts
 - `pnpm web:dev` - Start Next.js development server
