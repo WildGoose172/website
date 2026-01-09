@@ -45,6 +45,8 @@ jobs:
           node-version-file: ".nvmrc"
       - name: Install dependencies
         run: pnpm install
+      - name: Generate types
+        run: pnpm typegen
       - name: Run typechecking
         run: pnpm run typecheck
 
