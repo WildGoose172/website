@@ -39,6 +39,11 @@ wg-website/
    pnpm install
    ```
 
+### Environment Variables
+
+Create a `.env` file in the root directory and add the variables.
+The env file is symlinked to both the `web` and `studio` packages.
+
 ### Development
 
 Start both the frontend and studio in development mode:
