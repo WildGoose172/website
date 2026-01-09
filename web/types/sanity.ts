@@ -50,11 +50,60 @@ export type NavigationDropdownReference = {
   [internalGroqTypeReferenceTo]?: 'navigationDropdown'
 }
 
-export type PostReference = {
+export type TextHeroReference = {
   _ref: string
   _type: 'reference'
   _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'post'
+  [internalGroqTypeReferenceTo]?: 'textHero'
+}
+
+export type ServiceItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'serviceItem'
+}
+
+export type ServicesReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'services'
+}
+
+export type ClientItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'clientItem'
+}
+
+export type ClientsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'clients'
+}
+
+export type PageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
+
+export type SeoReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'seo'
+}
+
+export type PageBuilderReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'pageBuilder'
 }
 
 export type InternationalizedArrayReferenceValue = {
@@ -63,8 +112,27 @@ export type InternationalizedArrayReferenceValue = {
     | NavigationReference
     | NavigationLinkReference
     | NavigationDropdownReference
-    | PostReference
+    | TextHeroReference
+    | ServiceItemReference
+    | ServicesReference
+    | ClientItemReference
+    | ClientsReference
+    | PageReference
+    | SeoReference
+    | PageBuilderReference
 }
+
+export type PageBuilder = Array<
+  | ({
+      _key: string
+    } & TextHero)
+  | ({
+      _key: string
+    } & Services)
+  | ({
+      _key: string
+    } & Clients)
+>
 
 export type SanityImageAssetReference = {
   _ref: string
@@ -73,40 +141,31 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
-export type Post = {
-  _id: string
-  _type: 'post'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  slug?: Slug
-  publishedAt?: string
-  image?: {
+export type Seo = {
+  _type: 'seo'
+  metaTitle?: string
+  metaDescription?: string
+  metaKeywords?: Array<string>
+  metaImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
   }
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
+}
+
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  content?: PageBuilder
+  seo?: Seo
+  language?: string
 }
 
 export type SanityImageCrop = {
@@ -129,6 +188,57 @@ export type Slug = {
   _type: 'slug'
   current?: string
   source?: string
+}
+
+export type Clients = {
+  _type: 'clients'
+  title?: string
+  subtitle?: string
+  clients?: Array<
+    {
+      _key: string
+    } & ClientItem
+  >
+}
+
+export type ClientItem = {
+  _type: 'clientItem'
+  name?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type Services = {
+  _type: 'services'
+  services?: Array<
+    {
+      _key: string
+    } & ServiceItem
+  >
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type ServiceItem = {
+  _type: 'serviceItem'
+  name?: string
+  link?: string
+}
+
+export type TextHero = {
+  _type: 'textHero'
+  title?: string
+  description?: string
 }
 
 export type NavigationDropdown = {
@@ -273,13 +383,27 @@ export type AllSanitySchemaTypes =
   | NavigationReference
   | NavigationLinkReference
   | NavigationDropdownReference
-  | PostReference
+  | TextHeroReference
+  | ServiceItemReference
+  | ServicesReference
+  | ClientItemReference
+  | ClientsReference
+  | PageReference
+  | SeoReference
+  | PageBuilderReference
   | InternationalizedArrayReferenceValue
+  | PageBuilder
   | SanityImageAssetReference
-  | Post
+  | Seo
+  | Page
   | SanityImageCrop
   | SanityImageHotspot
   | Slug
+  | Clients
+  | ClientItem
+  | Services
+  | ServiceItem
+  | TextHero
   | NavigationDropdown
   | NavigationLink
   | Navigation
@@ -314,6 +438,11 @@ export type NavigationQueryResult = {
       } & NavigationLink)
   > | null
   _translations: Array<
+    | null
+    | {
+        image: null
+        links: null
+      }
     | {
         image: {
           asset?: SanityImageAssetReference
@@ -331,18 +460,23 @@ export type NavigationQueryResult = {
             } & NavigationLink)
         > | null
       }
-    | null
-    | {
-        image: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        } | null
-        links: null
-      }
   >
+} | null
+
+// Source: ../web/sanity/queries.ts
+// Variable: pageQuery
+// Query: *[_type == "page" && slug.current == $slug && language == $language][0]
+export type PageQueryResult = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  content?: PageBuilder
+  seo?: Seo
+  language?: string
 } | null
 
 // Query TypeMap
@@ -350,5 +484,6 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "navigation" && language == $language]{\n  image,\n  links,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    image,\n    links\n  },\n}[0]': NavigationQueryResult
+    '*[_type == "page" && slug.current == $slug && language == $language][0]': PageQueryResult
   }
 }

@@ -10,6 +10,9 @@ import { NavigationQueryResult } from '@/types/sanity'
 import { navigationQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import { VisualEditing } from 'next-sanity/visual-editing'
+import { draftMode } from 'next/headers'
+import { DisableDraftMode } from '@/components/disable-draft-mode'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -45,11 +48,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   params,
-}: Readonly<{
-  children: React.ReactNode
-  params: Promise<{ locale: string }>
-}>) {
-  const { locale } = await params
+}: LayoutProps<'/[[...slug]]'>) {
+  const { isEnabled } = await draftMode()
+  const { slug } = await params
+  const [locale] = slug || [routing.defaultLocale]
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -68,6 +70,12 @@ export default async function RootLayout({
             <Navigation nav={navigation} />
             <main className="flex flex-1 flex-col gap-16 pb-40 lg:gap-20">
               {children}
+              {isEnabled && (
+                <>
+                  <VisualEditing />
+                  <DisableDraftMode />
+                </>
+              )}
             </main>
           </div>
         </NextIntlClientProvider>

@@ -1,9 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { LinkIcon, CubeIcon } from '@sanity/icons'
 
 const navigationLinkType = defineType({
   name: 'navigationLink',
   title: 'Navigation Link',
   type: 'object',
+  icon: CubeIcon,
   fields: [
     defineField({
       name: 'name',
@@ -22,6 +24,7 @@ const navigationDropdownType = defineType({
   name: 'navigationDropdown',
   title: 'Navigation Dropdown',
   type: 'object',
+  icon: CubeIcon,
   fields: [
     defineField({
       name: 'name',
@@ -40,6 +43,7 @@ const navigationType = defineType({
   name: 'navigation',
   title: 'Navigation',
   type: 'document',
+  icon: LinkIcon,
   fields: [
     defineField({
       name: 'image',

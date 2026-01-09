@@ -8,3 +8,5 @@ export const navigationQuery = groq`*[_type == "navigation" && language == $lang
     links
   },
 }[0]`
+
+export const pageQuery = groq`*[_type == "page" && slug.current == $slug && language == $language][0]`
