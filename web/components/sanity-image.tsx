@@ -8,7 +8,7 @@ type Props = Omit<ImageProps, 'src'> & {
   src: SanityImageSource
 }
 
-export default function SanityImage({ src, alt, ...props }: Props) {
+export function SanityImage({ src, alt, ...props }: Props) {
   return (
     <Image
       src="sanity image"
