@@ -420,7 +420,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../web/sanity/queries.ts
 // Variable: navigationQuery
-// Query: *[_type == "navigation" && language == $language]{  image,  links,  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{    image,    links  },}[0]
+// Query: *[_type == "navigation" && language == $language]{    image,    links,    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{      image,      links    },  }[0]
 export type NavigationQueryResult = {
   image: {
     asset?: SanityImageAssetReference
@@ -465,7 +465,7 @@ export type NavigationQueryResult = {
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[_type == "page" && slug.current == $slug && language == $language][0]{  ...,   "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description,  ""),    "image": seo.image,    "keywords": coalesce(seo.keywords, []),  },}
+// Query: *[_type == "page" && slug.current == $slug && language == $language][0]{    ...,    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
 export type PageQueryResult = {
   _id: string
   _type: 'page'
@@ -490,11 +490,21 @@ export type PageQueryResult = {
   language?: string
 } | null
 
+// Source: ../web/sanity/queries.ts
+// Variable: sitemapQuery
+// Query: *[_type in ["page"] && defined(slug.current)] {    "href": select(      _type == "page" => slug.current,      slug.current    ),    _updatedAt,    language,  }
+export type SitemapQueryResult = Array<{
+  href: string | null
+  _updatedAt: string
+  language: string | null
+}>
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "navigation" && language == $language]{\n  image,\n  links,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    image,\n    links\n  },\n}[0]': NavigationQueryResult
-    '*[_type == "page" && slug.current == $slug && language == $language][0]{\n  ...,\n   "seo": {\n    "title": coalesce(seo.title, title, ""),\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "keywords": coalesce(seo.keywords, []),\n  },\n}': PageQueryResult
+    '\n  *[_type == "navigation" && language == $language]{\n    image,\n    links,\n    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n      image,\n      links\n    },\n  }[0]\n': NavigationQueryResult
+    '\n  *[_type == "page" && slug.current == $slug && language == $language][0]{\n    ...,\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
+    '\n  *[_type in ["page"] && defined(slug.current)] {\n    "href": select(\n      _type == "page" => slug.current,\n      slug.current\n    ),\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
   }
 }
