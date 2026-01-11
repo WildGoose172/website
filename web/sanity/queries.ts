@@ -9,4 +9,12 @@ export const navigationQuery = groq`*[_type == "navigation" && language == $lang
   },
 }[0]`
 
-export const pageQuery = groq`*[_type == "page" && slug.current == $slug && language == $language][0]`
+export const pageQuery = groq`*[_type == "page" && slug.current == $slug && language == $language][0]{
+  ...,
+   "seo": {
+    "title": coalesce(seo.title, title, ""),
+    "description": coalesce(seo.description,  ""),
+    "image": seo.image,
+    "keywords": coalesce(seo.keywords, []),
+  },
+}`

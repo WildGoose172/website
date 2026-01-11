@@ -1,37 +1,8 @@
-import { defineField, defineType, SlugValidationContext } from 'sanity'
-import { SparklesIcon, DocumentIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
+import { DocumentIcon } from '@sanity/icons'
+import { isUniqueOtherThanLanguage } from '../utils/validator'
 
-const seoType = defineType({
-  name: 'seo',
-  title: 'SEO',
-  type: 'object',
-  icon: SparklesIcon,
-  fields: [
-    defineField({
-      name: 'metaTitle',
-      type: 'string',
-    }),
-    defineField({
-      name: 'metaDescription',
-      type: 'text',
-    }),
-    defineField({
-      name: 'metaKeywords',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'metaImage',
-      type: 'image',
-    }),
-  ],
-  options: {
-    collapsible: true,
-    collapsed: true,
-  },
-})
-
-const pageType = defineType({
+export const pageType = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
@@ -79,30 +50,3 @@ const pageType = defineType({
     },
   },
 })
-
-export async function isUniqueOtherThanLanguage(
-  slug: string,
-  context: SlugValidationContext,
-) {
-  const { document, getClient } = context
-
-  if (!document?.language) {
-    return true
-  }
-
-  const client = getClient({ apiVersion: '2025-02-19' })
-  const id = document._id.replace(/^drafts\./, '')
-  const query = `!defined(*[
-    !(sanity::versionOf($id)) &&
-    slug.current == $slug &&
-    language == $language
-  ][0]._id)`
-
-  return await client.fetch(query, {
-    id,
-    language: document.language,
-    slug,
-  })
-}
-
-export const pageTypes = [pageType, seoType]

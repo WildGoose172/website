@@ -85,18 +85,18 @@ export type ClientsReference = {
   [internalGroqTypeReferenceTo]?: 'clients'
 }
 
-export type PageReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'page'
-}
-
 export type SeoReference = {
   _ref: string
   _type: 'reference'
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: 'seo'
+}
+
+export type PageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
 }
 
 export type PageBuilderReference = {
@@ -117,8 +117,8 @@ export type InternationalizedArrayReferenceValue = {
     | ServicesReference
     | ClientItemReference
     | ClientsReference
-    | PageReference
     | SeoReference
+    | PageReference
     | PageBuilderReference
 }
 
@@ -134,27 +134,6 @@ export type PageBuilder = Array<
     } & Clients)
 >
 
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-}
-
-export type Seo = {
-  _type: 'seo'
-  metaTitle?: string
-  metaDescription?: string
-  metaKeywords?: Array<string>
-  metaImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-}
-
 export type Page = {
   _id: string
   _type: 'page'
@@ -166,6 +145,33 @@ export type Page = {
   content?: PageBuilder
   seo?: Seo
   language?: string
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type Seo = {
+  _type: 'seo'
+  title?: string
+  description?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  keywords?: Array<string>
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
 }
 
 export type SanityImageCrop = {
@@ -182,12 +188,6 @@ export type SanityImageHotspot = {
   y?: number
   height?: number
   width?: number
-}
-
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
 }
 
 export type Clients = {
@@ -388,17 +388,17 @@ export type AllSanitySchemaTypes =
   | ServicesReference
   | ClientItemReference
   | ClientsReference
-  | PageReference
   | SeoReference
+  | PageReference
   | PageBuilderReference
   | InternationalizedArrayReferenceValue
   | PageBuilder
+  | Page
   | SanityImageAssetReference
   | Seo
-  | Page
+  | Slug
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
   | Clients
   | ClientItem
   | Services
@@ -465,7 +465,7 @@ export type NavigationQueryResult = {
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[_type == "page" && slug.current == $slug && language == $language][0]
+// Query: *[_type == "page" && slug.current == $slug && language == $language][0]{  ...,   "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description,  ""),    "image": seo.image,    "keywords": coalesce(seo.keywords, []),  },}
 export type PageQueryResult = {
   _id: string
   _type: 'page'
@@ -475,7 +475,18 @@ export type PageQueryResult = {
   title?: string
   slug?: Slug
   content?: PageBuilder
-  seo?: Seo
+  seo: {
+    title: string | ''
+    description: string | ''
+    image: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+    keywords: Array<string> | Array<never>
+  }
   language?: string
 } | null
 
@@ -484,6 +495,6 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "navigation" && language == $language]{\n  image,\n  links,\n  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n    image,\n    links\n  },\n}[0]': NavigationQueryResult
-    '*[_type == "page" && slug.current == $slug && language == $language][0]': PageQueryResult
+    '*[_type == "page" && slug.current == $slug && language == $language][0]{\n  ...,\n   "seo": {\n    "title": coalesce(seo.title, title, ""),\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "keywords": coalesce(seo.keywords, []),\n  },\n}': PageQueryResult
   }
 }

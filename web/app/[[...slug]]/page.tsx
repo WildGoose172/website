@@ -6,8 +6,10 @@ import { pageQuery } from '@/sanity/queries'
 import { PageQueryResult } from '@/types/sanity'
 import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
+import type { Metadata } from 'next'
+import { urlForImage } from '@/sanity/image'
 
-export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
+async function getPage(params: PageProps<'/[[...slug]]'>['params']) {
   const { isEnabled } = await draftMode()
   const { slug } = await params
 
@@ -27,6 +29,40 @@ export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
         }
       : undefined,
   )
+
+  return { data: page }
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<'/[[...slug]]'>): Promise<Metadata> {
+  const { data: page } = await getPage(params)
+
+  if (!page) {
+    return {}
+  }
+
+  const metadata: Metadata = {
+    title: page.seo.title,
+    description: page.seo.description,
+    keywords: page.seo.keywords,
+  }
+
+  if (page.seo.image) {
+    metadata.openGraph = {
+      images: {
+        url: urlForImage(page.seo.image).width(1200).height(630).url(),
+        width: 1200,
+        height: 630,
+      },
+    }
+  }
+
+  return metadata
+}
+
+export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
+  const { data: page } = await getPage(params)
 
   if (!page) {
     return notFound()
