@@ -1,6 +1,6 @@
 import { PageBuilder } from '@/components/page-builder'
 
-import { client } from '@/sanity/client'
+import { sanityFetch } from '@/sanity/client'
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
 import { PageQueryResult } from '@/types/sanity'
@@ -15,20 +15,20 @@ async function getPage(params: PageProps<'/[[...slug]]'>['params']) {
 
   const [language, ...routeSegments] = slug || [routing.defaultLocale]
 
-  const page = await client.fetch<PageQueryResult>(
-    pageQuery,
-    {
+  const page = await sanityFetch<PageQueryResult>({
+    query: pageQuery,
+    params: {
       slug: routeSegments.join('/') || '/',
       language,
+      options: isEnabled
+        ? {
+            perspective: 'drafts',
+            useCdn: false,
+            stega: true,
+          }
+        : undefined,
     },
-    isEnabled
-      ? {
-          perspective: 'drafts',
-          useCdn: false,
-          stega: true,
-        }
-      : undefined,
-  )
+  })
 
   return { data: page }
 }

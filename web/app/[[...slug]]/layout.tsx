@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import { client } from '@/sanity/client'
+import { sanityFetch } from '@/sanity/client'
 import { NavigationQueryResult } from '@/types/sanity'
 import { navigationQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
@@ -57,10 +57,10 @@ export default async function RootLayout({
     notFound()
   }
 
-  const navigation = await client.fetch<NavigationQueryResult>(
-    navigationQuery,
-    { language: locale },
-  )
+  const navigation = await sanityFetch<NavigationQueryResult>({
+    query: navigationQuery,
+    params: { language: locale },
+  })
 
   return (
     <html lang={locale}>
