@@ -33,7 +33,7 @@ export function Clients({ title, subtitle, clients, className }: ClientsProps) {
         {(clients ?? []).map(client => (
           <div
             key={client.name}
-            className="bg-muted flex items-center justify-center rounded-md p-10"
+            className="bg-muted flex items-center justify-center rounded-2xl p-10"
           >
             <SanityImage
               src={client.image!}

@@ -55,7 +55,7 @@ export function Services({ image, services, className }: ServicesProps) {
               <Link
                 key={service._key}
                 href={service.link?.slug || '#'}
-                className="hover:bg-muted/10 hover:scale-102 group w-full rounded border bg-transparent p-3 transition duration-300"
+                className="hover:bg-muted/10 hover:scale-102 group w-full rounded-lg border bg-transparent p-3 transition duration-300"
               >
                 <li>
                   <div className="flex min-h-[200px] flex-col gap-4">
