@@ -16,6 +16,7 @@ export function TextHero({ title, description, className }: TextHeroBlock) {
           alt="Wild Goose"
           width={200}
           height={146}
+          loading="eager"
           className="sm:ml-20"
         />
         <div className="self-center sm:self-end">
