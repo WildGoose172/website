@@ -169,10 +169,98 @@ const clientsType = defineType({
   },
 })
 
+const flockTalkItemType = defineType({
+  name: 'flockTalkItem',
+  title: 'Flock Talk Item',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'item',
+      type: 'reference',
+      to: [{ type: 'flockTalk' }],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      name: 'item.title',
+    },
+    prepare(selection) {
+      const { name } = selection
+
+      return {
+        title: name,
+        subtitle: 'Flock Talk Item',
+        icon: CubeIcon,
+      }
+    },
+  },
+})
+
+const flockTalkTeaserType = defineType({
+  name: 'flockTalkTeaser',
+  title: 'Flock Talk Teaser',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'ctaLabel',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'ctaLink',
+      type: 'reference',
+      to: [{ type: 'page' }],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'items',
+      type: 'array',
+      description: 'Select exactly 3 Flock Talks to feature in the teaser',
+      of: [{ type: 'flockTalkItem' }],
+      validation: rule => rule.required() && rule.min(3) && rule.max(3),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Flock Talk',
+        subtitle: 'Teaser',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   textHeroType,
   serviceItemType,
   servicesType,
   clientItemType,
   clientsType,
+  flockTalkItemType,
+  flockTalkTeaserType,
 ]

@@ -53,6 +53,17 @@ const pageBuilderBlocks = `
         }
       }
     },
+    _type == "flockTalkTeaser" => {
+      ...,
+      "ctaLink": ctaLink->slug.current,
+      items[]{
+        _key,
+        _type,
+        "slug": item->slug.current,
+        "thumbnail": item->thumbnail,
+        "title": item->title,
+      }
+    },
   },
 `
 

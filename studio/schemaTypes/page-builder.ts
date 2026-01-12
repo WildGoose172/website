@@ -9,5 +9,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'textHero' }),
     defineArrayMember({ type: 'services' }),
     defineArrayMember({ type: 'clients' }),
+    defineArrayMember({ type: 'flockTalkTeaser' }),
   ],
 })

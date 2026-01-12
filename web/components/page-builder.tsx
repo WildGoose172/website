@@ -3,6 +3,7 @@
 import { Clients } from '@/components/blocks/clients'
 import { Services } from '@/components/blocks/services'
 import { TextHero } from '@/components/blocks/text-hero'
+import { FlockTalkTeaser } from '@/components/blocks/flock-talk-teaser'
 
 import { PageQueryResult } from '@/types/sanity'
 import { client } from '@/sanity/client'
@@ -91,6 +92,16 @@ export function PageBuilder({
             return (
               <DragHandle key={block._key}>
                 <Clients
+                  {...block}
+                  documentId={documentId}
+                  documentType={documentType}
+                />
+              </DragHandle>
+            )
+          case 'flockTalkTeaser':
+            return (
+              <DragHandle key={block._key}>
+                <FlockTalkTeaser
                   {...block}
                   documentId={documentId}
                   documentType={documentType}
