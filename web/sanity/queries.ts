@@ -5,32 +5,39 @@ const pageReference = `page->{
   "slug": slug.current
 }`
 
-const nestedLinks = `links[]{
-  ...,
-  _type == "navigationLink" => {
-    ...,
-    page->{ _type, "slug": slug.current }
-  },
-  _type == "navigationDropdown" => {
-    ...,
-    links[]{
-      ...,
-      ${pageReference}
-    }
-  }
-}`
-
-export const navigationQuery = groq`
+export const configQuery = groq`
   *[
-    _type == "navigation" &&
+    _type == "config" &&
     language == $language
   ]{
-    image,
-    ${nestedLinks},
-    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    navigation{
+      name,
       image,
-      ${nestedLinks},
+      links[]{
+        ...,
+        _type == "navigationLink" => {
+          ...,
+          page->{ _type, "slug": slug.current }
+        },
+        _type == "navigationDropdown" => {
+          ...,
+          links[]{
+            ...,
+            ${pageReference}
+          }
+        }
+      }
     },
+    footer{
+      ...,
+      policies[]{
+        ...,
+        _type == "navigationLink" => {
+          ...,
+          page->{ _type, "slug": slug.current }
+        }
+      }
+    }
   }[0]
 `
 

@@ -50,6 +50,48 @@ export type NavigationDropdownReference = {
   [internalGroqTypeReferenceTo]?: 'navigationDropdown'
 }
 
+export type FooterReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footer'
+}
+
+export type FooterColumnReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footerColumn'
+}
+
+export type FooterColumnEmailReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footerColumnEmail'
+}
+
+export type FooterColumnNumberReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footerColumnNumber'
+}
+
+export type FooterColumnTextReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footerColumnText'
+}
+
+export type ConfigReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'config'
+}
+
 export type TextHeroReference = {
   _ref: string
   _type: 'reference'
@@ -133,6 +175,12 @@ export type InternationalizedArrayReferenceValue = {
     | NavigationReference
     | NavigationLinkReference
     | NavigationDropdownReference
+    | FooterReference
+    | FooterColumnReference
+    | FooterColumnEmailReference
+    | FooterColumnNumberReference
+    | FooterColumnTextReference
+    | ConfigReference
     | TextHeroReference
     | ServiceItemReference
     | ServicesReference
@@ -230,6 +278,106 @@ export type TextHero = {
   description?: string
 }
 
+export type Config = {
+  _id: string
+  _type: 'config'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  navigation?: Navigation
+  footer?: Footer
+  language?: string
+}
+
+export type Footer = {
+  _type: 'footer'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  columns?: Array<
+    {
+      _key: string
+    } & FooterColumn
+  >
+  policies?: Array<
+    {
+      _key: string
+    } & NavigationLink
+  >
+  linkedIn?: string
+  instagram?: string
+}
+
+export type Navigation = {
+  _type: 'navigation'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  links?: Array<
+    | ({
+        _key: string
+      } & NavigationLink)
+    | ({
+        _key: string
+      } & NavigationDropdown)
+  >
+}
+
+export type FooterColumnText = {
+  _type: 'footerColumnText'
+  text?: string
+}
+
+export type FooterColumnNumber = {
+  _type: 'footerColumnNumber'
+  number?: string
+}
+
+export type FooterColumnEmail = {
+  _type: 'footerColumnEmail'
+  email?: string
+}
+
+export type FooterColumn = {
+  _type: 'footerColumn'
+  name?: string
+  columnItems?: Array<
+    | ({
+        _key: string
+      } & FooterColumnNumber)
+    | ({
+        _key: string
+      } & FooterColumnEmail)
+    | ({
+        _key: string
+      } & FooterColumnText)
+  >
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
+
 export type NavigationDropdown = {
   _type: 'navigationDropdown'
   name?: string
@@ -305,46 +453,6 @@ export type Page = {
   slug?: Slug
   content?: PageBuilder
   seo?: Seo
-  language?: string
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type Navigation = {
-  _id: string
-  _type: 'navigation'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  links?: Array<
-    | ({
-        _key: string
-      } & NavigationLink)
-    | ({
-        _key: string
-      } & NavigationDropdown)
-  >
   language?: string
 }
 
@@ -450,6 +558,12 @@ export type AllSanitySchemaTypes =
   | NavigationReference
   | NavigationLinkReference
   | NavigationDropdownReference
+  | FooterReference
+  | FooterColumnReference
+  | FooterColumnEmailReference
+  | FooterColumnNumberReference
+  | FooterColumnTextReference
+  | ConfigReference
   | TextHeroReference
   | ServiceItemReference
   | ServicesReference
@@ -470,6 +584,15 @@ export type AllSanitySchemaTypes =
   | Services
   | ServiceItem
   | TextHero
+  | Config
+  | Footer
+  | Navigation
+  | FooterColumnText
+  | FooterColumnNumber
+  | FooterColumnEmail
+  | FooterColumn
+  | SanityImageCrop
+  | SanityImageHotspot
   | NavigationDropdown
   | NavigationLink
   | FlockTalk
@@ -477,9 +600,6 @@ export type AllSanitySchemaTypes =
   | Project
   | Service
   | Page
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Navigation
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -492,22 +612,48 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../web/sanity/queries.ts
-// Variable: navigationQuery
-// Query: *[    _type == "navigation" &&    language == $language  ]{    image,    links[]{  ...,  _type == "navigationLink" => {    ...,    page->{ _type, "slug": slug.current }  },  _type == "navigationDropdown" => {    ...,    links[]{      ...,      page->{  _type,  "slug": select(  _type == "page" => slug.current,  _type == "service" => "/services/" + slug.current,  _type == "project" => "/projects/" + slug.current,  _type == "flockTalk" => "/flock-talks/" + slug.current,  slug.current)}    }  }},    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{      image,      links[]{  ...,  _type == "navigationLink" => {    ...,    page->{ _type, "slug": slug.current }  },  _type == "navigationDropdown" => {    ...,    links[]{      ...,      page->{  _type,  "slug": select(  _type == "page" => slug.current,  _type == "service" => "/services/" + slug.current,  _type == "project" => "/projects/" + slug.current,  _type == "flockTalk" => "/flock-talks/" + slug.current,  slug.current)}    }  }},    },  }[0]
-export type NavigationQueryResult = {
-  image: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  } | null
-  links: Array<
-    | {
-        _key: string
-        _type: 'navigationDropdown'
-        name?: string
-        links: Array<{
+// Variable: configQuery
+// Query: *[    _type == "config" &&    language == $language  ]{    navigation{      name,      image,      links[]{        ...,        _type == "navigationLink" => {          ...,          page->{ _type, "slug": slug.current }        },        _type == "navigationDropdown" => {          ...,          links[]{            ...,            page->{  _type,  "slug": slug.current}          }        }      }    },    footer{      ...,      policies[]{        ...,        _type == "navigationLink" => {          ...,          page->{ _type, "slug": slug.current }        }      }    }  }[0]
+export type ConfigQueryResult = {
+  navigation: {
+    name: null
+    image: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+    links: Array<
+      | {
+          _key: string
+          _type: 'navigationDropdown'
+          name?: string
+          links: Array<{
+            _key: string
+            _type: 'navigationLink'
+            name?: string
+            page:
+              | {
+                  _type: 'flockTalk'
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  slug: string | null
+                }
+              | {
+                  _type: 'project'
+                  slug: string | null
+                }
+              | {
+                  _type: 'service'
+                  slug: string | null
+                }
+              | null
+          }> | null
+        }
+      | {
           _key: string
           _type: 'navigationLink'
           name?: string
@@ -529,106 +675,54 @@ export type NavigationQueryResult = {
                 slug: string | null
               }
             | null
-        }> | null
-      }
-    | {
+        }
+    > | null
+  } | null
+  footer: {
+    _type: 'footer'
+    image?: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+    columns?: Array<
+      {
         _key: string
-        _type: 'navigationLink'
-        name?: string
-        page:
-          | {
-              _type: 'flockTalk'
-              slug: string | null
-            }
-          | {
-              _type: 'page'
-              slug: string | null
-            }
-          | {
-              _type: 'project'
-              slug: string | null
-            }
-          | {
-              _type: 'service'
-              slug: string | null
-            }
-          | null
-      }
-  > | null
-  _translations: Array<
-    | null
-    | {
-        image: null
-        links: null
-      }
-    | {
-        image: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        } | null
-        links: Array<
-          | {
-              _key: string
-              _type: 'navigationDropdown'
-              name?: string
-              links: Array<{
-                _key: string
-                _type: 'navigationLink'
-                name?: string
-                page:
-                  | {
-                      _type: 'flockTalk'
-                      slug: string | null
-                    }
-                  | {
-                      _type: 'page'
-                      slug: string | null
-                    }
-                  | {
-                      _type: 'project'
-                      slug: string | null
-                    }
-                  | {
-                      _type: 'service'
-                      slug: string | null
-                    }
-                  | null
-              }> | null
-            }
-          | {
-              _key: string
-              _type: 'navigationLink'
-              name?: string
-              page:
-                | {
-                    _type: 'flockTalk'
-                    slug: string | null
-                  }
-                | {
-                    _type: 'page'
-                    slug: string | null
-                  }
-                | {
-                    _type: 'project'
-                    slug: string | null
-                  }
-                | {
-                    _type: 'service'
-                    slug: string | null
-                  }
-                | null
-            }
-        > | null
-      }
-  >
+      } & FooterColumn
+    >
+    policies: Array<{
+      _key: string
+      _type: 'navigationLink'
+      name?: string
+      page:
+        | {
+            _type: 'flockTalk'
+            slug: string | null
+          }
+        | {
+            _type: 'page'
+            slug: string | null
+          }
+        | {
+            _type: 'project'
+            slug: string | null
+          }
+        | {
+            _type: 'service'
+            slug: string | null
+          }
+        | null
+    }> | null
+    linkedIn?: string
+    instagram?: string
+  } | null
 } | null
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": "/services/" + link->slug.current,        }      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
 export type PageQueryResult =
   | {
       _id: string
@@ -874,7 +968,7 @@ export type PageQueryResult =
 
 // Source: ../web/sanity/queries.ts
 // Variable: sitemapQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&    defined(slug.current)  ] {    "href": select(  _type == "page" => slug.current,  _type == "service" => "/services/" + slug.current,  _type == "project" => "/projects/" + slug.current,  _type == "flockTalk" => "/flock-talks/" + slug.current,  slug.current),    _updatedAt,    language,  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&    defined(slug.current)  ] {    "href": slug.current,    _updatedAt,    language,  }
 export type SitemapQueryResult = Array<{
   href: string | null
   _updatedAt: string
@@ -885,8 +979,8 @@ export type SitemapQueryResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[\n    _type == "navigation" &&\n    language == $language\n  ]{\n    image,\n    links[]{\n  ...,\n  _type == "navigationLink" => {\n    ...,\n    page->{ _type, "slug": slug.current }\n  },\n  _type == "navigationDropdown" => {\n    ...,\n    links[]{\n      ...,\n      page->{\n  _type,\n  "slug": select(\n  _type == "page" => slug.current,\n  _type == "service" => "/services/" + slug.current,\n  _type == "project" => "/projects/" + slug.current,\n  _type == "flockTalk" => "/flock-talks/" + slug.current,\n  slug.current\n)\n}\n    }\n  }\n},\n    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{\n      image,\n      links[]{\n  ...,\n  _type == "navigationLink" => {\n    ...,\n    page->{ _type, "slug": slug.current }\n  },\n  _type == "navigationDropdown" => {\n    ...,\n    links[]{\n      ...,\n      page->{\n  _type,\n  "slug": select(\n  _type == "page" => slug.current,\n  _type == "service" => "/services/" + slug.current,\n  _type == "project" => "/projects/" + slug.current,\n  _type == "flockTalk" => "/flock-talks/" + slug.current,\n  slug.current\n)\n}\n    }\n  }\n},\n    },\n  }[0]\n': NavigationQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": "/services/" + link->slug.current,\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": select(\n  _type == "page" => slug.current,\n  _type == "service" => "/services/" + slug.current,\n  _type == "project" => "/projects/" + slug.current,\n  _type == "flockTalk" => "/flock-talks/" + slug.current,\n  slug.current\n),\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
+    '\n  *[\n    _type == "config" &&\n    language == $language\n  ]{\n    navigation{\n      name,\n      image,\n      links[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        },\n        _type == "navigationDropdown" => {\n          ...,\n          links[]{\n            ...,\n            page->{\n  _type,\n  "slug": slug.current\n}\n          }\n        }\n      }\n    },\n    footer{\n      ...,\n      policies[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        }\n      }\n    }\n  }[0]\n': ConfigQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
   }
 }
