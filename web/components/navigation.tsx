@@ -26,14 +26,14 @@ import { LiquidGlassCard } from '@/components/ui/liquid-glass'
 import { ChevronDown, Menu } from 'lucide-react'
 
 import { useIsMobile } from '@/hooks/use-mobile'
-import { NavigationQueryResult } from '@/types/sanity'
+import { ConfigQueryResult } from '@/types/sanity'
 import { useState } from 'react'
 
 interface NavigationProps {
-  nav: NavigationQueryResult
+  config: NonNullable<ConfigQueryResult>['navigation']
 }
 
-export function Navigation({ nav }: NavigationProps) {
+export function Navigation({ config }: NavigationProps) {
   const isMobile = useIsMobile()
 
   const [openAccordion, setOpenAccordion] = useState<string>()
@@ -43,13 +43,18 @@ export function Navigation({ nav }: NavigationProps) {
       <LiquidGlassCard blurIntensity="sm" className="rounded-full px-4 py-1.5">
         <div className="flex items-center justify-between gap-x-4">
           <Link href="/">
-            <SanityImage src={nav!.image!} alt="Logo" width={120} height={40} />
+            <SanityImage
+              src={config!.image!}
+              alt="Logo"
+              width={120}
+              height={40}
+            />
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu viewport={isMobile} className="hidden md:block">
+          <NavigationMenu viewport={isMobile} className="hidden lg:block">
             <NavigationMenuList className="flex-wrap">
-              {nav?.links?.map(link => {
+              {config?.links?.map(link => {
                 if (link._type === 'navigationDropdown') {
                   return (
                     <NavigationMenuItem key={link._key}>
@@ -91,7 +96,7 @@ export function Navigation({ nav }: NavigationProps) {
 
           {/* Mobile Navigation */}
           <Sheet>
-            <SheetTrigger asChild className="md:hidden">
+            <SheetTrigger asChild className="lg:hidden">
               <Button variant="outline" size="icon">
                 <Menu />
               </Button>
@@ -100,14 +105,14 @@ export function Navigation({ nav }: NavigationProps) {
               <SheetHeader>
                 <SheetTitle className="sr-only">Navigation menu</SheetTitle>
                 <SanityImage
-                  src={nav!.image!}
+                  src={config!.image!}
                   alt="Logo"
                   width={120}
                   height={40}
                 />
               </SheetHeader>
               <div className="flex flex-col gap-1 px-4">
-                {nav?.links?.map(link => {
+                {config?.links?.map(link => {
                   if (link._type === 'navigationDropdown') {
                     return (
                       <div
