@@ -6,18 +6,7 @@ import { Button } from '@/components/ui/button'
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import { PageQueryResult } from '@/types/sanity'
-
-type FlockTalkTeaserBlock = Extract<
-  NonNullable<NonNullable<PageQueryResult>['content']>[number],
-  { _type: 'flockTalkTeaser' }
->
-
-type FlockTalkTeaserProps = FlockTalkTeaserBlock & {
-  documentId: string
-  documentType: string
-  className?: string
-}
+import { FlockTalkTeaserBlock } from '@/types/blocks'
 
 export function FlockTalkTeaser({
   title,
@@ -26,7 +15,7 @@ export function FlockTalkTeaser({
   ctaLink,
   items,
   className,
-}: FlockTalkTeaserProps) {
+}: FlockTalkTeaserBlock) {
   return (
     <section
       className={cn('container mx-auto flex flex-col gap-6 py-20', className)}

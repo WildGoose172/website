@@ -3,20 +3,9 @@
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import { PageQueryResult } from '@/types/sanity'
+import { ClientsBlock } from '@/types/blocks'
 
-type ClientsBlock = Extract<
-  NonNullable<NonNullable<PageQueryResult>['content']>[number],
-  { _type: 'clients' }
->
-
-type ClientsProps = ClientsBlock & {
-  documentId: string
-  documentType: string
-  className?: string
-}
-
-export function Clients({ title, subtitle, clients, className }: ClientsProps) {
+export function Clients({ title, subtitle, clients, className }: ClientsBlock) {
   return (
     <section
       className={cn(

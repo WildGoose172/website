@@ -3,20 +3,9 @@
 import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
-import { PageQueryResult } from '@/types/sanity'
+import { TextHeroBlock } from '@/types/blocks'
 
-type TextHeroBlock = Extract<
-  NonNullable<NonNullable<PageQueryResult>['content']>[number],
-  { _type: 'textHero' }
->
-
-type TextHeroProps = TextHeroBlock & {
-  documentId: string
-  documentType: string
-  className?: string
-}
-
-export function TextHero({ title, description, className }: TextHeroProps) {
+export function TextHero({ title, description, className }: TextHeroBlock) {
   return (
     <section
       className={cn('bg-primary flex min-h-dvh flex-col text-white', className)}

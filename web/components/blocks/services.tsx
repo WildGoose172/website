@@ -6,20 +6,9 @@ import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import { PageQueryResult } from '@/types/sanity'
+import { ServicesBlock } from '@/types/blocks'
 
-type ServicesBlock = Extract<
-  NonNullable<NonNullable<PageQueryResult>['content']>[number],
-  { _type: 'services' }
->
-
-type ServicesProps = ServicesBlock & {
-  documentId: string
-  documentType: string
-  className?: string
-}
-
-export function Services({ image, services, className }: ServicesProps) {
+export function Services({ image, services, className }: ServicesBlock) {
   const t = useTranslations()
 
   return (
