@@ -3,9 +3,14 @@
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import type { Clients } from '@/types/sanity'
+import { PageQueryResult } from '@/types/sanity'
 
-interface ClientsProps extends Clients {
+type ClientsBlock = Extract<
+  NonNullable<NonNullable<PageQueryResult>['content']>[number],
+  { _type: 'clients' }
+>
+
+type ClientsProps = ClientsBlock & {
   documentId: string
   documentType: string
   className?: string

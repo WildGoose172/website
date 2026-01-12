@@ -59,7 +59,7 @@ export function Navigation({ nav }: NavigationProps) {
                           <li>
                             {(link.links ?? []).map(subLink => (
                               <NavigationMenuLink asChild key={subLink._key}>
-                                <Link href={subLink.slug?.current || '#'}>
+                                <Link href={subLink.page?.slug || '#'}>
                                   {subLink.name}
                                 </Link>
                               </NavigationMenuLink>
@@ -76,9 +76,7 @@ export function Navigation({ nav }: NavigationProps) {
                         asChild
                         className={navigationMenuTriggerStyle()}
                       >
-                        <Link href={link.slug?.current || '#'}>
-                          {link.name}
-                        </Link>
+                        <Link href={link.page?.slug || '#'}>{link.name}</Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   )
@@ -141,7 +139,7 @@ export function Navigation({ nav }: NavigationProps) {
                           <div key={link._key} className="flex flex-col pl-4">
                             {(link.links ?? []).map(subLink => (
                               <SheetClose key={subLink._key} asChild>
-                                <Link href={subLink.slug?.current || '#'}>
+                                <Link href={subLink.page?.slug || '#'}>
                                   {subLink.name}
                                 </Link>
                               </SheetClose>
@@ -154,7 +152,7 @@ export function Navigation({ nav }: NavigationProps) {
                     return (
                       <SheetClose key={link._key} asChild>
                         <Link
-                          href={link.slug?.current || '#'}
+                          href={link.page?.slug || '#'}
                           className={`border-b font-medium`}
                         >
                           {link.name}

@@ -3,9 +3,14 @@
 import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
-import type { TextHero } from '@/types/sanity'
+import { PageQueryResult } from '@/types/sanity'
 
-interface TextHeroProps extends TextHero {
+type TextHeroBlock = Extract<
+  NonNullable<NonNullable<PageQueryResult>['content']>[number],
+  { _type: 'textHero' }
+>
+
+type TextHeroProps = TextHeroBlock & {
   documentId: string
   documentType: string
   className?: string

@@ -46,7 +46,14 @@ const serviceItemType = defineType({
     }),
     defineField({
       name: 'link',
-      type: 'string',
+      type: 'reference',
+      to: [{ type: 'service' }],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
       validation: rule => rule.required(),
     }),
   ],

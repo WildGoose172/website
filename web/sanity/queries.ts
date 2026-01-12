@@ -1,19 +1,62 @@
 import { groq } from 'next-sanity'
 
+const pageReference = `page->{
+  _type,
+  "slug": slug.current
+}`
+
+const nestedLinks = `links[]{
+  ...,
+  _type == "navigationLink" => {
+    ...,
+    page->{ _type, "slug": slug.current }
+  },
+  _type == "navigationDropdown" => {
+    ...,
+    links[]{
+      ...,
+      ${pageReference}
+    }
+  }
+}`
+
 export const navigationQuery = groq`
-  *[_type == "navigation" && language == $language]{
+  *[
+    _type == "navigation" &&
+    language == $language
+  ]{
     image,
-    links,
+    ${nestedLinks},
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
       image,
-      links
+      ${nestedLinks},
     },
   }[0]
 `
 
-export const pageQuery = groq`
-  *[_type == "page" && slug.current == $slug && language == $language][0]{
+const pageBuilderBlocks = `
+  content[]{
     ...,
+    _type == "services" => {
+      ...,
+      services[]{
+        ...,
+        "link": {
+          "slug": link->slug.current,
+        }
+      }
+    },
+  },
+`
+
+export const pageQuery = groq`
+  *[
+    _type in ["page", "service", "project", "flockTalk"] && 
+    slug.current == $slug &&
+    language == $language
+  ][0]{
+    ...,
+    ${pageBuilderBlocks}
     "seo": {
       "title": coalesce(seo.title, title, ""),
       "description": coalesce(seo.description,  ""),
@@ -24,11 +67,11 @@ export const pageQuery = groq`
 `
 
 export const sitemapQuery = groq`
-  *[_type in ["page"] && defined(slug.current)] {
-    "href": select(
-      _type == "page" => slug.current,
-      slug.current
-    ),
+  *[
+    _type in ["page", "service", "project", "flockTalk"] &&
+    defined(slug.current)
+  ] {
+    "href": slug.current,
     _updatedAt,
     language,
   }

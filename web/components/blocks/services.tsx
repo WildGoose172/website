@@ -6,9 +6,14 @@ import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import type { Services } from '@/types/sanity'
+import { PageQueryResult } from '@/types/sanity'
 
-interface ServicesProps extends Services {
+type ServicesBlock = Extract<
+  NonNullable<NonNullable<PageQueryResult>['content']>[number],
+  { _type: 'services' }
+>
+
+type ServicesProps = ServicesBlock & {
   documentId: string
   documentType: string
   className?: string
@@ -49,7 +54,7 @@ export function Services({ image, services, className }: ServicesProps) {
             {(services ?? []).map(service => (
               <Link
                 key={service._key}
-                href={service.link || '#'}
+                href={service.link?.slug || '#'}
                 className="hover:bg-muted/10 hover:scale-102 group w-full rounded border bg-transparent p-3 transition duration-300"
               >
                 <li>

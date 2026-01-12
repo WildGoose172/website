@@ -13,8 +13,20 @@ const navigationLinkType = defineType({
       validation: rule => rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
+      name: 'page',
+      type: 'reference',
+      to: [
+        { type: 'page' },
+        { type: 'service' },
+        { type: 'project' },
+        { type: 'flockTalk' },
+      ],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
       validation: rule => rule.required(),
     }),
   ],
