@@ -1,6 +1,120 @@
 import { defineField, defineType } from 'sanity'
 import { ComponentIcon, CubeIcon } from '@sanity/icons'
 
+const buttonLinkType = defineType({
+  name: 'buttonLink',
+  title: 'Button Link',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'label',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'link',
+      type: 'reference',
+      to: [
+        { type: 'page' },
+        { type: 'service' },
+        { type: 'project' },
+        { type: 'flockTalk' },
+      ],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'variant',
+      type: 'string',
+      initialValue: 'default',
+      options: {
+        list: [
+          'link',
+          'default',
+          'destructive',
+          'outline',
+          'secondary',
+          'ghost',
+          'link',
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'size',
+      type: 'string',
+      initialValue: 'default',
+      options: {
+        list: [
+          { value: 'default', title: 'Default' },
+          { value: 'sm', title: 'Small' },
+          { value: 'lg', title: 'Large' },
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      label: 'label',
+    },
+    prepare(selection) {
+      const { label } = selection
+
+      return {
+        title: label,
+        subtitle: 'Button Link',
+        icon: CubeIcon,
+      }
+    },
+  },
+})
+
+const imageBannerType = defineType({
+  name: 'imageBanner',
+  title: 'Image Banner',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'No title',
+        subtitle: 'Image Banner',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 const textHeroType = defineType({
   name: 'textHero',
   title: 'Text Hero',
@@ -235,20 +349,8 @@ const flockTalkTeaserType = defineType({
       validation: rule => rule.required(),
     }),
     defineField({
-      name: 'ctaLabel',
-      type: 'string',
-      validation: rule => rule.required(),
-    }),
-    defineField({
-      name: 'ctaLink',
-      type: 'reference',
-      to: [{ type: 'page' }],
-      options: {
-        filter: ({ document }) => ({
-          filter: 'language == $language',
-          params: { language: document?.language },
-        }),
-      },
+      name: 'cta',
+      type: 'buttonLink',
       validation: rule => rule.required(),
     }),
     defineField({
@@ -332,6 +434,8 @@ const ImageTextType = defineType({
 })
 
 export const blockTypes = [
+  buttonLinkType,
+  imageBannerType,
   textHeroType,
   serviceItemType,
   servicesType,

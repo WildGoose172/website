@@ -11,5 +11,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'clients' }),
     defineArrayMember({ type: 'flockTalkTeaser' }),
     defineArrayMember({ type: 'imageText' }),
+    defineArrayMember({ type: 'imageBanner' }),
   ],
 })
