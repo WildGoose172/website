@@ -1,13 +1,14 @@
 import { MetadataRoute } from 'next'
-import { sanityFetch } from '@/sanity/client'
+import { sanityFetch } from '@/sanity/live'
 import { sitemapQuery } from '@/sanity/queries'
-import { SitemapQueryResult } from '@/types/sanity'
 import { routing } from '@/i18n/routing'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
-    const paths = await sanityFetch<SitemapQueryResult>({
+    const { data: paths } = await sanityFetch({
       query: sitemapQuery,
+      perspective: 'published',
+      stega: false,
     })
 
     if (!paths) return []

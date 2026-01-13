@@ -1,11 +1,11 @@
-import { groq } from 'next-sanity'
+import { defineQuery } from 'next-sanity'
 
 const pageReference = `page->{
   _type,
   "slug": slug.current
 }`
 
-export const configQuery = groq`
+export const configQuery = defineQuery(`
   *[
     _type == "config" &&
     language == $language
@@ -39,7 +39,7 @@ export const configQuery = groq`
       }
     }
   }[0]
-`
+`)
 
 const pageBuilderBlocks = `
   content[]{
@@ -70,7 +70,7 @@ const pageBuilderBlocks = `
   },
 `
 
-export const pageQuery = groq`
+export const pageQuery = defineQuery(`
   *[
     _type in ["page", "service", "project", "flockTalk"] && 
     slug.current == $slug &&
@@ -85,9 +85,9 @@ export const pageQuery = groq`
       "keywords": coalesce(seo.keywords, []),
     },
   }
-`
+`)
 
-export const sitemapQuery = groq`
+export const sitemapQuery = defineQuery(`
   *[
     _type in ["page", "service", "project", "flockTalk"] &&
     defined(slug.current)
@@ -96,4 +96,4 @@ export const sitemapQuery = groq`
     _updatedAt,
     language,
   }
-`
+`)

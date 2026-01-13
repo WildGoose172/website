@@ -1,18 +1,17 @@
 import { Navigation } from '@/components/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
-
+import { Footer } from '@/components/footer'
+import { DisableDraftMode } from '@/components/disable-draft-mode'
 import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import { sanityFetch } from '@/sanity/client'
-import { ConfigQueryResult } from '@/types/sanity'
+import { VisualEditing } from 'next-sanity/visual-editing'
+
 import { configQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
-import { VisualEditing } from 'next-sanity/visual-editing'
 import { draftMode } from 'next/headers'
-import { DisableDraftMode } from '@/components/disable-draft-mode'
-import { Footer } from '@/components/footer'
+import { SanityLive, sanityFetch } from '@/sanity/live'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -52,7 +51,7 @@ export default async function RootLayout({
     notFound()
   }
 
-  const config = await sanityFetch<ConfigQueryResult>({
+  const { data: config } = await sanityFetch({
     query: configQuery,
     params: { language: locale },
   })
@@ -69,6 +68,7 @@ export default async function RootLayout({
             <Navigation config={config.navigation} />
             <main className="flex flex-1 flex-col gap-16 pb-40 lg:gap-20">
               {children}
+              <SanityLive />
               {isEnabled && (
                 <>
                   <VisualEditing />

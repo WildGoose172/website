@@ -1,21 +1,23 @@
 import { PageBuilder } from '@/components/page-builder'
 
-import { sanityFetch } from '@/sanity/client'
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
-import { PageQueryResult } from '@/types/sanity'
 import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
 import type { Metadata } from 'next'
 import { urlForImage } from '@/sanity/image'
+import { sanityFetch } from '@/sanity/live'
 
-async function getPage(params: PageProps<'/[[...slug]]'>['params']) {
+async function getPage(
+  params: PageProps<'/[[...slug]]'>['params'],
+  meta?: boolean,
+) {
   const { isEnabled } = await draftMode()
   const { slug } = await params
 
   const [language, ...routeSegments] = slug || [routing.defaultLocale]
 
-  const page = await sanityFetch<PageQueryResult>({
+  const page = await sanityFetch({
     query: pageQuery,
     params: {
       slug: routeSegments.join('/') || '/',
@@ -28,15 +30,16 @@ async function getPage(params: PageProps<'/[[...slug]]'>['params']) {
           }
         : undefined,
     },
+    ...(meta ? { perspective: 'published', stega: false } : {}),
   })
 
-  return { data: page }
+  return page
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<'/[[...slug]]'>): Promise<Metadata> {
-  const { data: page } = await getPage(params)
+  const { data: page } = await getPage(params, true)
 
   if (!page) {
     return {}

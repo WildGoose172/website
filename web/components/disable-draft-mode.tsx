@@ -23,11 +23,11 @@ export function DisableDraftMode() {
     })
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="fixed left-4 top-1/2 origin-left rotate-[90deg]">
       {pending ? (
         'Disabling draft mode...'
       ) : (
-        <Button type="button" onClick={disable}>
+        <Button type="button" variant="secondary" size="lg" onClick={disable}>
           Disable draft mode
         </Button>
       )}
