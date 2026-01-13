@@ -11,9 +11,8 @@ import { BlockWithMeta } from '@/types/blocks'
 export function FlockTalkTeaser({
   title,
   subtitle,
-  ctaLabel,
-  ctaLink,
   items,
+  cta,
   className,
 }: BlockWithMeta<'flockTalkTeaser'>) {
   return (
@@ -26,11 +25,11 @@ export function FlockTalkTeaser({
           <p className="text-muted-foreground max-w-prose">{subtitle}</p>
         </div>
 
-        {ctaLabel && ctaLink && (
-          <Button variant="outline" size="sm" asChild>
-            <Link href={ctaLink}>
+        {cta?.label && cta?.link && (
+          <Button variant={cta.variant} size={cta.size} asChild>
+            <Link href={cta.link}>
               <CornerDownRight />
-              {ctaLabel}
+              {cta.label}
             </Link>
           </Button>
         )}

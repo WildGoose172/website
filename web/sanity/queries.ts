@@ -55,7 +55,10 @@ const pageBuilderBlocks = `
     },
     _type == "flockTalkTeaser" => {
       ...,
-      "ctaLink": ctaLink->slug.current,
+      cta{
+        ...,
+        "link": link->slug.current
+      },
       items[]{
         _key,
         _type,
