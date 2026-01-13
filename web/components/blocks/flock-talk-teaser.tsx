@@ -20,7 +20,7 @@ export function FlockTalkTeaser({
     <section
       className={cn('container mx-auto flex flex-col gap-6 py-20', className)}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start gap-y-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2>{title}</h2>
           <p className="text-muted-foreground max-w-prose">{subtitle}</p>
