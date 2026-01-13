@@ -43,20 +43,24 @@ export function ImageText({
         </div>
       </div>
 
-      <SanityImage
-        src={image}
-        alt={image?.alt || ''}
-        width={400}
-        height={225}
-        loading="lazy"
+      <div
         className={cn(
           imageRounded && 'rounded-md',
-          'border-primary aspect-[37/24] w-full object-contain lg:aspect-[65/34]',
+          'relative aspect-[37/24] w-full overflow-hidden lg:aspect-[65/34]',
           imagePosition === 'right' && 'lg:order-2',
           imagePosition === 'left' && 'lg:order-1',
           imagePosition === 'top' && 'order-1',
         )}
-      />
+      >
+        <SanityImage
+          src={image}
+          alt={image?.alt || ''}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          loading="lazy"
+          className="object-contain"
+        />
+      </div>
     </section>
   )
 }

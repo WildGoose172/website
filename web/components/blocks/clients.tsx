@@ -34,6 +34,7 @@ export function Clients({
               alt={client.image?.alt ?? client.name ?? 'Client Logo'}
               width={150}
               height={75}
+              loading="lazy"
               className="h-auto w-full object-contain grayscale"
             />
           </div>

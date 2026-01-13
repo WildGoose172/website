@@ -8,15 +8,15 @@ type Props = Omit<ImageProps, 'src'> & {
   src: SanityImageSource
 }
 
-export function SanityImage({ src, alt, ...props }: Props) {
+export function SanityImage({ src, alt, quality = 90, ...props }: Props) {
   return (
     <Image
-      src="sanity image"
-      alt={alt}
-      loader={({ width, quality = 90 }) =>
-        urlForImage(src).width(width).quality(quality).url()
-      }
       {...props}
+      src={urlForImage(src).quality(+quality).url()}
+      alt={alt}
+      quality={quality}
+      placeholder="blur"
+      blurDataURL={urlForImage(src).width(24).height(24).blur(10).url()}
     />
   )
 }

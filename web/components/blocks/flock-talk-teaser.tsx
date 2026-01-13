@@ -46,13 +46,13 @@ export function FlockTalkTeaser({
               'group flex flex-col gap-4',
             ].join(' ')}
           >
-            <div className="h-[22.75rem] overflow-hidden rounded-2xl border">
+            <div className="relative h-[22.75rem] overflow-hidden rounded-2xl border">
               <SanityImage
                 src={item.thumbnail!}
                 alt="Flock Talk Thumbnail"
-                width={400}
-                height={225}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <h4 className="group-hover:underline">{item.title}</h4>

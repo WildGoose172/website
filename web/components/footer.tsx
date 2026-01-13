@@ -20,7 +20,7 @@ export function Footer({ config }: FooterProps) {
               src={config!.image!}
               alt="Footer Logo"
               width={150}
-              height={50}
+              height={62}
               className="lg:col-span-2"
             />
             {config?.columns?.map(column => (

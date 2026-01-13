@@ -47,7 +47,7 @@ export function Navigation({ config }: NavigationProps) {
               src={config!.image!}
               alt="Logo"
               width={120}
-              height={40}
+              height={39}
               loading="eager"
             />
           </Link>
