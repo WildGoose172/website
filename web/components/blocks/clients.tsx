@@ -31,7 +31,7 @@ export function Clients({
           >
             <SanityImage
               src={client.image!}
-              alt={client.name ?? 'Client Logo'}
+              alt={client.image?.alt ?? client.name ?? 'Client Logo'}
               width={150}
               height={75}
               className="h-auto w-full object-contain grayscale"

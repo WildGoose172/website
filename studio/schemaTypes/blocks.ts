@@ -88,6 +88,14 @@ const servicesType = defineType({
     defineField({
       name: 'image',
       type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
       validation: rule => rule.required(),
     }),
   ],
@@ -116,7 +124,14 @@ const clientItemType = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      validation: rule => rule.required(),
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
     }),
   ],
   preview: {
@@ -274,6 +289,14 @@ const ImageTextType = defineType({
     defineField({
       name: 'image',
       type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
       validation: rule => rule.required(),
     }),
     defineField({

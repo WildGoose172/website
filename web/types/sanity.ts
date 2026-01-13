@@ -283,6 +283,7 @@ export type ImageText = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   imageRounded?: boolean
@@ -326,6 +327,7 @@ export type ClientItem = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
 }
@@ -342,6 +344,7 @@ export type Services = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
 }
@@ -900,6 +903,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
             imageRounded?: boolean
@@ -921,6 +925,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
           }
@@ -1021,6 +1026,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
             imageRounded?: boolean
@@ -1042,6 +1048,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
           }
@@ -1142,6 +1149,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
             imageRounded?: boolean
@@ -1163,6 +1171,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
           }
@@ -1263,6 +1272,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
             imageRounded?: boolean
@@ -1284,6 +1294,7 @@ export type PageQueryResult =
               media?: unknown
               hotspot?: SanityImageHotspot
               crop?: SanityImageCrop
+              alt?: string
               _type: 'image'
             }
           }

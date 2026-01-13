@@ -34,7 +34,7 @@ export function Services({
         >
           <SanityImage
             src={image!}
-            alt=""
+            alt={image?.alt || ''}
             width={600}
             height={300}
             className="h-auto w-full max-w-full object-cover transition-all duration-300 hover:scale-105"

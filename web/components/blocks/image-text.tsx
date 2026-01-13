@@ -45,7 +45,7 @@ export function ImageText({
 
       <SanityImage
         src={image}
-        alt=""
+        alt={image?.alt || ''}
         width={400}
         height={225}
         loading="lazy"
