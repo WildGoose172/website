@@ -6,9 +6,13 @@ import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import { ServicesBlock } from '@/types/blocks'
+import { BlockWithMeta } from '@/types/blocks'
 
-export function Services({ image, services, className }: ServicesBlock) {
+export function Services({
+  image,
+  services,
+  className,
+}: BlockWithMeta<'services'>) {
   const t = useTranslations()
 
   return (

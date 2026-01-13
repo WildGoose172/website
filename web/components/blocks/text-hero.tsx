@@ -3,9 +3,13 @@
 import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
-import { TextHeroBlock } from '@/types/blocks'
+import { BlockWithMeta } from '@/types/blocks'
 
-export function TextHero({ title, description, className }: TextHeroBlock) {
+export function TextHero({
+  title,
+  description,
+  className,
+}: BlockWithMeta<'textHero'>) {
   return (
     <section
       className={cn('bg-primary flex min-h-dvh flex-col text-white', className)}

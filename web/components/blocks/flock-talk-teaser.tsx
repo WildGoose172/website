@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import { FlockTalkTeaserBlock } from '@/types/blocks'
+import { BlockWithMeta } from '@/types/blocks'
 
 export function FlockTalkTeaser({
   title,
@@ -15,7 +15,7 @@ export function FlockTalkTeaser({
   ctaLink,
   items,
   className,
-}: FlockTalkTeaserBlock) {
+}: BlockWithMeta<'flockTalkTeaser'>) {
   return (
     <section
       className={cn('container mx-auto flex flex-col gap-6 py-20', className)}

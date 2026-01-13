@@ -1,45 +1,27 @@
 import { PageQueryResult } from '@/types/sanity'
 
-interface DefaultBlockFields {
-  className?: string
-}
+export const BLOCK_TYPES = [
+  'clients',
+  'flockTalkTeaser',
+  'imageText',
+  'services',
+  'textHero',
+] as const
 
-export interface WithDocumentMeta {
+export type BlockType = (typeof BLOCK_TYPES)[number]
+
+export type Block = {
+  [K in BlockType]: Extract<
+    NonNullable<NonNullable<PageQueryResult>['content']>[number],
+    { _type: K }
+  >
+}[BlockType]
+
+export type BlockWithMeta<T extends BlockType> = Extract<
+  NonNullable<NonNullable<PageQueryResult>['content']>[number],
+  { _type: T }
+> & {
   documentId: string
   documentType: string
+  className?: string
 }
-
-export type ClientsBlock = WithDocumentMeta &
-  DefaultBlockFields &
-  Extract<
-    NonNullable<NonNullable<PageQueryResult>['content']>[number],
-    { _type: 'clients' }
-  >
-
-export type FlockTalkTeaserBlock = WithDocumentMeta &
-  DefaultBlockFields &
-  Extract<
-    NonNullable<NonNullable<PageQueryResult>['content']>[number],
-    { _type: 'flockTalkTeaser' }
-  >
-
-export type GradientImageBlock = WithDocumentMeta &
-  DefaultBlockFields &
-  Extract<
-    NonNullable<NonNullable<PageQueryResult>['content']>[number],
-    { _type: 'gradientImage' }
-  >
-
-export type ServicesBlock = WithDocumentMeta &
-  DefaultBlockFields &
-  Extract<
-    NonNullable<NonNullable<PageQueryResult>['content']>[number],
-    { _type: 'services' }
-  >
-
-export type TextHeroBlock = WithDocumentMeta &
-  DefaultBlockFields &
-  Extract<
-    NonNullable<NonNullable<PageQueryResult>['content']>[number],
-    { _type: 'textHero' }
-  >

@@ -3,9 +3,14 @@
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import { ClientsBlock } from '@/types/blocks'
+import { BlockWithMeta } from '@/types/blocks'
 
-export function Clients({ title, subtitle, clients, className }: ClientsBlock) {
+export function Clients({
+  title,
+  subtitle,
+  clients,
+  className,
+}: BlockWithMeta<'clients'>) {
   return (
     <section
       className={cn(
