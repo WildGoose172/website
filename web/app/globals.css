@@ -119,6 +119,32 @@
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+
+  .html-richtext {
+    code {
+      @apply bg-muted rounded box-decoration-clone px-1 py-0.5;
+    }
+
+    blockquote {
+      @apply border-primary bg-muted border-l-4 pl-2;
+    }
+
+    ul {
+      @apply ml-7 list-disc;
+    }
+
+    ol {
+      @apply ml-7 list-decimal;
+    }
+
+    a {
+      @apply underline;
+    }
+
+    p {
+      @apply pb-2 last:pb-0;
+    }
+  }
 }
 
 @utility container {

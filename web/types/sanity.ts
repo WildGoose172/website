@@ -141,6 +141,13 @@ export type FlockTalkTeaserReference = {
   [internalGroqTypeReferenceTo]?: 'flockTalkTeaser'
 }
 
+export type ImageTextReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'imageText'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -202,6 +209,7 @@ export type InternationalizedArrayReferenceValue = {
     | ClientsReference
     | FlockTalkItemReference
     | FlockTalkTeaserReference
+    | ImageTextReference
     | SeoReference
     | PageReference
     | PageBuilderReference
@@ -223,6 +231,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & FlockTalkTeaser)
+  | ({
+      _key: string
+    } & ImageText)
 >
 
 export type SanityImageAssetReference = {
@@ -244,6 +255,38 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type ImageText = {
+  _type: 'imageText'
+  title?: string
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imageRounded?: boolean
+  imagePosition?: 'left' | 'right' | 'top' | 'bottom'
 }
 
 export type FlockTalkTeaser = {
@@ -615,6 +658,7 @@ export type AllSanitySchemaTypes =
   | ClientsReference
   | FlockTalkItemReference
   | FlockTalkTeaserReference
+  | ImageTextReference
   | SeoReference
   | PageReference
   | PageBuilderReference
@@ -625,6 +669,7 @@ export type AllSanitySchemaTypes =
   | PageBuilder
   | SanityImageAssetReference
   | Seo
+  | ImageText
   | FlockTalkTeaser
   | FlockTalkItem
   | Clients
@@ -822,6 +867,46 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'imageText'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+            imageRounded?: boolean
+            imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+          }
+        | {
+            _key: string
             _type: 'services'
             services: Array<{
               _key: string
@@ -900,6 +985,46 @@ export type PageQueryResult =
               } | null
               title: string | null
             }> | null
+          }
+        | {
+            _key: string
+            _type: 'imageText'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+            imageRounded?: boolean
+            imagePosition?: 'bottom' | 'left' | 'right' | 'top'
           }
         | {
             _key: string
@@ -984,6 +1109,46 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'imageText'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+            imageRounded?: boolean
+            imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+          }
+        | {
+            _key: string
             _type: 'services'
             services: Array<{
               _key: string
@@ -1062,6 +1227,46 @@ export type PageQueryResult =
               } | null
               title: string | null
             }> | null
+          }
+        | {
+            _key: string
+            _type: 'imageText'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+            imageRounded?: boolean
+            imagePosition?: 'bottom' | 'left' | 'right' | 'top'
           }
         | {
             _key: string

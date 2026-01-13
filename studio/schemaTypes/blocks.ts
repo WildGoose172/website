@@ -255,6 +255,59 @@ const flockTalkTeaserType = defineType({
   },
 })
 
+const ImageTextType = defineType({
+  name: 'imageText',
+  title: 'Image Text',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'imageRounded',
+      type: 'boolean',
+      initialValue: true,
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'imagePosition',
+      type: 'string',
+      initialValue: 'right',
+      options: {
+        list: [
+          { title: 'Left', value: 'left' },
+          { title: 'Right', value: 'right' },
+          { title: 'Top', value: 'top' },
+          { title: 'Bottom', value: 'bottom' },
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Image Text',
+        subtitle: 'Image with Text',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   textHeroType,
   serviceItemType,
@@ -263,4 +316,5 @@ export const blockTypes = [
   clientsType,
   flockTalkItemType,
   flockTalkTeaserType,
+  ImageTextType,
 ]
