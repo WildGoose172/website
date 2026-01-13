@@ -25,7 +25,9 @@ export function DisableDraftMode() {
   return (
     <div className="fixed left-4 top-1/2 origin-left rotate-[90deg]">
       {pending ? (
-        'Disabling draft mode...'
+        <Button type="button" variant="secondary" size="lg" disabled>
+          Disabling draft mode...
+        </Button>
       ) : (
         <Button type="button" variant="secondary" size="lg" onClick={disable}>
           Disable draft mode

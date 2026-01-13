@@ -28,6 +28,7 @@ import { ChevronDown, Menu } from 'lucide-react'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { ConfigQueryResult } from '@/types/sanity'
 import { useState } from 'react'
+import { normalizeSlug } from '@/lib/utils'
 
 interface NavigationProps {
   config: NonNullable<ConfigQueryResult>['navigation']
@@ -65,7 +66,7 @@ export function Navigation({ config }: NavigationProps) {
                           <li>
                             {(link.links ?? []).map(subLink => (
                               <NavigationMenuLink asChild key={subLink._key}>
-                                <Link href={subLink.page?.slug || '#'}>
+                                <Link href={normalizeSlug(subLink.page?.slug)}>
                                   {subLink.name}
                                 </Link>
                               </NavigationMenuLink>
@@ -82,7 +83,9 @@ export function Navigation({ config }: NavigationProps) {
                         asChild
                         className={navigationMenuTriggerStyle()}
                       >
-                        <Link href={link.page?.slug || '#'}>{link.name}</Link>
+                        <Link href={normalizeSlug(link.page?.slug)}>
+                          {link.name}
+                        </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   )
@@ -145,7 +148,7 @@ export function Navigation({ config }: NavigationProps) {
                           <div key={link._key} className="flex flex-col pl-4">
                             {(link.links ?? []).map(subLink => (
                               <SheetClose key={subLink._key} asChild>
-                                <Link href={subLink.page?.slug || '#'}>
+                                <Link href={normalizeSlug(subLink.page?.slug)}>
                                   {subLink.name}
                                 </Link>
                               </SheetClose>
@@ -158,7 +161,7 @@ export function Navigation({ config }: NavigationProps) {
                     return (
                       <SheetClose key={link._key} asChild>
                         <Link
-                          href={link.page?.slug || '#'}
+                          href={normalizeSlug(link.page?.slug)}
                           className={`border-b font-medium`}
                         >
                           {link.name}
