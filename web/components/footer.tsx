@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/navigation'
 import { SanityImage } from '@/components/sanity-image'
+import { LinkedIn, Instagram } from '@/components/icons'
 import { Mail, Phone } from 'lucide-react'
 
 import { ConfigQueryResult } from '@/types/sanity'
@@ -37,7 +38,7 @@ export function Footer({ config }: FooterProps) {
                           href={`mailto:${item.email}`}
                           className="flex items-center gap-2"
                         >
-                          <Mail className="size-4 min-w-4" />
+                          <Mail className="size-5 min-w-5" />
                           {item.email}
                         </Link>
                       )
@@ -48,7 +49,7 @@ export function Footer({ config }: FooterProps) {
                           href={`tel:${item.number}`}
                           className="flex items-center gap-2"
                         >
-                          <Phone className="size-4 min-w-4" />
+                          <Phone className="size-5 min-w-5" />
                           {item.number}
                         </Link>
                       )
@@ -60,9 +61,31 @@ export function Footer({ config }: FooterProps) {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col justify-between gap-2 text-xs sm:flex-row sm:items-center">
-            <p>&copy;{new Date().getFullYear()} Wild Goose BV</p>
-            <div className="flex flex-col sm:flex-row sm:items-center">
+          <div className="mt-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+            <div className="flex gap-2">
+              {config?.linkedIn && (
+                <Link
+                  href={config?.linkedIn}
+                  className="flex items-center gap-2"
+                >
+                  <LinkedIn className="size-5 min-w-5" />
+                </Link>
+              )}
+              {config?.instagram && (
+                <Link
+                  href={config?.instagram}
+                  className="flex items-center gap-2"
+                >
+                  <Instagram className="size-5 min-w-5" />
+                </Link>
+              )}
+            </div>
+
+            <p className="text-muted-foreground text-xs">
+              &copy;{new Date().getFullYear()} Wild Goose BV
+            </p>
+
+            <div className="flex flex-col text-sm sm:flex-row sm:items-center">
               {config?.policies?.map(policy => (
                 <Link
                   key={policy._key}
