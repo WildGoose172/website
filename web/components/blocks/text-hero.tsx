@@ -16,12 +16,12 @@ export function TextHero({
     >
       <div className="container mx-auto flex grow flex-col justify-around gap-20 pb-10 pt-40">
         <Image
-          src="/images/flat-goose.webp"
+          src="/images/goose_with_hat.webp"
           alt="Wild Goose"
-          width={200}
-          height={146}
+          width={150}
+          height={208}
           loading="eager"
-          className="sm:ml-20"
+          className="mx-auto md:ml-20 md:mr-0"
         />
         <div className="self-center sm:self-end">
           <h1 className="text-balance text-center text-4xl leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
@@ -31,7 +31,7 @@ export function TextHero({
             {description}
           </p>
         </div>
-        <div className="head-4 text-muted flex flex-col">
+        <div className="head-4 text-muted flex flex-col font-black">
           <span>Fly</span>
           <span>Further</span>
           <span>Together</span>

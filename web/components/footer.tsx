@@ -20,8 +20,8 @@ export function Footer({ config }: FooterProps) {
             <SanityImage
               src={config!.image!}
               alt="Footer Logo"
-              width={150}
-              height={62}
+              width={200}
+              height={65}
               className="lg:col-span-2"
             />
             {config?.columns?.map(column => (
@@ -61,7 +61,7 @@ export function Footer({ config }: FooterProps) {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="mt-20 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex gap-2">
               {config?.linkedIn && (
                 <Link
