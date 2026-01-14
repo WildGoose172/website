@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         source: '/:path*',
         headers: [
           {
+            key: 'X-Frame-Options',
+            value: '',
+          },
+          {
             key: 'Content-Security-Policy',
             value:
               "frame-ancestors 'self' https://*.sanity.io https://www.sanity.io",
