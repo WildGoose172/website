@@ -9,8 +9,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'X-Frame-Options',
-            value:
-              "ALLOW FROM 'self' https://*.sanity.io https://www.sanity.io",
+            value: 'ALLOWALL',
           },
           {
             key: 'Content-Security-Policy',
