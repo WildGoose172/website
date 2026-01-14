@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       let href = path.replace(/\/+/g, '/')
 
       if (language !== routing.defaultLocale) {
-        href = `/${language}${href}`
+        href = `/${language}${href.startsWith('/') ? '' : '/'}${href}`
       }
 
       const fullUrl = new URL(href, baseUrl).toString()
