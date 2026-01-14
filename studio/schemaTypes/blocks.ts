@@ -372,7 +372,7 @@ const flockTalkTeaserType = defineType({
   },
 })
 
-const ImageTextType = defineType({
+const imageTextType = defineType({
   name: 'imageText',
   title: 'Image Text',
   type: 'object',
@@ -433,6 +433,41 @@ const ImageTextType = defineType({
   },
 })
 
+const articleType = defineType({
+  name: 'article',
+  title: 'Article',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'constrained',
+      description: 'Constrain the width of the article for better readability',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'showSocialShare',
+      type: 'boolean',
+      initialValue: true,
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Article',
+        subtitle: 'Article with social share',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   buttonLinkType,
   imageBannerType,
@@ -443,5 +478,6 @@ export const blockTypes = [
   clientsType,
   flockTalkItemType,
   flockTalkTeaserType,
-  ImageTextType,
+  imageTextType,
+  articleType,
 ]

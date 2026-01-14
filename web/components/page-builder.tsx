@@ -6,6 +6,7 @@ import { TextHero } from '@/components/blocks/text-hero'
 import { FlockTalkTeaser } from '@/components/blocks/flock-talk-teaser'
 import { ImageText } from '@/components/blocks/image-text'
 import { ImageBanner } from '@/components/blocks/image-banner'
+import { Article } from '@/components/blocks/article'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -120,6 +121,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'imageBanner':
       return (
         <ImageBanner
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'article':
+      return (
+        <Article
           {...block}
           documentId={documentId}
           documentType={documentType}

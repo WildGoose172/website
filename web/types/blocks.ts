@@ -7,6 +7,7 @@ export const BLOCK_TYPES = [
   'services',
   'textHero',
   'imageBanner',
+  'article',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

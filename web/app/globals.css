@@ -142,7 +142,7 @@
     }
 
     p {
-      @apply pb-2 last:pb-0;
+      @apply pb-4 last:pb-0;
     }
   }
 }
