@@ -1,4 +1,9 @@
 {
   "services": "Services",
-  "share": "Share"
+  "share": "Share",
+  "notFound": {
+    "title": "You've gone on a wild goose chase",
+    "description": "This page flew the coop. We looked everywhere and it's not here.",
+    "cta": "Back to the nest"
+  }
 }
