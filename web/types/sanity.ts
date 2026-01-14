@@ -92,6 +92,13 @@ export type ConfigReference = {
   [internalGroqTypeReferenceTo]?: 'config'
 }
 
+export type PhotoReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'photo'
+}
+
 export type ButtonLinkReference = {
   _ref: string
   _type: 'reference'
@@ -223,6 +230,7 @@ export type InternationalizedArrayReferenceValue = {
     | FooterColumnNumberReference
     | FooterColumnTextReference
     | ConfigReference
+    | PhotoReference
     | ButtonLinkReference
     | ImageBannerReference
     | TextHeroReference
@@ -289,24 +297,40 @@ export type Seo = {
 
 export type Article = {
   _type: 'article'
-  text?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
+  text?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Photo)
+    | ({
+        _key: string
+      } & ButtonLink)
+  >
   constrained?: boolean
   showSocialShare?: boolean
 }
@@ -314,24 +338,40 @@ export type Article = {
 export type ImageText = {
   _type: 'imageText'
   title?: string
-  text?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
+  text?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Photo)
+    | ({
+        _key: string
+      } & ButtonLink)
+  >
   image?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -444,6 +484,20 @@ export type ButtonLink = {
     | 'ghost'
     | 'link'
   size?: 'default' | 'sm' | 'lg'
+}
+
+export type Photo = {
+  _type: 'photo'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  alt?: string
+  aspectRatio?: 'square' | 'landscape' | 'portrait'
+  centered?: boolean
 }
 
 export type Config = {
@@ -664,6 +718,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette
   lqip?: string
   blurHash?: string
+  thumbHash?: string
   hasAlpha?: boolean
   isOpaque?: boolean
 }
@@ -739,6 +794,7 @@ export type AllSanitySchemaTypes =
   | FooterColumnNumberReference
   | FooterColumnTextReference
   | ConfigReference
+  | PhotoReference
   | ButtonLinkReference
   | ImageBannerReference
   | TextHeroReference
@@ -771,6 +827,7 @@ export type AllSanitySchemaTypes =
   | TextHero
   | ImageBanner
   | ButtonLink
+  | Photo
   | Config
   | Footer
   | Navigation
@@ -797,6 +854,12 @@ export type AllSanitySchemaTypes =
   | Geopoint
 
 export declare const internalGroqTypeReferenceTo: unique symbol
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string
+  }
+>
 
 // Source: ../web/sanity/queries.ts
 // Variable: configQuery
@@ -909,7 +972,7 @@ export type ConfigQueryResult = {
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        _key,        _type,        "slug": item->slug.current,        "thumbnail": item->thumbnail,        "title": item->title,      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        _key,        _type,        "slug": item->slug.current,        "thumbnail": item->thumbnail,        "title": item->title,      }    },    _type == "imageText" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "article" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
 export type PageQueryResult =
   | {
       _id: string
@@ -930,32 +993,62 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'article'
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             constrained?: boolean
             showSocialShare?: boolean
           }
@@ -1019,32 +1112,62 @@ export type PageQueryResult =
             _key: string
             _type: 'imageText'
             title?: string
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             image?: {
               asset?: SanityImageAssetReference
               media?: unknown
@@ -1109,32 +1232,62 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'article'
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             constrained?: boolean
             showSocialShare?: boolean
           }
@@ -1198,32 +1351,62 @@ export type PageQueryResult =
             _key: string
             _type: 'imageText'
             title?: string
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             image?: {
               asset?: SanityImageAssetReference
               media?: unknown
@@ -1288,32 +1471,62 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'article'
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             constrained?: boolean
             showSocialShare?: boolean
           }
@@ -1377,32 +1590,62 @@ export type PageQueryResult =
             _key: string
             _type: 'imageText'
             title?: string
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             image?: {
               asset?: SanityImageAssetReference
               media?: unknown
@@ -1467,32 +1710,62 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'article'
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             constrained?: boolean
             showSocialShare?: boolean
           }
@@ -1556,32 +1829,62 @@ export type PageQueryResult =
             _key: string
             _type: 'imageText'
             title?: string
-            text?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?:
-                | 'blockquote'
-                | 'h1'
-                | 'h2'
-                | 'h3'
-                | 'h4'
-                | 'h5'
-                | 'h6'
-                | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
+            text: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+              | {
+                  _key: string
+                  _type: 'buttonLink'
+                  label?: string
+                  link: string | null
+                  variant?:
+                    | 'default'
+                    | 'destructive'
+                    | 'ghost'
+                    | 'link'
+                    | 'outline'
+                    | 'secondary'
+                  size?: 'default' | 'lg' | 'sm'
+                }
+              | {
+                  _key: string
+                  _type: 'photo'
+                  image?: {
+                    asset?: SanityImageAssetReference
+                    media?: unknown
+                    hotspot?: SanityImageHotspot
+                    crop?: SanityImageCrop
+                    _type: 'image'
+                  }
+                  alt?: string
+                  aspectRatio?: 'landscape' | 'portrait' | 'square'
+                  centered?: boolean
+                }
+            > | null
             image?: {
               asset?: SanityImageAssetReference
               media?: unknown
@@ -1650,7 +1953,7 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[\n    _type == "config" &&\n    language == $language\n  ]{\n    navigation{\n      name,\n      image,\n      links[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        },\n        _type == "navigationDropdown" => {\n          ...,\n          links[]{\n            ...,\n            page->{\n  _type,\n  "slug": slug.current\n}\n          }\n        }\n      }\n    },\n    footer{\n      ...,\n      policies[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        }\n      }\n    }\n  }[0]\n': ConfigQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        _key,\n        _type,\n        "slug": item->slug.current,\n        "thumbnail": item->thumbnail,\n        "title": item->title,\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        _key,\n        _type,\n        "slug": item->slug.current,\n        "thumbnail": item->thumbnail,\n        "title": item->title,\n      }\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
   }
 }

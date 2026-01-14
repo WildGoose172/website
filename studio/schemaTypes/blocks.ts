@@ -1,79 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { ComponentIcon, CubeIcon } from '@sanity/icons'
-
-const buttonLinkType = defineType({
-  name: 'buttonLink',
-  title: 'Button Link',
-  type: 'object',
-  fields: [
-    defineField({
-      name: 'label',
-      type: 'string',
-      validation: rule => rule.required(),
-    }),
-    defineField({
-      name: 'link',
-      type: 'reference',
-      to: [
-        { type: 'page' },
-        { type: 'service' },
-        { type: 'project' },
-        { type: 'flockTalk' },
-      ],
-      options: {
-        filter: ({ document }) => ({
-          filter: 'language == $language',
-          params: { language: document?.language },
-        }),
-      },
-      validation: rule => rule.required(),
-    }),
-    defineField({
-      name: 'variant',
-      type: 'string',
-      initialValue: 'default',
-      options: {
-        list: [
-          'link',
-          'default',
-          'destructive',
-          'outline',
-          'secondary',
-          'ghost',
-          'link',
-        ],
-      },
-      validation: rule => rule.required(),
-    }),
-    defineField({
-      name: 'size',
-      type: 'string',
-      initialValue: 'default',
-      options: {
-        list: [
-          { value: 'default', title: 'Default' },
-          { value: 'sm', title: 'Small' },
-          { value: 'lg', title: 'Large' },
-        ],
-      },
-      validation: rule => rule.required(),
-    }),
-  ],
-  preview: {
-    select: {
-      label: 'label',
-    },
-    prepare(selection) {
-      const { label } = selection
-
-      return {
-        title: label,
-        subtitle: 'Button Link',
-        icon: CubeIcon,
-      }
-    },
-  },
-})
+import { portableComponents } from './portable-blocks'
 
 const imageBannerType = defineType({
   name: 'imageBanner',
@@ -385,7 +312,7 @@ const imageTextType = defineType({
     defineField({
       name: 'text',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: portableComponents,
       validation: rule => rule.required(),
     }),
     defineField({
@@ -442,7 +369,7 @@ const articleType = defineType({
     defineField({
       name: 'text',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: portableComponents,
       validation: rule => rule.required(),
     }),
     defineField({
@@ -469,7 +396,6 @@ const articleType = defineType({
 })
 
 export const blockTypes = [
-  buttonLinkType,
   imageBannerType,
   textHeroType,
   serviceItemType,

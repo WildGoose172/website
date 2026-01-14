@@ -1,6 +1,6 @@
 'use client'
 
-import { PortableText } from '@portabletext/react'
+import { RichText } from '@/components/richtext'
 import { LinkedIn, Facebook } from '@/components/icons'
 import { FacebookShareButton, LinkedinShareButton } from 'next-share'
 import { Clipboard, ClipboardCheck } from 'lucide-react'
@@ -32,7 +32,7 @@ export function Article({
           constrained && 'md:mx-0 md:max-w-prose',
         )}
       >
-        <PortableText value={text!} />
+        <RichText text={text} />
       </div>
 
       {showSocialShare && <SocialShare className="mt-8 md:hidden" />}

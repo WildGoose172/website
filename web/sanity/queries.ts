@@ -67,6 +67,26 @@ const pageBuilderBlocks = `
         "title": item->title,
       }
     },
+    _type == "imageText" => {
+      ...,
+      text[]{
+        ...,
+        _type == "buttonLink" => {
+          ...,
+          "link": link->slug.current
+        }
+      }
+    },
+    _type == "article" => {
+      ...,
+      text[]{
+        ...,
+        _type == "buttonLink" => {
+          ...,
+          "link": link->slug.current
+        }
+      }
+    },
   },
 `
 
