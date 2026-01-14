@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './schemaTypes'
 import { documentInternationalization } from '@sanity/document-internationalization'
+import { vercelProtectionBypassTool } from '@sanity/vercel-protection-bypass'
 
 export default defineConfig({
   name: 'default',
@@ -30,6 +31,7 @@ export default defineConfig({
       ],
       schemaTypes: schemaTypes.map(type => type.name),
     }),
+    vercelProtectionBypassTool(),
   ],
   schema: {
     types: schemaTypes,
