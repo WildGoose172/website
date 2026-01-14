@@ -1486,13 +1486,6 @@
             "type": "boolean"
           },
           "optional": true
-        },
-        "showSocialShare": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
         }
       }
     }

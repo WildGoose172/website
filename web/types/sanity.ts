@@ -332,7 +332,6 @@ export type Article = {
       } & ButtonLink)
   >
   constrained?: boolean
-  showSocialShare?: boolean
 }
 
 export type ImageText = {
@@ -1050,7 +1049,6 @@ export type PageQueryResult =
                 }
             > | null
             constrained?: boolean
-            showSocialShare?: boolean
           }
         | {
             _key: string
@@ -1289,7 +1287,6 @@ export type PageQueryResult =
                 }
             > | null
             constrained?: boolean
-            showSocialShare?: boolean
           }
         | {
             _key: string
@@ -1528,7 +1525,6 @@ export type PageQueryResult =
                 }
             > | null
             constrained?: boolean
-            showSocialShare?: boolean
           }
         | {
             _key: string
@@ -1767,7 +1763,6 @@ export type PageQueryResult =
                 }
             > | null
             constrained?: boolean
-            showSocialShare?: boolean
           }
         | {
             _key: string

@@ -378,17 +378,12 @@ const articleType = defineType({
       type: 'boolean',
       initialValue: true,
     }),
-    defineField({
-      name: 'showSocialShare',
-      type: 'boolean',
-      initialValue: true,
-    }),
   ],
   preview: {
     prepare() {
       return {
         title: 'Article',
-        subtitle: 'Article with social share',
+        subtitle: 'Article content',
         icon: ComponentIcon,
       }
     },
