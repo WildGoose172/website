@@ -124,10 +124,6 @@ const buttonLinkType = defineType({
   },
 })
 
-export const portableComponents = [
-  { type: 'block' },
-  { type: 'photo' },
-  { type: 'buttonLink' },
-]
+export const portableComponents = [{ type: 'photo' }, { type: 'buttonLink' }]
 
 export const portableBlockTypes = [photoType, buttonLinkType]

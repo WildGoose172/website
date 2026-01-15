@@ -4,7 +4,7 @@ import { isUniqueOtherThanLanguage } from '../utils/validator'
 
 export const pageType = defineType({
   name: 'page',
-  title: 'Page',
+  title: "Pagina's",
   type: 'document',
   icon: DocumentIcon,
   fields: [

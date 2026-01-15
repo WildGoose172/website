@@ -4,7 +4,7 @@ import { isUniqueOtherThanLanguage } from '../utils/validator'
 
 export const projectType = defineType({
   name: 'project',
-  title: 'Project',
+  title: 'Projecten',
   type: 'document',
   icon: DocumentIcon,
   fields: [

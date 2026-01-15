@@ -4,7 +4,7 @@ import { isUniqueOtherThanLanguage } from '../utils/validator'
 
 export const flockTalkType = defineType({
   name: 'flockTalk',
-  title: 'Flock Talk',
+  title: "Flock Talk's",
   type: 'document',
   icon: DocumentIcon,
   fields: [

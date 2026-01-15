@@ -4,7 +4,7 @@ import { isUniqueOtherThanLanguage } from '../utils/validator'
 
 export const serviceType = defineType({
   name: 'service',
-  title: 'Service',
+  title: 'Diensten',
   type: 'document',
   icon: DocumentIcon,
   fields: [
