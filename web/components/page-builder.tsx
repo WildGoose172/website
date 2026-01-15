@@ -7,6 +7,7 @@ import { FlockTalkTeaser } from '@/components/blocks/flock-talk-teaser'
 import { ImageText } from '@/components/blocks/image-text'
 import { ImageBanner } from '@/components/blocks/image-banner'
 import { Article } from '@/components/blocks/article'
+import { ContactForm } from '@/components/blocks/contact-form'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -129,6 +130,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'article':
       return (
         <Article
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'contactForm':
+      return (
+        <ContactForm
           {...block}
           documentId={documentId}
           documentType={documentType}

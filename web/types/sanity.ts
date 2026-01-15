@@ -185,6 +185,13 @@ export type ArticleReference = {
   [internalGroqTypeReferenceTo]?: 'article'
 }
 
+export type ContactFormReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'contactForm'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -251,6 +258,7 @@ export type InternationalizedArrayReferenceValue = {
     | FlockTalkTeaserReference
     | ImageTextReference
     | ArticleReference
+    | ContactFormReference
     | SeoReference
     | PageReference
     | PageBuilderReference
@@ -281,6 +289,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & Article)
+  | ({
+      _key: string
+    } & ContactForm)
 >
 
 export type SanityImageAssetReference = {
@@ -302,6 +313,12 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type ContactForm = {
+  _type: 'contactForm'
+  title?: string
+  emailTo?: string
 }
 
 export type Article = {
@@ -763,6 +780,7 @@ export type AllSanitySchemaTypes =
   | FlockTalkTeaserReference
   | ImageTextReference
   | ArticleReference
+  | ContactFormReference
   | SeoReference
   | PageReference
   | PageBuilderReference
@@ -773,6 +791,7 @@ export type AllSanitySchemaTypes =
   | PageBuilder
   | SanityImageAssetReference
   | Seo
+  | ContactForm
   | Article
   | ImageText
   | FlockTalkTeaser
@@ -995,6 +1014,12 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'contactForm'
+            title?: string
+            emailTo?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -1178,6 +1203,12 @@ export type PageQueryResult =
                 _key: string
               } & ClientItem
             >
+          }
+        | {
+            _key: string
+            _type: 'contactForm'
+            title?: string
+            emailTo?: string
           }
         | {
             _key: string
@@ -1367,6 +1398,12 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'contactForm'
+            title?: string
+            emailTo?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -1550,6 +1587,12 @@ export type PageQueryResult =
                 _key: string
               } & ClientItem
             >
+          }
+        | {
+            _key: string
+            _type: 'contactForm'
+            title?: string
+            emailTo?: string
           }
         | {
             _key: string

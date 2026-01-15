@@ -390,6 +390,34 @@ const articleType = defineType({
   },
 })
 
+const contactFormType = defineType({
+  name: 'contactForm',
+  title: 'Contact Form',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+    }),
+    defineField({
+      name: 'emailTo',
+      description:
+        'Email address to receive form submissions. Leave empty to use default.',
+      type: 'email',
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Contact Form',
+        subtitle: 'Form',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -401,4 +429,5 @@ export const blockTypes = [
   flockTalkTeaserType,
   imageTextType,
   articleType,
+  contactFormType,
 ]

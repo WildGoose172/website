@@ -8,6 +8,7 @@ export const BLOCK_TYPES = [
   'textHero',
   'imageBanner',
   'article',
+  'contactForm',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

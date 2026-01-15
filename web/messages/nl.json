@@ -5,5 +5,20 @@
     "title": "Je bent op een wilde ganzenjacht beland",
     "description": "Deze pagina is gevlogen. We hebben overal gezocht, maar niets gevonden.",
     "cta": "Terug naar het nest"
+  },
+  "contactForm": {
+    "name": "Naam",
+    "email": "Email",
+    "message": "Bericht",
+    "submit": "Verzenden",
+    "sending": "Bezig met verzenden...",
+    "error": "Er is een fout opgetreden bij het verzenden van het bericht. Probeer het later opnieuw.",
+    "success": "Bericht succesvol verzonden!"
+  },
+  "form": {
+    "min": "{field} moet minimaal {min} tekens bevatten",
+    "max": "{field} mag maximaal {max} tekens bevatten",
+    "required": "{field} is verplicht",
+    "email": "{field} moet een geldig emailadres zijn"
   }
 }

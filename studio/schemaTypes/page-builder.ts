@@ -13,5 +13,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'imageText' }),
     defineArrayMember({ type: 'imageBanner' }),
     defineArrayMember({ type: 'article' }),
+    defineArrayMember({ type: 'contactForm' }),
   ],
 })

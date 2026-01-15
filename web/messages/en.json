@@ -5,5 +5,20 @@
     "title": "You've gone on a wild goose chase",
     "description": "This page flew the coop. We looked everywhere and it's not here.",
     "cta": "Back to the nest"
+  },
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "error": "An error occurred while sending the message. Please try again later.",
+    "success": "Message sent successfully!"
+  },
+  "form": {
+    "min": "{field} must be at least {min} characters",
+    "max": "{field} must be at most {max} characters",
+    "required": "{field} is required",
+    "email": "{field} must be a valid email address"
   }
 }
