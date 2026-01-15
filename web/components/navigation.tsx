@@ -108,12 +108,14 @@ export function Navigation({ config }: NavigationProps) {
             <SheetContent side="top">
               <SheetHeader>
                 <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-                <SanityImage
-                  src={config!.image!}
-                  alt="Logo"
-                  width={120}
-                  height={40}
-                />
+                <Link href="/">
+                  <SanityImage
+                    src={config!.image!}
+                    alt="Logo"
+                    width={120}
+                    height={40}
+                  />
+                </Link>
               </SheetHeader>
               <div className="flex flex-col gap-1 px-4">
                 {config?.links?.map(link => {

@@ -5,6 +5,7 @@ import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './schemaTypes'
 import { documentInternationalization } from '@sanity/document-internationalization'
 import { vercelProtectionBypassTool } from '@sanity/vercel-protection-bypass'
+import { resolve } from './utils/presentation-reslove'
 
 export default defineConfig({
   name: 'default',
@@ -23,6 +24,7 @@ export default defineConfig({
           enable: '/api/draft-mode/enable',
         },
       },
+      resolve,
     }),
     documentInternationalization({
       supportedLanguages: [
