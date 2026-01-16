@@ -474,6 +474,7 @@ const projectOverviewType = defineType({
     defineField({
       name: 'cta',
       type: 'string',
+      description: 'Button text for each Project item',
       validation: rule => rule.required(),
     }),
   ],
@@ -486,6 +487,30 @@ const projectOverviewType = defineType({
       return {
         title: title ?? 'Project Overview',
         subtitle: 'Project Overview',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
+const flockTalkOverviewType = defineType({
+  name: 'flockTalkOverview',
+  title: 'Flock Talk Overview',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'cta',
+      type: 'string',
+      description: 'Button text for each Flock Talk item',
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Flock Talk Overview',
+        subtitle: 'Flock Talk Overview',
         icon: ComponentIcon,
       }
     },
@@ -506,4 +531,5 @@ export const blockTypes = [
   articleType,
   contactFormType,
   projectOverviewType,
+  flockTalkOverviewType,
 ]

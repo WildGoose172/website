@@ -206,6 +206,13 @@ export type ProjectOverviewReference = {
   [internalGroqTypeReferenceTo]?: 'projectOverview'
 }
 
+export type FlockTalkOverviewReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'flockTalkOverview'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -282,6 +289,7 @@ export type InternationalizedArrayReferenceValue = {
     | ArticleReference
     | ContactFormReference
     | ProjectOverviewReference
+    | FlockTalkOverviewReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -322,6 +330,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & ProjectOverview)
+  | ({
+      _key: string
+    } & FlockTalkOverview)
 >
 
 export type SanityImageAssetReference = {
@@ -373,6 +384,11 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type FlockTalkOverview = {
+  _type: 'flockTalkOverview'
+  cta?: string
 }
 
 export type ProjectOverview = {
@@ -728,13 +744,7 @@ export type FlockTalk = {
   _rev: string
   title?: string
   slug?: Slug
-  thumbnail?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
+  teaser?: Teaser
   content?: PageBuilder
   seo?: Seo
   language?: string
@@ -911,6 +921,7 @@ export type AllSanitySchemaTypes =
   | ArticleReference
   | ContactFormReference
   | ProjectOverviewReference
+  | FlockTalkOverviewReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -923,6 +934,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | FlockTalkOverview
   | ProjectOverview
   | ContactForm
   | Article
@@ -1082,7 +1094,7 @@ export type ConfigQueryResult = {
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        _key,        _type,        "slug": item->slug.current,        "thumbnail": item->thumbnail,        "title": item->title,      }    },    _type == "relatedFlockTalk" => {      ...,      cta{        ...,        "link": link->slug.current      },    },    _type == "imageText" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "article" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        ...,        "slug": item->slug.current,        "teaser": item->teaser,      }    },    _type == "relatedFlockTalk" => {      ...,      cta{        ...,        "link": link->slug.current      },    },    _type == "imageText" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "article" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
 export type PageQueryResult =
   | {
       _id: string
@@ -1092,13 +1104,7 @@ export type PageQueryResult =
       _rev: string
       title?: string
       slug?: Slug
-      thumbnail?: {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
+      teaser?: Teaser
       content: Array<
         | {
             _key: string
@@ -1181,6 +1187,11 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'flockTalkOverview'
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -1200,15 +1211,9 @@ export type PageQueryResult =
             items: Array<{
               _key: string
               _type: 'flockTalkItem'
+              item?: FlockTalkReference
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
-              title: string | null
+              teaser: Teaser | null
             }> | null
           }
         | {
@@ -1452,6 +1457,11 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'flockTalkOverview'
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -1471,15 +1481,9 @@ export type PageQueryResult =
             items: Array<{
               _key: string
               _type: 'flockTalkItem'
+              item?: FlockTalkReference
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
-              title: string | null
+              teaser: Teaser | null
             }> | null
           }
         | {
@@ -1724,6 +1728,11 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'flockTalkOverview'
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -1743,15 +1752,9 @@ export type PageQueryResult =
             items: Array<{
               _key: string
               _type: 'flockTalkItem'
+              item?: FlockTalkReference
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
-              title: string | null
+              teaser: Teaser | null
             }> | null
           }
         | {
@@ -1995,6 +1998,11 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'flockTalkOverview'
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkTeaser'
             title?: string
             subtitle?: string
@@ -2014,15 +2022,9 @@ export type PageQueryResult =
             items: Array<{
               _key: string
               _type: 'flockTalkItem'
+              item?: FlockTalkReference
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
-              title: string | null
+              teaser: Teaser | null
             }> | null
           }
         | {
@@ -2189,19 +2191,36 @@ export type SitemapQueryResult = Array<{
 
 // Source: ../web/sanity/queries.ts
 // Variable: relatedFlockTalksQuery
-// Query: *[    _type == "flockTalk" &&    _id != $currentDocumentId &&    language == $language  ] | order(_createdAt desc)[0...3] {    _id,    _key,    title,    "slug": slug.current,    thumbnail,  }
+// Query: *[    _type == "flockTalk" &&    _id != $currentDocumentId &&    language == $language  ] | order(_createdAt desc)[0...3] {    ...,    "slug": slug.current,  }
 export type RelatedFlockTalksQueryResult = Array<{
   _id: string
-  _key: null
-  title: string | null
+  _type: 'flockTalk'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
   slug: string | null
-  thumbnail: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  } | null
+  teaser?: Teaser
+  content?: PageBuilder
+  seo?: Seo
+  language?: string
+}>
+
+// Source: ../web/sanity/queries.ts
+// Variable: flockTalkOverviewQuery
+// Query: *[    _type == "flockTalk" &&    language == $language  ] | order(_createdAt desc) {    ...,    "slug": slug.current,  }
+export type FlockTalkOverviewQueryResult = Array<{
+  _id: string
+  _type: 'flockTalk'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug: string | null
+  teaser?: Teaser
+  content?: PageBuilder
+  seo?: Seo
+  language?: string
 }>
 
 // Source: ../web/sanity/queries.ts
@@ -2226,9 +2245,10 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[\n    _type == "config" &&\n    language == $language\n  ]{\n    navigation{\n      name,\n      image,\n      links[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        },\n        _type == "navigationDropdown" => {\n          ...,\n          links[]{\n            ...,\n            page->{\n  _type,\n  "slug": slug.current\n}\n          }\n        }\n      }\n    },\n    footer{\n      ...,\n      policies[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        }\n      }\n    }\n  }[0]\n': ConfigQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        _key,\n        _type,\n        "slug": item->slug.current,\n        "thumbnail": item->thumbnail,\n        "title": item->title,\n      }\n    },\n    _type == "relatedFlockTalk" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        ...,\n        "slug": item->slug.current,\n        "teaser": item->teaser,\n      }\n    },\n    _type == "relatedFlockTalk" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
-    '\n  *[\n    _type == "flockTalk" &&\n    _id != $currentDocumentId &&\n    language == $language\n  ] | order(_createdAt desc)[0...3] {\n    _id,\n    _key,\n    title,\n    "slug": slug.current,\n    thumbnail,\n  }\n': RelatedFlockTalksQueryResult
+    '\n  *[\n    _type == "flockTalk" &&\n    _id != $currentDocumentId &&\n    language == $language\n  ] | order(_createdAt desc)[0...3] {\n    ...,\n    "slug": slug.current,\n  }\n': RelatedFlockTalksQueryResult
+    '\n  *[\n    _type == "flockTalk" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': FlockTalkOverviewQueryResult
     '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult
   }
 }

@@ -68,12 +68,17 @@ export function ProjectOverview({
               />
             </div>
 
-            <div className="flex flex-col gap-4 p-10">
-              <h3 className="head-2">{item.teaser!.title}</h3>
-              <div className="html-richtext">
-                <PortableText value={item.teaser!.text!} />
+            <div className="flex flex-col gap-8 p-10">
+              <div className="flex grow flex-col gap-2">
+                <h3 className="head-2">{item.teaser?.title}</h3>
+                {item.teaser?.text && (
+                  <div className="html-richtext">
+                    <PortableText value={item.teaser.text} />
+                  </div>
+                )}
               </div>
-              <Button className="w-fit">{cta}</Button>
+
+              <Button className="w-fit self-end">{cta}</Button>
             </div>
 
             <Link

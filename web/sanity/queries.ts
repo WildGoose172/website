@@ -60,11 +60,9 @@ const pageBuilderBlocks = `
         "link": link->slug.current
       },
       items[]{
-        _key,
-        _type,
+        ...,
         "slug": item->slug.current,
-        "thumbnail": item->thumbnail,
-        "title": item->title,
+        "teaser": item->teaser,
       }
     },
     _type == "relatedFlockTalk" => {
@@ -131,11 +129,18 @@ export const relatedFlockTalksQuery = defineQuery(`
     _id != $currentDocumentId &&
     language == $language
   ] | order(_createdAt desc)[0...3] {
-    _id,
-    _key,
-    title,
+    ...,
     "slug": slug.current,
-    thumbnail,
+  }
+`)
+
+export const flockTalkOverviewQuery = defineQuery(`
+  *[
+    _type == "flockTalk" &&
+    language == $language
+  ] | order(_createdAt desc) {
+    ...,
+    "slug": slug.current,
   }
 `)
 
