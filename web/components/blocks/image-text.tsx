@@ -45,20 +45,20 @@ export function ImageText({
 
       <div
         className={cn(
-          imageRounded && 'rounded-md',
-          'relative aspect-[37/24] w-full overflow-hidden lg:aspect-[65/34]',
           imagePosition === 'right' && 'lg:order-2',
           imagePosition === 'left' && 'lg:order-1',
           imagePosition === 'top' && 'order-1',
+          imageRounded && 'rounded-md',
         )}
       >
         <SanityImage
           src={image}
           alt={image?.alt || ''}
-          fill
+          height={630}
+          width={1385}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading="lazy"
-          className="object-contain"
+          className="h-full w-full rounded-2xl object-cover"
         />
       </div>
     </section>
