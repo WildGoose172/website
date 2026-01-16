@@ -54,6 +54,7 @@ const buttonLinkType = defineType({
   name: 'buttonLink',
   title: 'Button Link',
   type: 'object',
+  icon: CubeIcon,
   fields: [
     defineField({
       name: 'label',
@@ -124,6 +125,10 @@ const buttonLinkType = defineType({
   },
 })
 
-export const portableComponents = [{ type: 'photo' }, { type: 'buttonLink' }]
+export const portableComponents = [
+  { type: 'block' },
+  { type: 'photo' },
+  { type: 'buttonLink' },
+]
 
 export const portableBlockTypes = [photoType, buttonLinkType]
