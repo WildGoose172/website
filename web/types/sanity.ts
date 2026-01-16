@@ -213,6 +213,13 @@ export type FlockTalkOverviewReference = {
   [internalGroqTypeReferenceTo]?: 'flockTalkOverview'
 }
 
+export type QuoteReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'quote'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -290,6 +297,7 @@ export type InternationalizedArrayReferenceValue = {
     | ContactFormReference
     | ProjectOverviewReference
     | FlockTalkOverviewReference
+    | QuoteReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -333,6 +341,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & FlockTalkOverview)
+  | ({
+      _key: string
+    } & Quote)
 >
 
 export type SanityImageAssetReference = {
@@ -384,6 +395,13 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type Quote = {
+  _type: 'quote'
+  quote?: string
+  author?: string
+  bgBlur?: boolean
 }
 
 export type FlockTalkOverview = {
@@ -922,6 +940,7 @@ export type AllSanitySchemaTypes =
   | ContactFormReference
   | ProjectOverviewReference
   | FlockTalkOverviewReference
+  | QuoteReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -934,6 +953,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | Quote
   | FlockTalkOverview
   | ProjectOverview
   | ContactForm
@@ -1309,6 +1329,13 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'quote'
+            quote?: string
+            author?: string
+            bgBlur?: boolean
+          }
+        | {
+            _key: string
             _type: 'relatedFlockTalk'
             title?: string
             subtitle?: string
@@ -1576,6 +1603,13 @@ export type PageQueryResult =
             title?: string
             subtitle?: string
             cta?: string
+          }
+        | {
+            _key: string
+            _type: 'quote'
+            quote?: string
+            author?: string
+            bgBlur?: boolean
           }
         | {
             _key: string
@@ -1850,6 +1884,13 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'quote'
+            quote?: string
+            author?: string
+            bgBlur?: boolean
+          }
+        | {
+            _key: string
             _type: 'relatedFlockTalk'
             title?: string
             subtitle?: string
@@ -2117,6 +2158,13 @@ export type PageQueryResult =
             title?: string
             subtitle?: string
             cta?: string
+          }
+        | {
+            _key: string
+            _type: 'quote'
+            quote?: string
+            author?: string
+            bgBlur?: boolean
           }
         | {
             _key: string

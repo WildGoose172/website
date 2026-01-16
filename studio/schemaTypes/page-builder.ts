@@ -17,5 +17,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'contactForm' }),
     defineArrayMember({ type: 'projectOverview' }),
     defineArrayMember({ type: 'flockTalkOverview' }),
+    defineArrayMember({ type: 'quote' }),
   ],
 })

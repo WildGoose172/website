@@ -12,6 +12,7 @@ export const BLOCK_TYPES = [
   'contactForm',
   'projectOverview',
   'flockTalkOverview',
+  'quote',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

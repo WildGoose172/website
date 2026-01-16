@@ -517,6 +517,40 @@ const flockTalkOverviewType = defineType({
   },
 })
 
+const quoteType = defineType({
+  name: 'quote',
+  title: 'Quote',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'quote',
+      type: 'text',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'author',
+      type: 'string',
+    }),
+    defineField({
+      name: 'bgBlur',
+      type: 'boolean',
+      title: 'Background Blur',
+      initialValue: true,
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Quote',
+        subtitle: 'Quote',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -532,4 +566,5 @@ export const blockTypes = [
   contactFormType,
   projectOverviewType,
   flockTalkOverviewType,
+  quoteType,
 ]

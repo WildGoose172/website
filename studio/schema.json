@@ -872,6 +872,36 @@
   },
   {
     "type": "type",
+    "name": "quote.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "quote"
+    }
+  },
+  {
+    "type": "type",
     "name": "seo.reference",
     "value": {
       "type": "object",
@@ -1200,6 +1230,10 @@
               },
               {
                 "type": "inline",
+                "name": "quote.reference"
+              },
+              {
+                "type": "inline",
                 "name": "seo.reference"
               },
               {
@@ -1404,6 +1438,21 @@
             "rest": {
               "type": "inline",
               "name": "flockTalkOverview"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "quote"
             }
           }
         ]
@@ -1770,6 +1819,43 @@
             "of": {
               "type": "string"
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "quote",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "quote"
+          }
+        },
+        "quote": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "author": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "bgBlur": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
           },
           "optional": true
         }
