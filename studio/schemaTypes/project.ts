@@ -21,6 +21,10 @@ export const projectType = defineType({
       },
     }),
     defineField({
+      name: 'teaser',
+      type: 'teaser',
+    }),
+    defineField({
       name: 'content',
       type: 'pageBuilder',
     }),

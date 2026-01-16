@@ -199,11 +199,25 @@ export type ContactFormReference = {
   [internalGroqTypeReferenceTo]?: 'contactForm'
 }
 
+export type ProjectOverviewReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'projectOverview'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: 'seo'
+}
+
+export type TeaserReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'teaser'
 }
 
 export type PageReference = {
@@ -267,7 +281,9 @@ export type InternationalizedArrayReferenceValue = {
     | ImageTextReference
     | ArticleReference
     | ContactFormReference
+    | ProjectOverviewReference
     | SeoReference
+    | TeaserReference
     | PageReference
     | PageBuilderReference
     | ServiceReference
@@ -303,6 +319,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & ContactForm)
+  | ({
+      _key: string
+    } & ProjectOverview)
 >
 
 export type SanityImageAssetReference = {
@@ -310,6 +329,36 @@ export type SanityImageAssetReference = {
   _type: 'reference'
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type Teaser = {
+  _type: 'teaser'
+  thumbnail?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  title?: string
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
 }
 
 export type Seo = {
@@ -324,6 +373,13 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type ProjectOverview = {
+  _type: 'projectOverview'
+  title?: string
+  subtitle?: string
+  cta?: string
 }
 
 export type ContactForm = {
@@ -672,13 +728,7 @@ export type FlockTalk = {
   _rev: string
   title?: string
   slug?: Slug
-  thumbnail?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
+  teaser?: Teaser
   content?: PageBuilder
   seo?: Seo
   language?: string
@@ -698,6 +748,7 @@ export type Project = {
   _rev: string
   title?: string
   slug?: Slug
+  teaser?: Teaser
   content?: PageBuilder
   seo?: Seo
   language?: string
@@ -853,7 +904,9 @@ export type AllSanitySchemaTypes =
   | ImageTextReference
   | ArticleReference
   | ContactFormReference
+  | ProjectOverviewReference
   | SeoReference
+  | TeaserReference
   | PageReference
   | PageBuilderReference
   | ServiceReference
@@ -862,7 +915,9 @@ export type AllSanitySchemaTypes =
   | InternationalizedArrayReferenceValue
   | PageBuilder
   | SanityImageAssetReference
+  | Teaser
   | Seo
+  | ProjectOverview
   | ContactForm
   | Article
   | ImageText
@@ -1031,13 +1086,7 @@ export type PageQueryResult =
       _rev: string
       title?: string
       slug?: Slug
-      thumbnail?: {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
+      teaser?: Teaser
       content: Array<
         | {
             _key: string
@@ -1140,13 +1189,7 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
+              thumbnail: null
               title: string | null
             }> | null
           }
@@ -1233,6 +1276,13 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+          }
+        | {
+            _key: string
+            _type: 'projectOverview'
+            title?: string
+            subtitle?: string
+            cta?: string
           }
         | {
             _key: string
@@ -1404,13 +1454,7 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
+              thumbnail: null
               title: string | null
             }> | null
           }
@@ -1500,6 +1544,13 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'projectOverview'
+            title?: string
+            subtitle?: string
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'relatedFlockTalk'
             title?: string
             subtitle?: string
@@ -1566,6 +1617,7 @@ export type PageQueryResult =
       _rev: string
       title?: string
       slug?: Slug
+      teaser?: Teaser
       content: Array<
         | {
             _key: string
@@ -1668,13 +1720,7 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
+              thumbnail: null
               title: string | null
             }> | null
           }
@@ -1761,6 +1807,13 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+          }
+        | {
+            _key: string
+            _type: 'projectOverview'
+            title?: string
+            subtitle?: string
+            cta?: string
           }
         | {
             _key: string
@@ -1932,13 +1985,7 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: {
-                asset?: SanityImageAssetReference
-                media?: unknown
-                hotspot?: SanityImageHotspot
-                crop?: SanityImageCrop
-                _type: 'image'
-              } | null
+              thumbnail: null
               title: string | null
             }> | null
           }
@@ -2028,6 +2075,13 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'projectOverview'
+            title?: string
+            subtitle?: string
+            cta?: string
+          }
+        | {
+            _key: string
             _type: 'relatedFlockTalk'
             title?: string
             subtitle?: string
@@ -2105,13 +2159,24 @@ export type RelatedFlockTalksQueryResult = Array<{
   _key: null
   title: string | null
   slug: string | null
-  thumbnail: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  } | null
+  thumbnail: null
+}>
+
+// Source: ../web/sanity/queries.ts
+// Variable: projectOverviewQuery
+// Query: *[    _type == "project" &&    language == $language  ] | order(_createdAt desc) {    ...,    "slug": slug.current,  }
+export type ProjectOverviewQueryResult = Array<{
+  _id: string
+  _type: 'project'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug: string | null
+  teaser?: Teaser
+  content?: PageBuilder
+  seo?: Seo
+  language?: string
 }>
 
 // Query TypeMap
@@ -2122,5 +2187,6 @@ declare module '@sanity/client' {
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        _key,\n        _type,\n        "slug": item->slug.current,\n        "thumbnail": item->thumbnail,\n        "title": item->title,\n      }\n    },\n    _type == "relatedFlockTalk" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
     '\n  *[\n    _type == "flockTalk" &&\n    _id != $currentDocumentId &&\n    language == $language\n  ] | order(_createdAt desc)[0...3] {\n    _id,\n    _key,\n    title,\n    "slug": slug.current,\n    thumbnail,\n  }\n': RelatedFlockTalksQueryResult
+    '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult
   }
 }

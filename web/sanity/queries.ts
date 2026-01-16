@@ -138,3 +138,13 @@ export const relatedFlockTalksQuery = defineQuery(`
     thumbnail,
   }
 `)
+
+export const projectOverviewQuery = defineQuery(`
+  *[
+    _type == "project" &&
+    language == $language
+  ] | order(_createdAt desc) {
+    ...,
+    "slug": slug.current,
+  }
+`)

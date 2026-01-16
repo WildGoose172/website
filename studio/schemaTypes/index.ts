@@ -7,12 +7,14 @@ import { portableBlockTypes } from './portable-blocks'
 import { projectType } from './project'
 import { seoType } from './seo'
 import { serviceType } from './service'
+import { teaserType } from './teaser'
 
 export const schemaTypes = [
   ...navigationTypes,
   ...portableBlockTypes,
   ...blockTypes,
   seoType,
+  teaserType,
   pageType,
   pageBuilderType,
   serviceType,

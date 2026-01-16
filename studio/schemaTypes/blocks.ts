@@ -456,6 +456,42 @@ const contactFormType = defineType({
   },
 })
 
+const projectOverviewType = defineType({
+  name: 'projectOverview',
+  title: 'Project Overview',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      type: 'string',
+    }),
+    defineField({
+      name: 'cta',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+      return {
+        title: title ?? 'Project Overview',
+        subtitle: 'Project Overview',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -469,4 +505,5 @@ export const blockTypes = [
   imageTextType,
   articleType,
   contactFormType,
+  projectOverviewType,
 ]
