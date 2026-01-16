@@ -26,7 +26,11 @@ export function Footer({ config }: FooterProps) {
               className="lg:col-span-2"
             />
             {config?.columns?.map(column => (
-              <div key={column._key} className="flex flex-col gap-2">
+              <div
+                key={column._key}
+                id={(column.name ?? '').toLowerCase()}
+                className="flex flex-col gap-2"
+              >
                 <h4 className="font-semibold">{column.name}</h4>
                 {(column.columnItems ?? []).map(item => {
                   switch (item._type) {

@@ -85,6 +85,10 @@
     @apply font-text bg-background text-foreground;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   h1,
   .head-1 {
     @apply font-title text-4xl font-black tracking-tight;

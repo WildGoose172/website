@@ -38,6 +38,13 @@ export type InternationalizedArrayReference = Array<
   } & InternationalizedArrayReferenceValue
 >
 
+export type NavigationScrollReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'navigationScroll'
+}
+
 export type NavigationReference = {
   _ref: string
   _type: 'reference'
@@ -279,6 +286,7 @@ export type FlockTalkReference = {
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
+    | NavigationScrollReference
     | NavigationReference
     | NavigationLinkReference
     | NavigationDropdownReference
@@ -705,6 +713,9 @@ export type Navigation = {
     | ({
         _key: string
       } & NavigationDropdown)
+    | ({
+        _key: string
+      } & NavigationScroll)
   >
 }
 
@@ -835,6 +846,12 @@ export type Page = {
   language?: string
 }
 
+export type NavigationScroll = {
+  _type: 'navigationScroll'
+  name?: string
+  scrollToId?: string
+}
+
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
   background?: string
@@ -936,6 +953,7 @@ export type AllSanitySchemaTypes =
   | SanityVercelProtectionBypass
   | TranslationMetadata
   | InternationalizedArrayReference
+  | NavigationScrollReference
   | NavigationReference
   | NavigationLinkReference
   | NavigationDropdownReference
@@ -1009,6 +1027,7 @@ export type AllSanitySchemaTypes =
   | Project
   | Service
   | Page
+  | NavigationScroll
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -1090,6 +1109,12 @@ export type ConfigQueryResult = {
                 slug: string | null
               }
             | null
+        }
+      | {
+          _key: string
+          _type: 'navigationScroll'
+          name?: string
+          scrollToId?: string
         }
     > | null
   } | null

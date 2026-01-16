@@ -7,6 +7,27 @@ import {
   TextIcon,
 } from '@sanity/icons'
 
+const navigationScrollType = defineType({
+  name: 'navigationScroll',
+  title: 'Navigation Scroll',
+  type: 'object',
+  icon: CubeIcon,
+  fields: [
+    defineField({
+      name: 'name',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'scrollToId',
+      title: 'Scroll ID',
+      description: 'ID of the section to scroll to',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+  ],
+})
+
 const navigationLinkType = defineType({
   name: 'navigationLink',
   title: 'Navigation Link',
@@ -70,7 +91,11 @@ const navigationType = defineType({
     defineField({
       name: 'links',
       type: 'array',
-      of: [{ type: 'navigationLink' }, { type: 'navigationDropdown' }],
+      of: [
+        { type: 'navigationLink' },
+        { type: 'navigationDropdown' },
+        { type: 'navigationScroll' },
+      ],
     }),
   ],
 })
@@ -210,6 +235,7 @@ const configType = defineType({
 })
 
 export const navigationTypes = [
+  navigationScrollType,
   navigationType,
   navigationLinkType,
   navigationDropdownType,

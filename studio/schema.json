@@ -122,6 +122,36 @@
   },
   {
     "type": "type",
+    "name": "navigationScroll.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "navigationScroll"
+    }
+  },
+  {
+    "type": "type",
     "name": "navigation.reference",
     "value": {
       "type": "object",
@@ -1158,6 +1188,10 @@
           "value": {
             "type": "union",
             "of": [
+              {
+                "type": "inline",
+                "name": "navigationScroll.reference"
+              },
               {
                 "type": "inline",
                 "name": "navigation.reference"
@@ -3578,6 +3612,21 @@
                     "type": "inline",
                     "name": "navigationDropdown"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "navigationScroll"
+                  }
                 }
               ]
             }
@@ -4260,6 +4309,36 @@
           "type": "string"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "navigationScroll",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "navigationScroll"
+          }
+        },
+        "name": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "scrollToId": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },

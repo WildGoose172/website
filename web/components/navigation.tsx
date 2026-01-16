@@ -89,6 +89,17 @@ export function Navigation({ config }: NavigationProps) {
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   )
+                } else if (link._type === 'navigationScroll') {
+                  return (
+                    <NavigationMenuItem key={link._key}>
+                      <NavigationMenuLink
+                        asChild
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        <Link href={`#${link.scrollToId}`}>{link.name}</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  )
                 }
               })}
               <NavigationMenuItem>
