@@ -92,6 +92,10 @@ const pageBuilderBlocks = `
         }
       }
     },
+    _type == "backButton" => {
+      ...,
+      "link": link->slug.current
+    }
   },
 `
 

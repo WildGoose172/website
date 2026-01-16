@@ -12,6 +12,7 @@ import { ContactForm } from '@/components/blocks/contact-form'
 import { ProjectOverview } from '@/components/blocks/project-overview'
 import { FlockTalkOverview } from '@/components/blocks/flock-talk-overview'
 import { Quote } from '@/components/blocks/quote'
+import { BackButton } from '@/components/blocks/back-button'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -174,6 +175,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'quote':
       return (
         <Quote {...block} documentId={documentId} documentType={documentType} />
+      )
+    case 'backButton':
+      return (
+        <BackButton
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
       )
     default:
       return <div className="container mx-auto">Block not found</div>

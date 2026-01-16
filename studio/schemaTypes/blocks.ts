@@ -551,6 +551,51 @@ const quoteType = defineType({
   },
 })
 
+const backButtonType = defineType({
+  name: 'backButton',
+  title: 'Back Button',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'label',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'link',
+      type: 'reference',
+      to: [
+        { type: 'page' },
+        { type: 'service' },
+        { type: 'project' },
+        { type: 'flockTalk' },
+      ],
+      options: {
+        filter: ({ document }) => ({
+          filter: 'language == $language',
+          params: { language: document?.language },
+        }),
+      },
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      label: 'label',
+    },
+    prepare(selection) {
+      const { label } = selection
+
+      return {
+        title: label ?? 'Back Button',
+        subtitle: 'Back Button',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -567,4 +612,5 @@ export const blockTypes = [
   projectOverviewType,
   flockTalkOverviewType,
   quoteType,
+  backButtonType,
 ]
