@@ -13,7 +13,7 @@ export function Quote({
   return (
     <section
       className={cn(
-        'pt-30 container relative mx-auto flex flex-col items-center justify-center gap-8 pb-20 md:flex-row md:items-start',
+        'container relative mx-auto flex flex-col items-center justify-center gap-8 py-20 md:flex-row md:items-start',
         className,
       )}
     >
