@@ -11,6 +11,7 @@ import { RelatedFlockTalksQueryResult } from '@/types/sanity'
 import { relatedFlockTalksQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
+import { useLocale } from 'next-intl'
 
 export function RelatedFlockTalk({
   title,
@@ -20,13 +21,14 @@ export function RelatedFlockTalk({
   className,
 }: BlockWithMeta<'relatedFlockTalk'>) {
   const [items, setItems] = useState<RelatedFlockTalksQueryResult>([])
+  const locale = useLocale()
 
   useEffect(() => {
     const fetchRelatedTalks = async () => {
       try {
         const data = await client.fetch(relatedFlockTalksQuery, {
           currentDocumentId: documentId,
-          language: 'nl',
+          language: locale,
         })
 
         setItems(data || [])
@@ -36,7 +38,7 @@ export function RelatedFlockTalk({
     }
 
     fetchRelatedTalks()
-  }, [documentId])
+  }, [documentId, locale])
 
   return (
     <section
