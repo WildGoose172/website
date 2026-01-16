@@ -21,8 +21,8 @@ export const flockTalkType = defineType({
       },
     }),
     defineField({
-      name: 'teaser',
-      type: 'teaser',
+      name: 'thumbnail',
+      type: 'image',
     }),
     defineField({
       name: 'content',

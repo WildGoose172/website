@@ -728,7 +728,13 @@ export type FlockTalk = {
   _rev: string
   title?: string
   slug?: Slug
-  teaser?: Teaser
+  thumbnail?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   content?: PageBuilder
   seo?: Seo
   language?: string
@@ -1086,7 +1092,13 @@ export type PageQueryResult =
       _rev: string
       title?: string
       slug?: Slug
-      teaser?: Teaser
+      thumbnail?: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
       content: Array<
         | {
             _key: string
@@ -1189,7 +1201,13 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: null
+              thumbnail: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              } | null
               title: string | null
             }> | null
           }
@@ -1454,7 +1472,13 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: null
+              thumbnail: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              } | null
               title: string | null
             }> | null
           }
@@ -1720,7 +1744,13 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: null
+              thumbnail: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              } | null
               title: string | null
             }> | null
           }
@@ -1985,7 +2015,13 @@ export type PageQueryResult =
               _key: string
               _type: 'flockTalkItem'
               slug: string | null
-              thumbnail: null
+              thumbnail: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              } | null
               title: string | null
             }> | null
           }
@@ -2159,7 +2195,13 @@ export type RelatedFlockTalksQueryResult = Array<{
   _key: null
   title: string | null
   slug: string | null
-  thumbnail: null
+  thumbnail: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
 }>
 
 // Source: ../web/sanity/queries.ts
