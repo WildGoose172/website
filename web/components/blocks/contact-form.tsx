@@ -27,9 +27,9 @@ export function ContactForm({
 }: BlockWithMeta<'contactForm'>) {
   const t = useTranslations()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(
-    'success',
-  )
+  const [submitStatus, setSubmitStatus] = useState<
+    'success' | 'error' | 'initial'
+  >('initial')
 
   const formSchema = z.object({
     name: z
@@ -57,7 +57,7 @@ export function ContactForm({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-    setSubmitStatus(null)
+    setSubmitStatus('initial')
 
     try {
       const response = await fetch('/api/mail/contact', {
