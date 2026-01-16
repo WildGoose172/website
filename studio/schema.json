@@ -692,6 +692,36 @@
   },
   {
     "type": "type",
+    "name": "relatedFlockTalk.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "relatedFlockTalk"
+    }
+  },
+  {
+    "type": "type",
     "name": "imageText.reference",
     "value": {
       "type": "object",
@@ -1056,6 +1086,10 @@
               },
               {
                 "type": "inline",
+                "name": "relatedFlockTalk.reference"
+              },
+              {
+                "type": "inline",
                 "name": "imageText.reference"
               },
               {
@@ -1163,6 +1197,21 @@
             "rest": {
               "type": "inline",
               "name": "flockTalkTeaser"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "relatedFlockTalk"
             }
           },
           {
@@ -1609,6 +1658,13 @@
             "type": "boolean"
           },
           "optional": true
+        },
+        "topPadding": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         }
       }
     }
@@ -1930,6 +1986,44 @@
                 "value": "bottom"
               }
             ]
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "relatedFlockTalk",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "relatedFlockTalk"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "subtitle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "buttonLink"
           },
           "optional": true
         }

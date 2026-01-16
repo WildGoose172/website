@@ -299,6 +299,38 @@ const flockTalkTeaserType = defineType({
   },
 })
 
+const relatedFlockTalkType = defineType({
+  name: 'relatedFlockTalk',
+  title: 'Related Flock Talks',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      type: 'string',
+    }),
+    defineField({
+      name: 'cta',
+      type: 'buttonLink',
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Related Flock Talks',
+        subtitle: 'Flock Talks',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 const imageTextType = defineType({
   name: 'imageText',
   title: 'Image Text',
@@ -378,6 +410,12 @@ const articleType = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'topPadding',
+      description: 'Add top padding to the article for better spacing',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
   preview: {
     prepare() {
@@ -427,6 +465,7 @@ export const blockTypes = [
   clientsType,
   flockTalkItemType,
   flockTalkTeaserType,
+  relatedFlockTalkType,
   imageTextType,
   articleType,
   contactFormType,

@@ -3,6 +3,7 @@ import { PageQueryResult } from '@/types/sanity'
 export const BLOCK_TYPES = [
   'clients',
   'flockTalkTeaser',
+  'relatedFlockTalk',
   'imageText',
   'services',
   'textHero',

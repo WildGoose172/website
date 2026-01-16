@@ -67,6 +67,13 @@ const pageBuilderBlocks = `
         "title": item->title,
       }
     },
+    _type == "relatedFlockTalk" => {
+      ...,
+      cta{
+        ...,
+        "link": link->slug.current
+      },
+    },
     _type == "imageText" => {
       ...,
       text[]{
@@ -115,5 +122,19 @@ export const sitemapQuery = defineQuery(`
     "href": slug.current,
     _updatedAt,
     language,
+  }
+`)
+
+export const relatedFlockTalksQuery = defineQuery(`
+  *[
+    _type == "flockTalk" &&
+    _id != $currentDocumentId &&
+    language == $language
+  ] | order(_createdAt desc)[0...3] {
+    _id,
+    _key,
+    title,
+    "slug": slug.current,
+    thumbnail,
   }
 `)

@@ -4,6 +4,7 @@ import { Clients } from '@/components/blocks/clients'
 import { Services } from '@/components/blocks/services'
 import { TextHero } from '@/components/blocks/text-hero'
 import { FlockTalkTeaser } from '@/components/blocks/flock-talk-teaser'
+import { RelatedFlockTalk } from '@/components/blocks/related-flock-talks'
 import { ImageText } from '@/components/blocks/image-text'
 import { ImageBanner } from '@/components/blocks/image-banner'
 import { Article } from '@/components/blocks/article'
@@ -106,6 +107,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'flockTalkTeaser':
       return (
         <FlockTalkTeaser
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'relatedFlockTalk':
+      return (
+        <RelatedFlockTalk
           {...block}
           documentId={documentId}
           documentType={documentType}
