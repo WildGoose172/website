@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
 
 import type { ButtonLink } from '@/types/sanity'
+import { normalizeSlug } from '@/lib/utils'
 
 export function ButtonLink({
   variant,
@@ -14,7 +15,7 @@ export function ButtonLink({
   return (
     <Button variant={variant} size={size} asChild>
       <Link
-        href={link}
+        href={normalizeSlug(link)}
         className={variant !== 'link' ? 'no-underline' : undefined}
       >
         {label}

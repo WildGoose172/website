@@ -12,6 +12,7 @@ import { relatedFlockTalksQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
 import { useLocale } from 'next-intl'
+import { normalizeSlug } from '@/lib/utils'
 
 export function RelatedFlockTalk({
   title,
@@ -54,7 +55,7 @@ export function RelatedFlockTalk({
 
         {cta?.label && cta?.link && (
           <Button variant={cta.variant} size={cta.size} asChild>
-            <Link href={cta.link}>
+            <Link href={normalizeSlug(cta.link)}>
               <CornerDownRight />
               {cta.label}
             </Link>
@@ -65,7 +66,7 @@ export function RelatedFlockTalk({
       <div className="grid gap-x-4 gap-y-8 lg:grid-cols-4">
         {items.map((item, i) => (
           <Link
-            href={item.slug || '#'}
+            href={normalizeSlug(item.slug)}
             key={item._id}
             className={[
               i === 0 ? 'lg:col-span-2' : 'col-span-1',

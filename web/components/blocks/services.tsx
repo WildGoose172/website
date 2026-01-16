@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { SanityImage } from '@/components/sanity-image'
 
-import { cn } from '@/lib/utils'
+import { cn, normalizeSlug } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { BlockWithMeta } from '@/types/blocks'
 
@@ -47,7 +47,7 @@ export function Services({
             {(services ?? []).map(service => (
               <Link
                 key={service._key}
-                href={service.link?.slug || '#'}
+                href={normalizeSlug(service.link?.slug)}
                 className="hover:bg-muted/10 hover:scale-102 group w-full rounded-lg border bg-transparent p-3 transition duration-300"
               >
                 <li>

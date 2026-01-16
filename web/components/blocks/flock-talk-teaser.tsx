@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
 import { SanityImage } from '@/components/sanity-image'
 
-import { cn } from '@/lib/utils'
+import { cn, normalizeSlug } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
 
 export function FlockTalkTeaser({
@@ -27,7 +27,7 @@ export function FlockTalkTeaser({
 
         {cta?.label && cta?.link && (
           <Button variant={cta.variant} size={cta.size} asChild>
-            <Link href={cta.link}>
+            <Link href={normalizeSlug(cta.link)}>
               <CornerDownRight />
               {cta.label}
             </Link>
@@ -38,7 +38,7 @@ export function FlockTalkTeaser({
       <div className="grid gap-x-4 gap-y-8 lg:grid-cols-4">
         {(items ?? []).map((item, i) => (
           <Link
-            href={item.slug || '#'}
+            href={normalizeSlug(item.slug)}
             key={item._key}
             className={[
               i === 0 ? 'lg:col-span-2' : 'col-span-1',

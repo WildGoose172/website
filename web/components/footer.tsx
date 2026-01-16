@@ -6,6 +6,7 @@ import { LinkedIn, Instagram } from '@/components/icons'
 import { Mail, Phone } from 'lucide-react'
 
 import { ConfigQueryResult } from '@/types/sanity'
+import { normalizeSlug } from '@/lib/utils'
 
 interface FooterProps {
   config: NonNullable<ConfigQueryResult>['footer']
@@ -89,7 +90,7 @@ export function Footer({ config }: FooterProps) {
               {config?.policies?.map(policy => (
                 <Link
                   key={policy._key}
-                  href={policy.page?.slug || '#'}
+                  href={normalizeSlug(policy.page?.slug)}
                   className="underline"
                 >
                   {policy.name}
