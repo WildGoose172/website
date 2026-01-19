@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { presentationTool } from 'sanity/presentation'
+import { media } from 'sanity-plugin-media'
 import { schemaTypes } from './schemaTypes'
 import { documentInternationalization } from '@sanity/document-internationalization'
 import { vercelProtectionBypassTool } from '@sanity/vercel-protection-bypass'
@@ -33,6 +34,7 @@ export default defineConfig({
       ],
       schemaTypes: schemaTypes.map(type => type.name),
     }),
+    media(),
     vercelProtectionBypassTool(),
   ],
   schema: {

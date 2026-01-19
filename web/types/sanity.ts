@@ -22,6 +22,21 @@ export type SanityVercelProtectionBypass = {
   secret?: string
 }
 
+export type MediaTag = {
+  _id: string
+  _type: 'media.tag'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: Slug
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
 export type TranslationMetadata = {
   _id: string
   _type: 'translation.metadata'
@@ -800,12 +815,6 @@ export type FlockTalk = {
   language?: string
 }
 
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
 export type Project = {
   _id: string
   _type: 'project'
@@ -951,6 +960,8 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityVercelProtectionBypass
+  | MediaTag
+  | Slug
   | TranslationMetadata
   | InternationalizedArrayReference
   | NavigationScrollReference
@@ -1023,7 +1034,6 @@ export type AllSanitySchemaTypes =
   | NavigationDropdown
   | NavigationLink
   | FlockTalk
-  | Slug
   | Project
   | Service
   | Page
