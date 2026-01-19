@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { ComponentIcon, CubeIcon } from '@sanity/icons'
 import { portableComponents } from './portable-blocks'
+import { pageDocumentTypes } from './page'
 
 const imageBannerType = defineType({
   name: 'imageBanner',
@@ -578,12 +579,7 @@ const backButtonType = defineType({
     defineField({
       name: 'link',
       type: 'reference',
-      to: [
-        { type: 'page' },
-        { type: 'service' },
-        { type: 'project' },
-        { type: 'flockTalk' },
-      ],
+      to: pageDocumentTypes,
       options: {
         filter: ({ document }) => ({
           filter: 'language == $language',

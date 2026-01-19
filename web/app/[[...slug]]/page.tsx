@@ -1,4 +1,5 @@
 import { PageBuilder } from '@/components/page-builder'
+import { Vacancy } from '@/components/vacancy'
 
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
@@ -53,9 +54,10 @@ export async function generateMetadata({
     keywords: page.seo.keywords ?? [],
   }
 
-  const url = page.seo.image
-    ? urlForImage(page.seo.image).width(1200).height(630).url()
-    : 'https://cdn.sanity.io/images/uwf1iyke/production/17898bf1deed45584cc5b0bdef9b4603a4422e73-1219x397.webp'
+  const url =
+    'image' in page.seo && page.seo.image
+      ? urlForImage(page.seo.image).width(1200).height(630).url()
+      : 'https://cdn.sanity.io/images/uwf1iyke/production/17898bf1deed45584cc5b0bdef9b4603a4422e73-1219x397.webp'
 
   metadata.openGraph = {
     images: {
@@ -77,11 +79,20 @@ export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
 
   return (
     <div className="min-h-screen">
-      <PageBuilder
-        documentId={page._id}
-        documentType={page._type}
-        content={page.content}
-      />
+      {(() => {
+        switch (page._type) {
+          case 'vacancy':
+            return <Vacancy {...page} />
+          default:
+            return (
+              <PageBuilder
+                documentId={page._id}
+                documentType={page._type}
+                content={page.content}
+              />
+            )
+        }
+      })()}
     </div>
   )
 }

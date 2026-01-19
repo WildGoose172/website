@@ -298,6 +298,13 @@ export type FlockTalkReference = {
   [internalGroqTypeReferenceTo]?: 'flockTalk'
 }
 
+export type VacancyReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'vacancy'
+}
+
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
@@ -336,6 +343,7 @@ export type InternationalizedArrayReferenceValue = {
     | ServiceReference
     | ProjectReference
     | FlockTalkReference
+    | VacancyReference
 }
 
 export type PageBuilder = Array<
@@ -439,6 +447,7 @@ export type BackButton = {
     | ServiceReference
     | ProjectReference
     | FlockTalkReference
+    | VacancyReference
 }
 
 export type Quote = {
@@ -654,6 +663,7 @@ export type ButtonLink = {
     | ServiceReference
     | ProjectReference
     | FlockTalkReference
+    | VacancyReference
   variant?:
     | 'link'
     | 'default'
@@ -800,6 +810,178 @@ export type NavigationLink = {
     | ServiceReference
     | ProjectReference
     | FlockTalkReference
+    | VacancyReference
+}
+
+export type Vacancy = {
+  _id: string
+  _type: 'vacancy'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  slug?: Slug
+  teaser?: Teaser
+  hero?: {
+    location?: string
+    hours?: string
+    title?: string
+    description?: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'normal'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'blockquote'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | ({
+          _key: string
+        } & Photo)
+      | ({
+          _key: string
+        } & ButtonLink)
+    >
+  }
+  intro?: {
+    title?: string
+    description?: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'normal'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'blockquote'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | ({
+          _key: string
+        } & Photo)
+      | ({
+          _key: string
+        } & ButtonLink)
+    >
+  }
+  role?: {
+    title?: string
+    description?: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'normal'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'blockquote'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | ({
+          _key: string
+        } & Photo)
+      | ({
+          _key: string
+        } & ButtonLink)
+    >
+  }
+  offer?: {
+    title?: string
+    description?: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'normal'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'blockquote'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | ({
+          _key: string
+        } & Photo)
+      | ({
+          _key: string
+        } & ButtonLink)
+    >
+  }
+  backButton?: {
+    label?: string
+    page?:
+      | PageReference
+      | ServiceReference
+      | ProjectReference
+      | FlockTalkReference
+      | VacancyReference
+  }
+  seo?: Seo
+  language?: string
 }
 
 export type FlockTalk = {
@@ -1000,6 +1182,7 @@ export type AllSanitySchemaTypes =
   | ServiceReference
   | ProjectReference
   | FlockTalkReference
+  | VacancyReference
   | InternationalizedArrayReferenceValue
   | PageBuilder
   | SanityImageAssetReference
@@ -1034,6 +1217,7 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | NavigationDropdown
   | NavigationLink
+  | Vacancy
   | FlockTalk
   | Project
   | Service
@@ -1095,6 +1279,10 @@ export type ConfigQueryResult = {
                   _type: 'service'
                   slug: string | null
                 }
+              | {
+                  _type: 'vacancy'
+                  slug: string | null
+                }
               | null
           }> | null
         }
@@ -1117,6 +1305,10 @@ export type ConfigQueryResult = {
               }
             | {
                 _type: 'service'
+                slug: string | null
+              }
+            | {
+                _type: 'vacancy'
                 slug: string | null
               }
             | null
@@ -1164,6 +1356,10 @@ export type ConfigQueryResult = {
             _type: 'service'
             slug: string | null
           }
+        | {
+            _type: 'vacancy'
+            slug: string | null
+          }
         | null
     }> | null
     linkedIn?: string
@@ -1173,7 +1369,7 @@ export type ConfigQueryResult = {
 
 // Source: ../web/sanity/queries.ts
 // Variable: pageQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&     slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        ...,        "slug": item->slug.current,        "teaser": item->teaser,      }    },    _type == "relatedFlockTalk" => {      ...,      cta{        ...,        "link": link->slug.current      },    },    _type == "imageText" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "article" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "backButton" => {      ...,      "link": link->slug.current    }  },    "seo": {      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&    slug.current == $slug &&    language == $language  ][0]{    ...,      content[]{    ...,    _type == "services" => {      ...,      services[]{        ...,        "link": {          "slug": link->slug.current,        }      }    },    _type == "flockTalkTeaser" => {      ...,      cta{        ...,        "link": link->slug.current      },      items[]{        ...,        "slug": item->slug.current,        "teaser": item->teaser,      }    },    _type == "relatedFlockTalk" => {      ...,      cta{        ...,        "link": link->slug.current      },    },    _type == "imageText" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "article" => {      ...,      text[]{        ...,        _type == "buttonLink" => {          ...,          "link": link->slug.current        }      }    },    _type == "backButton" => {      ...,      "link": link->slug.current    }  },      backButton{    ...,    "page": page->slug.current,  },    "seo": {      "_type": "seo",      "title": coalesce(seo.title, title, ""),      "description": coalesce(seo.description,  ""),      "image": seo.image,      "keywords": coalesce(seo.keywords, []),    },  }
 export type PageQueryResult =
   | {
       _id: string
@@ -1447,6 +1643,7 @@ export type PageQueryResult =
           }
       > | null
       seo: {
+        _type: 'seo'
         title: string | ''
         description: string | ''
         image: {
@@ -1459,6 +1656,7 @@ export type PageQueryResult =
         keywords: Array<string> | Array<never>
       }
       language?: string
+      backButton: null
     }
   | {
       _id: string
@@ -1731,6 +1929,7 @@ export type PageQueryResult =
           }
       > | null
       seo: {
+        _type: 'seo'
         title: string | ''
         description: string | ''
         image: {
@@ -1743,6 +1942,7 @@ export type PageQueryResult =
         keywords: Array<string> | Array<never>
       }
       language?: string
+      backButton: null
     }
   | {
       _id: string
@@ -2016,6 +2216,7 @@ export type PageQueryResult =
           }
       > | null
       seo: {
+        _type: 'seo'
         title: string | ''
         description: string | ''
         image: {
@@ -2028,6 +2229,7 @@ export type PageQueryResult =
         keywords: Array<string> | Array<never>
       }
       language?: string
+      backButton: null
     }
   | {
       _id: string
@@ -2300,6 +2502,7 @@ export type PageQueryResult =
           }
       > | null
       seo: {
+        _type: 'seo'
         title: string | ''
         description: string | ''
         image: {
@@ -2312,12 +2515,191 @@ export type PageQueryResult =
         keywords: Array<string> | Array<never>
       }
       language?: string
+      backButton: null
+    }
+  | {
+      _id: string
+      _type: 'vacancy'
+      _createdAt: string
+      _updatedAt: string
+      _rev: string
+      slug?: Slug
+      teaser?: Teaser
+      hero?: {
+        location?: string
+        hours?: string
+        title?: string
+        description?: Array<
+          | ({
+              _key: string
+            } & ButtonLink)
+          | ({
+              _key: string
+            } & Photo)
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+        >
+      }
+      intro?: {
+        title?: string
+        description?: Array<
+          | ({
+              _key: string
+            } & ButtonLink)
+          | ({
+              _key: string
+            } & Photo)
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+        >
+      }
+      role?: {
+        title?: string
+        description?: Array<
+          | ({
+              _key: string
+            } & ButtonLink)
+          | ({
+              _key: string
+            } & Photo)
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+        >
+      }
+      offer?: {
+        title?: string
+        description?: Array<
+          | ({
+              _key: string
+            } & ButtonLink)
+          | ({
+              _key: string
+            } & Photo)
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+        >
+      }
+      backButton: {
+        label?: string
+        page: string | null
+      } | null
+      seo: {
+        _type: 'seo'
+        title: string | ''
+        description: string | ''
+        image: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+        keywords: Array<string> | Array<never>
+      }
+      language?: string
+      content: null
     }
   | null
 
 // Source: ../web/sanity/queries.ts
 // Variable: sitemapQuery
-// Query: *[    _type in ["page", "service", "project", "flockTalk"] &&    defined(slug.current)  ] {    "href": slug.current,    _updatedAt,    language,  }
+// Query: *[    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&    defined(slug.current)  ] {    "href": slug.current,    _updatedAt,    language,  }
 export type SitemapQueryResult = Array<{
   href: string | null
   _updatedAt: string
@@ -2380,8 +2762,8 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[\n    _type == "config" &&\n    language == $language\n  ]{\n    navigation{\n      name,\n      image,\n      links[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        },\n        _type == "navigationDropdown" => {\n          ...,\n          links[]{\n            ...,\n            page->{\n  _type,\n  "slug": slug.current\n}\n          }\n        }\n      }\n    },\n    footer{\n      ...,\n      policies[]{\n        ...,\n        _type == "navigationLink" => {\n          ...,\n          page->{ _type, "slug": slug.current }\n        }\n      }\n    }\n  }[0]\n': ConfigQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] && \n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        ...,\n        "slug": item->slug.current,\n        "teaser": item->teaser,\n      }\n    },\n    _type == "relatedFlockTalk" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "backButton" => {\n      ...,\n      "link": link->slug.current\n    }\n  },\n\n    "seo": {\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
-    '\n  *[\n    _type in ["page", "service", "project", "flockTalk"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&\n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    ...,\n    \n  content[]{\n    ...,\n    _type == "services" => {\n      ...,\n      services[]{\n        ...,\n        "link": {\n          "slug": link->slug.current,\n        }\n      }\n    },\n    _type == "flockTalkTeaser" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n      items[]{\n        ...,\n        "slug": item->slug.current,\n        "teaser": item->teaser,\n      }\n    },\n    _type == "relatedFlockTalk" => {\n      ...,\n      cta{\n        ...,\n        "link": link->slug.current\n      },\n    },\n    _type == "imageText" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "article" => {\n      ...,\n      text[]{\n        ...,\n        _type == "buttonLink" => {\n          ...,\n          "link": link->slug.current\n        }\n      }\n    },\n    _type == "backButton" => {\n      ...,\n      "link": link->slug.current\n    }\n  },\n\n    \n  backButton{\n    ...,\n    "page": page->slug.current,\n  },\n\n    "seo": {\n      "_type": "seo",\n      "title": coalesce(seo.title, title, ""),\n      "description": coalesce(seo.description,  ""),\n      "image": seo.image,\n      "keywords": coalesce(seo.keywords, []),\n    },\n  }\n': PageQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&\n    defined(slug.current)\n  ] {\n    "href": slug.current,\n    _updatedAt,\n    language,\n  }\n': SitemapQueryResult
     '\n  *[\n    _type == "flockTalk" &&\n    _id != $currentDocumentId &&\n    language == $language\n  ] | order(_createdAt desc)[0...3] {\n    ...,\n    "slug": slug.current,\n  }\n': RelatedFlockTalksQueryResult
     '\n  *[\n    _type == "flockTalk" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': FlockTalkOverviewQueryResult
     '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult

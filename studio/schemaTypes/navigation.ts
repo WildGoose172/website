@@ -6,6 +6,7 @@ import {
   MobileDeviceIcon,
   TextIcon,
 } from '@sanity/icons'
+import { pageDocumentTypes } from './page'
 
 const navigationScrollType = defineType({
   name: 'navigationScroll',
@@ -42,12 +43,7 @@ const navigationLinkType = defineType({
     defineField({
       name: 'page',
       type: 'reference',
-      to: [
-        { type: 'page' },
-        { type: 'service' },
-        { type: 'project' },
-        { type: 'flockTalk' },
-      ],
+      to: pageDocumentTypes,
       options: {
         filter: ({ document }) => ({
           filter: 'language == $language',

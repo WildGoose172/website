@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { CubeIcon } from '@sanity/icons'
+import { pageDocumentTypes } from './page'
 
 const photoType = defineType({
   name: 'photo',
@@ -64,12 +65,7 @@ const buttonLinkType = defineType({
     defineField({
       name: 'link',
       type: 'reference',
-      to: [
-        { type: 'page' },
-        { type: 'service' },
-        { type: 'project' },
-        { type: 'flockTalk' },
-      ],
+      to: pageDocumentTypes,
       options: {
         filter: ({ document }) => ({
           filter: 'language == $language',

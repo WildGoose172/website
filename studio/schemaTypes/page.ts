@@ -50,3 +50,11 @@ export const pageType = defineType({
     },
   },
 })
+
+export const pageDocumentTypes = [
+  { type: 'page' },
+  { type: 'service' },
+  { type: 'project' },
+  { type: 'flockTalk' },
+  { type: 'vacancy' },
+]

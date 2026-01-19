@@ -99,15 +99,24 @@ const pageBuilderBlocks = `
   },
 `
 
+const vacancyPageBlocks = `
+  backButton{
+    ...,
+    "page": page->slug.current,
+  },
+`
+
 export const pageQuery = defineQuery(`
   *[
-    _type in ["page", "service", "project", "flockTalk"] && 
+    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&
     slug.current == $slug &&
     language == $language
   ][0]{
     ...,
     ${pageBuilderBlocks}
+    ${vacancyPageBlocks}
     "seo": {
+      "_type": "seo",
       "title": coalesce(seo.title, title, ""),
       "description": coalesce(seo.description,  ""),
       "image": seo.image,
@@ -118,7 +127,7 @@ export const pageQuery = defineQuery(`
 
 export const sitemapQuery = defineQuery(`
   *[
-    _type in ["page", "service", "project", "flockTalk"] &&
+    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&
     defined(slug.current)
   ] {
     "href": slug.current,
