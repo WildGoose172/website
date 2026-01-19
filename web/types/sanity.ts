@@ -339,6 +339,13 @@ export type VacanciesAboutUsReference = {
   [internalGroqTypeReferenceTo]?: 'vacanciesAboutUs'
 }
 
+export type VacancyOverviewReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'vacancyOverview'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -428,6 +435,7 @@ export type InternationalizedArrayReferenceValue = {
     | BackButtonReference
     | VacanciesHeaderReference
     | VacanciesAboutUsReference
+    | VacancyOverviewReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -484,6 +492,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & VacanciesAboutUs)
+  | ({
+      _key: string
+    } & VacancyOverview)
 >
 
 export type SanityImageAssetReference = {
@@ -535,6 +546,12 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type VacancyOverview = {
+  _type: 'vacancyOverview'
+  title?: string
+  cta?: string
 }
 
 export type VacanciesAboutUs = {
@@ -1330,6 +1347,7 @@ export type AllSanitySchemaTypes =
   | BackButtonReference
   | VacanciesHeaderReference
   | VacanciesAboutUsReference
+  | VacancyOverviewReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1343,6 +1361,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | VacancyOverview
   | VacanciesAboutUs
   | VacanciesHeader
   | BackButton
@@ -1851,6 +1870,12 @@ export type PageQueryResult =
               _type: 'image'
             }
           }
+        | {
+            _key: string
+            _type: 'vacancyOverview'
+            title?: string
+            cta?: string
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -2189,6 +2214,12 @@ export type PageQueryResult =
               alt?: string
               _type: 'image'
             }
+          }
+        | {
+            _key: string
+            _type: 'vacancyOverview'
+            title?: string
+            cta?: string
           }
       > | null
       seo: {
@@ -2530,6 +2561,12 @@ export type PageQueryResult =
               _type: 'image'
             }
           }
+        | {
+            _key: string
+            _type: 'vacancyOverview'
+            title?: string
+            cta?: string
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -2869,6 +2906,12 @@ export type PageQueryResult =
               _type: 'image'
             }
           }
+        | {
+            _key: string
+            _type: 'vacancyOverview'
+            title?: string
+            cta?: string
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -3126,6 +3169,180 @@ export type ProjectOverviewQueryResult = Array<{
   language?: string
 }>
 
+// Source: ../web/sanity/queries.ts
+// Variable: vacancyOverviewQuery
+// Query: *[    _type == "vacancy" &&    language == $language  ] | order(_createdAt desc) {    ...,    "slug": slug.current,  }
+export type VacancyOverviewQueryResult = Array<{
+  _id: string
+  _type: 'vacancy'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  slug: string | null
+  teaser?: Teaser
+  hero?: {
+    location?: string
+    hours?: string
+    title?: string
+    description?: Array<
+      | ({
+          _key: string
+        } & ButtonLink)
+      | ({
+          _key: string
+        } & Photo)
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'blockquote'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+    >
+  }
+  intro?: {
+    title?: string
+    description?: Array<
+      | ({
+          _key: string
+        } & ButtonLink)
+      | ({
+          _key: string
+        } & Photo)
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'blockquote'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+    >
+  }
+  role?: {
+    title?: string
+    description?: Array<
+      | ({
+          _key: string
+        } & ButtonLink)
+      | ({
+          _key: string
+        } & Photo)
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'blockquote'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+    >
+  }
+  offer?: {
+    title?: string
+    description?: Array<
+      | ({
+          _key: string
+        } & ButtonLink)
+      | ({
+          _key: string
+        } & Photo)
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'blockquote'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+    >
+  }
+  backButton?: {
+    label?: string
+    page?:
+      | FlockTalkReference
+      | PageReference
+      | ProjectReference
+      | ServiceReference
+      | VacancyReference
+  }
+  seo?: Seo
+  language?: string
+}>
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
@@ -3136,5 +3353,6 @@ declare module '@sanity/client' {
     '\n  *[\n    _type == "flockTalk" &&\n    _id != $currentDocumentId &&\n    language == $language\n  ] | order(_createdAt desc)[0...3] {\n    ...,\n    "slug": slug.current,\n  }\n': RelatedFlockTalksQueryResult
     '\n  *[\n    _type == "flockTalk" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': FlockTalkOverviewQueryResult
     '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult
+    '\n  *[\n    _type == "vacancy" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': VacancyOverviewQueryResult
   }
 }

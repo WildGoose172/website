@@ -1557,6 +1557,36 @@
   },
   {
     "type": "type",
+    "name": "vacancyOverview.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "vacancyOverview"
+    }
+  },
+  {
+    "type": "type",
     "name": "seo.reference",
     "value": {
       "type": "object",
@@ -1935,6 +1965,10 @@
               },
               {
                 "type": "inline",
+                "name": "vacancyOverview.reference"
+              },
+              {
+                "type": "inline",
                 "name": "seo.reference"
               },
               {
@@ -2203,6 +2237,21 @@
             "rest": {
               "type": "inline",
               "name": "vacanciesAboutUs"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "vacancyOverview"
             }
           }
         ]
@@ -2569,6 +2618,36 @@
             "of": {
               "type": "string"
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "vacancyOverview",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "vacancyOverview"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "cta": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         }

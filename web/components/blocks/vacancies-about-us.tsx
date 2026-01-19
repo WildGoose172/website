@@ -18,14 +18,14 @@ export function VacanciesAboutUs({
       </svg>
       <div className="bg-foreground text-background -mt-1 rounded-b-2xl pb-20">
         <div className="container flex flex-col gap-10 md:flex-row md:justify-center md:gap-20">
-          <div className="flex max-w-prose flex-1 flex-col gap-6">
+          <div className="flex flex-1 flex-col gap-6">
             <h2>{sectionOne?.title}</h2>
             <div className="html-richtext">
               <PortableText value={sectionOne?.description || []} />
             </div>
           </div>
 
-          <div className="flex max-w-prose flex-1 flex-col gap-6">
+          <div className="flex flex-1 flex-col gap-6">
             <h2>{sectionTwo?.title}</h2>
             <div className="html-richtext">
               <PortableText value={sectionTwo?.description || []} />

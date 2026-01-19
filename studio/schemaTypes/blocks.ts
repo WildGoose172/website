@@ -704,6 +704,35 @@ const vacanciesAboutUsType = defineType({
   },
 })
 
+const vacancyOverviewType = defineType({
+  name: 'vacancyOverview',
+  title: 'Vacancy Overview',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'cta',
+      type: 'string',
+      description: 'Button text for each Vacancy item',
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Vacancy Overview',
+        subtitle: 'Vacancy Overview',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -723,4 +752,5 @@ export const blockTypes = [
   backButtonType,
   vacanciesHeaderType,
   vacanciesAboutUsType,
+  vacancyOverviewType,
 ]

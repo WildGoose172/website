@@ -3,16 +3,15 @@
 import { Link } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
 import { SanityImage } from '@/components/sanity-image'
+import { PortableText } from 'next-sanity'
 
-import { cn } from '@/lib/utils'
+import { cn, normalizeSlug } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
 import { ProjectOverviewQueryResult } from '@/types/sanity'
 import { projectOverviewQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
 import { useLocale } from 'next-intl'
-import { normalizeSlug } from '@/lib/utils'
-import { PortableText } from 'next-sanity'
 
 export function ProjectOverview({
   title,

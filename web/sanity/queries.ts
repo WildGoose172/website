@@ -166,3 +166,13 @@ export const projectOverviewQuery = defineQuery(`
     "slug": slug.current,
   }
 `)
+
+export const vacancyOverviewQuery = defineQuery(`
+  *[
+    _type == "vacancy" &&
+    language == $language
+  ] | order(_createdAt desc) {
+    ...,
+    "slug": slug.current,
+  }
+`)
