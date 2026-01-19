@@ -553,6 +553,7 @@ export type ImageText = {
   }
   imageRounded?: boolean
   imagePosition?: 'left' | 'right' | 'top' | 'bottom'
+  textAlignment?: 'top' | 'center' | 'bottom'
 }
 
 export type RelatedFlockTalk = {
@@ -1383,6 +1384,7 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+            textAlignment?: 'bottom' | 'center' | 'top'
           }
         | {
             _key: string
@@ -1666,6 +1668,7 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+            textAlignment?: 'bottom' | 'center' | 'top'
           }
         | {
             _key: string
@@ -1950,6 +1953,7 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+            textAlignment?: 'bottom' | 'center' | 'top'
           }
         | {
             _key: string
@@ -2233,6 +2237,7 @@ export type PageQueryResult =
             }
             imageRounded?: boolean
             imagePosition?: 'bottom' | 'left' | 'right' | 'top'
+            textAlignment?: 'bottom' | 'center' | 'top'
           }
         | {
             _key: string

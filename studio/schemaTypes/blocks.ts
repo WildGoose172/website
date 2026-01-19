@@ -380,6 +380,19 @@ const imageTextType = defineType({
       },
       validation: rule => rule.required(),
     }),
+    defineField({
+      name: 'textAlignment',
+      type: 'string',
+      initialValue: 'center',
+      options: {
+        list: [
+          { title: 'Top', value: 'top' },
+          { title: 'Center', value: 'center' },
+          { title: 'Bottom', value: 'bottom' },
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
   ],
   preview: {
     prepare() {

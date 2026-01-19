@@ -12,6 +12,7 @@ export function ImageText({
   image,
   imageRounded = true,
   imagePosition = 'right',
+  textAlignment = 'center',
   className,
 }: BlockWithMeta<'imageText'>) {
   if (!image) {
@@ -31,10 +32,13 @@ export function ImageText({
     >
       <div
         className={cn(
-          'space-y-6',
+          'flex flex-col gap-y-6',
           imagePosition === 'right' && 'lg:order-1',
           imagePosition === 'left' && 'lg:order-2',
           imagePosition === 'top' && 'order-2',
+          textAlignment === 'top' && 'justify-start',
+          textAlignment === 'center' && 'justify-center',
+          textAlignment === 'bottom' && 'justify-end',
         )}
       >
         <h2>{title}</h2>
