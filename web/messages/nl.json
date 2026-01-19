@@ -20,5 +20,9 @@
     "max": "{field} mag maximaal {max} tekens bevatten",
     "required": "{field} is verplicht",
     "email": "{field} moet een geldig emailadres zijn"
+  },
+  "seo": {
+    "title": "Wild Goose",
+    "description": "Wij doen puur technisch software development. Verpakken ervaring in dynamiek. Verkiezen snelheid boven logge structuur. En geven vrijheid aan denken buiten hokjes. Wij zijn niet wat je verwacht. Wel wat je nodig hebt."
   }
 }

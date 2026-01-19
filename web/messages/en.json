@@ -20,5 +20,9 @@
     "max": "{field} must be at most {max} characters",
     "required": "{field} is required",
     "email": "{field} must be a valid email address"
+  },
+  "seo": {
+    "title": "Wild Goose",
+    "description": "We do Java, Frontend, Cloud & Consultancy. Dynamic, fast, and free-thinking. Not what you expect, but exactly what you need."
   }
 }

@@ -7,6 +7,7 @@ import { draftMode } from 'next/headers'
 import type { Metadata } from 'next'
 import { urlForImage } from '@/sanity/image'
 import { sanityFetch } from '@/sanity/live'
+import { getTranslations } from 'next-intl/server'
 
 async function getPage(
   params: PageProps<'/[[...slug]]'>['params'],
@@ -39,6 +40,7 @@ async function getPage(
 export async function generateMetadata({
   params,
 }: PageProps<'/[[...slug]]'>): Promise<Metadata> {
+  const t = await getTranslations('seo')
   const { data: page } = await getPage(params, true)
 
   if (!page) {
@@ -46,19 +48,21 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
-    title: page.seo.title,
-    description: page.seo.description,
-    keywords: page.seo.keywords,
+    title: page.seo.title ?? t('title'),
+    description: page.seo.description ?? t('description'),
+    keywords: page.seo.keywords ?? [],
   }
 
-  if (page.seo.image) {
-    metadata.openGraph = {
-      images: {
-        url: urlForImage(page.seo.image).width(1200).height(630).url(),
-        width: 1200,
-        height: 630,
-      },
-    }
+  const url = page.seo.image
+    ? urlForImage(page.seo.image).width(1200).height(630).url()
+    : 'https://cdn.sanity.io/images/uwf1iyke/production/17898bf1deed45584cc5b0bdef9b4603a4422e73-1219x397.webp'
+
+  metadata.openGraph = {
+    images: {
+      url,
+      width: 1200,
+      height: 630,
+    },
   }
 
   return metadata
