@@ -20,5 +20,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'quote' }),
     defineArrayMember({ type: 'backButton' }),
     defineArrayMember({ type: 'vacanciesHeader' }),
+    defineArrayMember({ type: 'vacanciesAboutUs' }),
   ],
 })

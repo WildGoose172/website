@@ -10,7 +10,7 @@ export function VacanciesHeader({
   image,
 }: BlockWithMeta<'vacanciesHeader'>) {
   return (
-    <div className="bg-primary text-background py-30">
+    <div className="bg-primary text-background pt-30 pb-10">
       <div className="container grid gap-10 md:grid-cols-2">
         <div className="flex flex-col justify-center gap-6">
           <h1>{title}</h1>
@@ -38,6 +38,7 @@ export function VacanciesHeader({
               src={image}
               alt={image.alt || ''}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="rounded-2xl object-cover transition-all duration-300 hover:scale-105"
             />
           </div>

@@ -14,6 +14,7 @@ import { FlockTalkOverview } from '@/components/blocks/flock-talk-overview'
 import { Quote } from '@/components/blocks/quote'
 import { BackButton } from '@/components/blocks/back-button'
 import { VacanciesHeader } from '@/components/blocks/vacancies-header'
+import { VacanciesAboutUs } from '@/components/blocks/vacancies-about-us'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -188,6 +189,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'vacanciesHeader':
       return (
         <VacanciesHeader
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'vacanciesAboutUs':
+      return (
+        <VacanciesAboutUs
           {...block}
           documentId={documentId}
           documentType={documentType}

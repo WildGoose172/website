@@ -57,14 +57,14 @@ export function Vacancy({
         <div className="container grid gap-10 md:grid-cols-2">
           <CircleEye className="text-primary mx-auto max-w-60" />
 
-          <div className="container grid gap-6">
+          <div className="container flex flex-col gap-6">
             <h2>{intro?.title}</h2>
             <div className="html-richtext max-w-prose">
               <PortableText value={intro?.description || []} />
             </div>
           </div>
 
-          <div className="container grid gap-6">
+          <div className="container flex flex-col gap-6">
             <h2>{role?.title}</h2>
             <div className="html-richtext max-w-prose">
               <PortableText value={role?.description || []} />
@@ -75,7 +75,7 @@ export function Vacancy({
         </div>
       </div>
 
-      <div className="container mx-auto grid max-w-prose gap-6 pt-20">
+      <div className="container mx-auto flex max-w-prose flex-col gap-6 pt-20">
         <h2>{offer?.title}</h2>
         <div className="html-richtext">
           <PortableText value={offer?.description || []} />

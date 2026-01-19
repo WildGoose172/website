@@ -15,6 +15,7 @@ export const BLOCK_TYPES = [
   'quote',
   'backButton',
   'vacanciesHeader',
+  'vacanciesAboutUs',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

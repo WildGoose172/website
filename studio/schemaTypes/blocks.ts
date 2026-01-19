@@ -652,6 +652,58 @@ const vacanciesHeaderType = defineType({
   },
 })
 
+const vacanciesAboutUsType = defineType({
+  name: 'vacanciesAboutUs',
+  title: 'Vacancies About Us',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'sectionOne',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+        defineField({
+          name: 'description',
+          type: 'array',
+          of: portableComponents,
+          validation: rule => rule.required(),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'sectionTwo',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+        defineField({
+          name: 'description',
+          type: 'array',
+          of: portableComponents,
+          validation: rule => rule.required(),
+        }),
+      ],
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Vacancies About Us',
+        subtitle: 'Vacancies About Us',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -670,4 +722,5 @@ export const blockTypes = [
   quoteType,
   backButtonType,
   vacanciesHeaderType,
+  vacanciesAboutUsType,
 ]

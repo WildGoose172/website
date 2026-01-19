@@ -13,6 +13,82 @@
  */
 
 // Source: schema.json
+export type SectionOne = {
+  title?: string
+  description?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Photo)
+    | ({
+        _key: string
+      } & ButtonLink)
+  >
+}
+
+export type SectionTwo = {
+  title?: string
+  description?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Photo)
+    | ({
+        _key: string
+      } & ButtonLink)
+  >
+}
+
 export type SanityVercelProtectionBypass = {
   _id: string
   _type: 'sanity.vercelProtectionBypass'
@@ -256,6 +332,13 @@ export type VacanciesHeaderReference = {
   [internalGroqTypeReferenceTo]?: 'vacanciesHeader'
 }
 
+export type VacanciesAboutUsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'vacanciesAboutUs'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -344,6 +427,7 @@ export type InternationalizedArrayReferenceValue = {
     | QuoteReference
     | BackButtonReference
     | VacanciesHeaderReference
+    | VacanciesAboutUsReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -397,6 +481,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & VacanciesHeader)
+  | ({
+      _key: string
+    } & VacanciesAboutUs)
 >
 
 export type SanityImageAssetReference = {
@@ -448,6 +535,12 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type VacanciesAboutUs = {
+  _type: 'vacanciesAboutUs'
+  sectionOne?: SectionOne
+  sectionTwo?: SectionTwo
 }
 
 export type VacanciesHeader = {
@@ -1200,6 +1293,8 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | SectionOne
+  | SectionTwo
   | SanityVercelProtectionBypass
   | MediaTag
   | Slug
@@ -1234,6 +1329,7 @@ export type AllSanitySchemaTypes =
   | QuoteReference
   | BackButtonReference
   | VacanciesHeaderReference
+  | VacanciesAboutUsReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1247,6 +1343,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | VacanciesAboutUs
   | VacanciesHeader
   | BackButton
   | Quote
@@ -1703,6 +1800,12 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'vacanciesAboutUs'
+            sectionOne?: SectionOne
+            sectionTwo?: SectionTwo
+          }
+        | {
+            _key: string
             _type: 'vacanciesHeader'
             title?: string
             description?: Array<
@@ -2033,6 +2136,12 @@ export type PageQueryResult =
             _type: 'textHero'
             title?: string
             description?: string
+          }
+        | {
+            _key: string
+            _type: 'vacanciesAboutUs'
+            sectionOne?: SectionOne
+            sectionTwo?: SectionTwo
           }
         | {
             _key: string
@@ -2370,6 +2479,12 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'vacanciesAboutUs'
+            sectionOne?: SectionOne
+            sectionTwo?: SectionTwo
+          }
+        | {
+            _key: string
             _type: 'vacanciesHeader'
             title?: string
             description?: Array<
@@ -2700,6 +2815,12 @@ export type PageQueryResult =
             _type: 'textHero'
             title?: string
             description?: string
+          }
+        | {
+            _key: string
+            _type: 'vacanciesAboutUs'
+            sectionOne?: SectionOne
+            sectionTwo?: SectionTwo
           }
         | {
             _key: string
