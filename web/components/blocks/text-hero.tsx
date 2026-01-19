@@ -18,10 +18,10 @@ export function TextHero({
         <Image
           src="/images/goose_with_hat.webp"
           alt="Wild Goose"
-          width={150}
-          height={208}
+          width={200}
+          height={278}
           loading="eager"
-          className="mx-auto md:ml-20 md:mr-0"
+          className="w-37 xl:w-50 mx-auto md:ml-20 md:mr-0"
         />
         <div className="self-center sm:self-end">
           <h1 className="text-balance text-center text-4xl leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
