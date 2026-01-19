@@ -2,7 +2,7 @@
 
 import { BlockWithMeta } from '@/types/blocks'
 import { PortableText } from 'next-sanity'
-import { SanityImage } from '../sanity-image'
+import { SanityImage } from '@/components/sanity-image'
 
 export function VacanciesHeader({
   title,
