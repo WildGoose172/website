@@ -146,7 +146,7 @@
     }
 
     p {
-      @apply pb-4 last:pb-0;
+      @apply pb-4 text-justify last:pb-0;
     }
   }
 }
