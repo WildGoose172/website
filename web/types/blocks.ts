@@ -14,6 +14,7 @@ export const BLOCK_TYPES = [
   'flockTalkOverview',
   'quote',
   'backButton',
+  'vacanciesHeader',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

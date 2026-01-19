@@ -19,5 +19,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'flockTalkOverview' }),
     defineArrayMember({ type: 'quote' }),
     defineArrayMember({ type: 'backButton' }),
+    defineArrayMember({ type: 'vacanciesHeader' }),
   ],
 })

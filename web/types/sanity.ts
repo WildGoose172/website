@@ -249,6 +249,13 @@ export type BackButtonReference = {
   [internalGroqTypeReferenceTo]?: 'backButton'
 }
 
+export type VacanciesHeaderReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'vacanciesHeader'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -336,6 +343,7 @@ export type InternationalizedArrayReferenceValue = {
     | FlockTalkOverviewReference
     | QuoteReference
     | BackButtonReference
+    | VacanciesHeaderReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -386,6 +394,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & BackButton)
+  | ({
+      _key: string
+    } & VacanciesHeader)
 >
 
 export type SanityImageAssetReference = {
@@ -437,6 +448,53 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type VacanciesHeader = {
+  _type: 'vacanciesHeader'
+  title?: string
+  description?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Photo)
+    | ({
+        _key: string
+      } & ButtonLink)
+  >
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
 }
 
 export type BackButton = {
@@ -1175,6 +1233,7 @@ export type AllSanitySchemaTypes =
   | FlockTalkOverviewReference
   | QuoteReference
   | BackButtonReference
+  | VacanciesHeaderReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1188,6 +1247,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | VacanciesHeader
   | BackButton
   | Quote
   | FlockTalkOverview
@@ -1641,6 +1701,53 @@ export type PageQueryResult =
             title?: string
             description?: string
           }
+        | {
+            _key: string
+            _type: 'vacanciesHeader'
+            title?: string
+            description?: Array<
+              | ({
+                  _key: string
+                } & ButtonLink)
+              | ({
+                  _key: string
+                } & Photo)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+            >
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              alt?: string
+              _type: 'image'
+            }
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -1926,6 +2033,53 @@ export type PageQueryResult =
             _type: 'textHero'
             title?: string
             description?: string
+          }
+        | {
+            _key: string
+            _type: 'vacanciesHeader'
+            title?: string
+            description?: Array<
+              | ({
+                  _key: string
+                } & ButtonLink)
+              | ({
+                  _key: string
+                } & Photo)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+            >
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              alt?: string
+              _type: 'image'
+            }
           }
       > | null
       seo: {
@@ -2214,6 +2368,53 @@ export type PageQueryResult =
             title?: string
             description?: string
           }
+        | {
+            _key: string
+            _type: 'vacanciesHeader'
+            title?: string
+            description?: Array<
+              | ({
+                  _key: string
+                } & ButtonLink)
+              | ({
+                  _key: string
+                } & Photo)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+            >
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              alt?: string
+              _type: 'image'
+            }
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -2499,6 +2700,53 @@ export type PageQueryResult =
             _type: 'textHero'
             title?: string
             description?: string
+          }
+        | {
+            _key: string
+            _type: 'vacanciesHeader'
+            title?: string
+            description?: Array<
+              | ({
+                  _key: string
+                } & ButtonLink)
+              | ({
+                  _key: string
+                } & Photo)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>
+                    text?: string
+                    _type: 'span'
+                    _key: string
+                  }>
+                  style?:
+                    | 'blockquote'
+                    | 'h1'
+                    | 'h2'
+                    | 'h3'
+                    | 'h4'
+                    | 'h5'
+                    | 'h6'
+                    | 'normal'
+                  listItem?: 'bullet' | 'number'
+                  markDefs?: Array<{
+                    href?: string
+                    _type: 'link'
+                    _key: string
+                  }>
+                  level?: number
+                  _type: 'block'
+                  _key: string
+                }
+            >
+            image?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              alt?: string
+              _type: 'image'
+            }
           }
       > | null
       seo: {

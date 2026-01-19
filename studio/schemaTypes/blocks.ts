@@ -605,6 +605,53 @@ const backButtonType = defineType({
   },
 })
 
+const vacanciesHeaderType = defineType({
+  name: 'vacanciesHeader',
+  title: 'Vacancies Header',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      type: 'array',
+      of: portableComponents,
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'No title',
+        subtitle: 'Vacancies Header',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -622,4 +669,5 @@ export const blockTypes = [
   flockTalkOverviewType,
   quoteType,
   backButtonType,
+  vacanciesHeaderType,
 ]
