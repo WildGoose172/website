@@ -6,6 +6,7 @@ import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
 import '../globals.css'
 import { VisualEditing } from 'next-sanity/visual-editing'
+import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 
 import { configQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
@@ -77,6 +78,11 @@ export default async function RootLayout({
               )}
             </main>
             <Footer config={config.footer} />
+            <ProgressiveBlur
+              height="10%"
+              position="bottom"
+              className="fixed bottom-0 left-0 right-0"
+            />
           </div>
         </NextIntlClientProvider>
       </body>
