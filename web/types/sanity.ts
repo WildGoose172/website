@@ -360,6 +360,20 @@ export type CardCarouselReference = {
   [internalGroqTypeReferenceTo]?: 'cardCarousel'
 }
 
+export type ValuesItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'valuesItem'
+}
+
+export type ValuesReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'values'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -452,6 +466,8 @@ export type InternationalizedArrayReferenceValue = {
     | VacancyOverviewReference
     | CardCarouselItemReference
     | CardCarouselReference
+    | ValuesItemReference
+    | ValuesReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -505,6 +521,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & CardCarousel)
+  | ({
+      _key: string
+    } & Values)
   | ({
       _key: string
     } & VacanciesHeader)
@@ -565,6 +584,54 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type Values = {
+  _type: 'values'
+  values?: Array<
+    {
+      _key: string
+    } & ValuesItem
+  >
+}
+
+export type ValuesItem = {
+  _type: 'valuesItem'
+  title?: string
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  icon?:
+    | 'briefcase-business'
+    | 'land-plot'
+    | 'megaphone-off'
+    | 'shield-check'
+    | 'users'
+    | 'bed-double'
+    | 'door-open'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
 }
 
 export type CardCarousel = {
@@ -1392,6 +1459,8 @@ export type AllSanitySchemaTypes =
   | VacancyOverviewReference
   | CardCarouselItemReference
   | CardCarouselReference
+  | ValuesItemReference
+  | ValuesReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1405,6 +1474,8 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | Values
+  | ValuesItem
   | CardCarousel
   | CardCarouselItem
   | VacancyOverview
@@ -1932,6 +2003,15 @@ export type PageQueryResult =
             title?: string
             cta?: string
           }
+        | {
+            _key: string
+            _type: 'values'
+            values?: Array<
+              {
+                _key: string
+              } & ValuesItem
+            >
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -2286,6 +2366,15 @@ export type PageQueryResult =
             _type: 'vacancyOverview'
             title?: string
             cta?: string
+          }
+        | {
+            _key: string
+            _type: 'values'
+            values?: Array<
+              {
+                _key: string
+              } & ValuesItem
+            >
           }
       > | null
       seo: {
@@ -2643,6 +2732,15 @@ export type PageQueryResult =
             title?: string
             cta?: string
           }
+        | {
+            _key: string
+            _type: 'values'
+            values?: Array<
+              {
+                _key: string
+              } & ValuesItem
+            >
+          }
       > | null
       seo: {
         _type: 'seo'
@@ -2997,6 +3095,15 @@ export type PageQueryResult =
             _type: 'vacancyOverview'
             title?: string
             cta?: string
+          }
+        | {
+            _key: string
+            _type: 'values'
+            values?: Array<
+              {
+                _key: string
+              } & ValuesItem
+            >
           }
       > | null
       seo: {

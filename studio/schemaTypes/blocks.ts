@@ -807,6 +807,92 @@ const cardCarouselType = defineType({
   },
 })
 
+const valuesItemType = defineType({
+  name: 'valuesItem',
+  title: 'Value Item',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'icon',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Briefcase', value: 'briefcase-business' },
+          { title: 'Land plot', value: 'land-plot' },
+          { title: 'Megaphone off', value: 'megaphone-off' },
+          { title: 'Shield check', value: 'shield-check' },
+          { title: 'Users', value: 'users' },
+          { title: 'Bed double', value: 'bed-double' },
+          { title: 'Door open', value: 'door-open' },
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'No title',
+        subtitle: 'Value Item',
+        icon: CubeIcon,
+      }
+    },
+  },
+})
+
+const valuesType = defineType({
+  name: 'values',
+  title: 'Values',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'values',
+      type: 'array',
+      of: [{ type: 'valuesItem' }],
+      validation: rule => rule.required() && rule.min(1),
+    }),
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Values',
+        subtitle: 'Values',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -829,4 +915,6 @@ export const blockTypes = [
   vacancyOverviewType,
   cardCarouselItemType,
   cardCarouselType,
+  valuesItemType,
+  valuesType,
 ]

@@ -17,6 +17,7 @@ import { VacanciesHeader } from '@/components/blocks/vacancies-header'
 import { VacanciesAboutUs } from '@/components/blocks/vacancies-about-us'
 import { VacancyOverview } from '@/components/blocks/vacancy-overview'
 import { CardCarousel } from '@/components/blocks/card-carousel'
+import { Values } from '@/components/blocks/values'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -215,6 +216,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'cardCarousel':
       return (
         <CardCarousel
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'values':
+      return (
+        <Values
           {...block}
           documentId={documentId}
           documentType={documentType}
