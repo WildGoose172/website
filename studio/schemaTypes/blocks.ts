@@ -733,6 +733,80 @@ const vacancyOverviewType = defineType({
   },
 })
 
+const cardCarouselItemType = defineType({
+  name: 'cardCarouselItem',
+  title: 'Card',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'label',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      label: 'label',
+    },
+    prepare(selection) {
+      const { label } = selection
+
+      return {
+        title: label,
+        subtitle: 'Card',
+        icon: CubeIcon,
+      }
+    },
+  },
+})
+
+const cardCarouselType = defineType({
+  name: 'cardCarousel',
+  title: 'Card Carousel',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'cards',
+      type: 'array',
+      of: [{ type: 'cardCarouselItem' }],
+      validation: rule => rule.required() && rule.min(1),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'Card Carousel',
+        subtitle: 'Card Carousel',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   textHeroType,
@@ -753,4 +827,6 @@ export const blockTypes = [
   vacanciesHeaderType,
   vacanciesAboutUsType,
   vacancyOverviewType,
+  cardCarouselItemType,
+  cardCarouselType,
 ]

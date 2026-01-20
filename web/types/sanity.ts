@@ -346,6 +346,20 @@ export type VacancyOverviewReference = {
   [internalGroqTypeReferenceTo]?: 'vacancyOverview'
 }
 
+export type CardCarouselItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'cardCarouselItem'
+}
+
+export type CardCarouselReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'cardCarousel'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -436,6 +450,8 @@ export type InternationalizedArrayReferenceValue = {
     | VacanciesHeaderReference
     | VacanciesAboutUsReference
     | VacancyOverviewReference
+    | CardCarouselItemReference
+    | CardCarouselReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -486,6 +502,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & BackButton)
+  | ({
+      _key: string
+    } & CardCarousel)
   | ({
       _key: string
     } & VacanciesHeader)
@@ -546,6 +565,29 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type CardCarousel = {
+  _type: 'cardCarousel'
+  title?: string
+  cards?: Array<
+    {
+      _key: string
+    } & CardCarouselItem
+  >
+}
+
+export type CardCarouselItem = {
+  _type: 'cardCarouselItem'
+  label?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
 }
 
 export type VacancyOverview = {
@@ -1348,6 +1390,8 @@ export type AllSanitySchemaTypes =
   | VacanciesHeaderReference
   | VacanciesAboutUsReference
   | VacancyOverviewReference
+  | CardCarouselItemReference
+  | CardCarouselReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1361,6 +1405,8 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | CardCarousel
+  | CardCarouselItem
   | VacancyOverview
   | VacanciesAboutUs
   | VacanciesHeader
@@ -1624,6 +1670,16 @@ export type PageQueryResult =
             _type: 'backButton'
             label?: string
             link: string | null
+          }
+        | {
+            _key: string
+            _type: 'cardCarousel'
+            title?: string
+            cards?: Array<
+              {
+                _key: string
+              } & CardCarouselItem
+            >
           }
         | {
             _key: string
@@ -1969,6 +2025,16 @@ export type PageQueryResult =
             _type: 'backButton'
             label?: string
             link: string | null
+          }
+        | {
+            _key: string
+            _type: 'cardCarousel'
+            title?: string
+            cards?: Array<
+              {
+                _key: string
+              } & CardCarouselItem
+            >
           }
         | {
             _key: string
@@ -2318,6 +2384,16 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'cardCarousel'
+            title?: string
+            cards?: Array<
+              {
+                _key: string
+              } & CardCarouselItem
+            >
+          }
+        | {
+            _key: string
             _type: 'clients'
             title?: string
             subtitle?: string
@@ -2660,6 +2736,16 @@ export type PageQueryResult =
             _type: 'backButton'
             label?: string
             link: string | null
+          }
+        | {
+            _key: string
+            _type: 'cardCarousel'
+            title?: string
+            cards?: Array<
+              {
+                _key: string
+              } & CardCarouselItem
+            >
           }
         | {
             _key: string

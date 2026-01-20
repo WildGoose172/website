@@ -14,6 +14,7 @@ export const BLOCK_TYPES = [
   'flockTalkOverview',
   'quote',
   'backButton',
+  'cardCarousel',
   'vacanciesHeader',
   'vacanciesAboutUs',
   'vacancyOverview',

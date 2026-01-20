@@ -16,6 +16,7 @@ import { BackButton } from '@/components/blocks/back-button'
 import { VacanciesHeader } from '@/components/blocks/vacancies-header'
 import { VacanciesAboutUs } from '@/components/blocks/vacancies-about-us'
 import { VacancyOverview } from '@/components/blocks/vacancy-overview'
+import { CardCarousel } from '@/components/blocks/card-carousel'
 
 import { PageQueryResult } from '@/types/sanity'
 import { Block } from '@/types/blocks'
@@ -206,6 +207,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'vacancyOverview':
       return (
         <VacancyOverview
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'cardCarousel':
+      return (
+        <CardCarousel
           {...block}
           documentId={documentId}
           documentType={documentType}
