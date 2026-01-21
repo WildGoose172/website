@@ -43,6 +43,52 @@ const imageBannerType = defineType({
   },
 })
 
+const alternativeHeroType = defineType({
+  name: 'alternativeHero',
+  title: 'Alternative Hero',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'backgroundColor',
+      type: 'string',
+      initialValue: 'bg-primary',
+      options: {
+        list: [
+          { title: 'Red', value: 'bg-primary' },
+          { title: 'Gray', value: 'bg-foreground' },
+        ],
+      },
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title,
+        subtitle: 'Alternative Hero',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 const textHeroType = defineType({
   name: 'textHero',
   title: 'Text Hero',
@@ -895,6 +941,7 @@ const valuesType = defineType({
 
 export const blockTypes = [
   imageBannerType,
+  alternativeHeroType,
   textHeroType,
   serviceItemType,
   servicesType,

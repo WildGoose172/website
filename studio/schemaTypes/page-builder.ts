@@ -7,6 +7,7 @@ export const pageBuilderType = defineType({
   icon: BlockElementIcon,
   of: [
     defineArrayMember({ type: 'textHero' }),
+    defineArrayMember({ type: 'alternativeHero' }),
     defineArrayMember({ type: 'services' }),
     defineArrayMember({ type: 'clients' }),
     defineArrayMember({ type: 'flockTalkTeaser' }),

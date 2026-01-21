@@ -220,6 +220,13 @@ export type ImageBannerReference = {
   [internalGroqTypeReferenceTo]?: 'imageBanner'
 }
 
+export type AlternativeHeroReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'alternativeHero'
+}
+
 export type TextHeroReference = {
   _ref: string
   _type: 'reference'
@@ -446,6 +453,7 @@ export type InternationalizedArrayReferenceValue = {
     | PhotoReference
     | ButtonLinkReference
     | ImageBannerReference
+    | AlternativeHeroReference
     | TextHeroReference
     | ServiceItemReference
     | ServicesReference
@@ -482,6 +490,9 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & TextHero)
+  | ({
+      _key: string
+    } & AlternativeHero)
   | ({
       _key: string
     } & Services)
@@ -917,6 +928,30 @@ export type TextHero = {
   _type: 'textHero'
   title?: string
   description?: string
+}
+
+export type AlternativeHero = {
+  _type: 'alternativeHero'
+  backgroundColor?: 'bg-primary' | 'bg-foreground'
+  title?: string
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
 }
 
 export type ImageBanner = {
@@ -1439,6 +1474,7 @@ export type AllSanitySchemaTypes =
   | PhotoReference
   | ButtonLinkReference
   | ImageBannerReference
+  | AlternativeHeroReference
   | TextHeroReference
   | ServiceItemReference
   | ServicesReference
@@ -1496,6 +1532,7 @@ export type AllSanitySchemaTypes =
   | Services
   | ServiceItem
   | TextHero
+  | AlternativeHero
   | ImageBanner
   | ButtonLink
   | Photo
@@ -1674,6 +1711,38 @@ export type PageQueryResult =
       slug?: Slug
       teaser?: Teaser
       content: Array<
+        | {
+            _key: string
+            _type: 'alternativeHero'
+            backgroundColor?: 'bg-foreground' | 'bg-primary'
+            title?: string
+            description?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+          }
         | {
             _key: string
             _type: 'article'
@@ -2038,6 +2107,38 @@ export type PageQueryResult =
       title?: string
       slug?: Slug
       content: Array<
+        | {
+            _key: string
+            _type: 'alternativeHero'
+            backgroundColor?: 'bg-foreground' | 'bg-primary'
+            title?: string
+            description?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+          }
         | {
             _key: string
             _type: 'article'
@@ -2405,6 +2506,38 @@ export type PageQueryResult =
       content: Array<
         | {
             _key: string
+            _type: 'alternativeHero'
+            backgroundColor?: 'bg-foreground' | 'bg-primary'
+            title?: string
+            description?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+          }
+        | {
+            _key: string
             _type: 'article'
             text: Array<
               | {
@@ -2767,6 +2900,38 @@ export type PageQueryResult =
       title?: string
       slug?: Slug
       content: Array<
+        | {
+            _key: string
+            _type: 'alternativeHero'
+            backgroundColor?: 'bg-foreground' | 'bg-primary'
+            title?: string
+            description?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+          }
         | {
             _key: string
             _type: 'article'

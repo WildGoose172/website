@@ -7,6 +7,7 @@ export const BLOCK_TYPES = [
   'imageText',
   'services',
   'textHero',
+  'alternativeHero',
   'imageBanner',
   'article',
   'contactForm',
