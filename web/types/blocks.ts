@@ -40,11 +40,25 @@ export type BlockWithMeta<T extends BlockType> = Extract<
   className?: string
 }
 
-export const TEMPLATE_TYPES = ['vacancy'] as const
+export const TEMPLATE_TYPES = ['vacancy', 'policy'] as const
 
 export type TemplateType = (typeof TEMPLATE_TYPES)[number]
 
 export type PageTemplate<T extends TemplateType> = Extract<
   PageQueryResult,
   { _type: T }
+>
+
+export const PAGE_BUILDER_TYPES = [
+  'page',
+  'service',
+  'project',
+  'flockTalk',
+] as const
+
+export type PageBuilderType = (typeof PAGE_BUILDER_TYPES)[number]
+
+export type PageBuilderDocument = Extract<
+  NonNullable<PageQueryResult>,
+  { _type: PageBuilderType }
 >

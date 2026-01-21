@@ -2,15 +2,16 @@ import { defineField, defineType } from 'sanity'
 import { DocumentIcon } from '@sanity/icons'
 import { isUniqueOtherThanLanguage } from '../utils/validator'
 
-export const pageType = defineType({
-  name: 'page',
-  title: "Pagina's",
+export const policyType = defineType({
+  name: 'policy',
+  title: 'Beleid',
   type: 'document',
   icon: DocumentIcon,
   fields: [
     defineField({
       name: 'title',
       type: 'string',
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -19,14 +20,13 @@ export const pageType = defineType({
         isUnique: isUniqueOtherThanLanguage,
         source: 'title',
       },
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'content',
-      type: 'pageBuilder',
-    }),
-    defineField({
-      name: 'seo',
-      type: 'seo',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'language',
@@ -50,12 +50,3 @@ export const pageType = defineType({
     },
   },
 })
-
-export const pageDocumentTypes = [
-  { type: 'page' },
-  { type: 'service' },
-  { type: 'project' },
-  { type: 'flockTalk' },
-  { type: 'vacancy' },
-  { type: 'policy' },
-]

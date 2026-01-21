@@ -71,6 +71,7 @@ export function Footer({ config }: FooterProps) {
               {config?.linkedIn && (
                 <Link
                   href={config?.linkedIn}
+                  target="_blank"
                   className="flex items-center gap-2"
                 >
                   <LinkedIn className="size-5 min-w-5" />
@@ -79,6 +80,7 @@ export function Footer({ config }: FooterProps) {
               {config?.instagram && (
                 <Link
                   href={config?.instagram}
+                  target="_blank"
                   className="flex items-center gap-2"
                 >
                   <Instagram className="size-5 min-w-5" />

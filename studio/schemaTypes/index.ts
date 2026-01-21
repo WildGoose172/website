@@ -9,6 +9,7 @@ import { seoType } from './seo'
 import { serviceType } from './service'
 import { teaserType } from './teaser'
 import { vacancyType } from './vacancy'
+import { policyType } from './policy'
 
 export const schemaTypes = [
   ...navigationTypes,
@@ -22,4 +23,5 @@ export const schemaTypes = [
   projectType,
   flockTalkType,
   vacancyType,
+  policyType,
 ]

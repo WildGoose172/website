@@ -79,7 +79,7 @@ export default async function RootLayout({
             </main>
             <Footer config={config.footer} />
             <ProgressiveBlur
-              height="10%"
+              height="50px"
               position="bottom"
               className="fixed bottom-0 left-0 right-0"
             />

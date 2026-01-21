@@ -1,5 +1,6 @@
 import { PageBuilder } from '@/components/page-builder'
 import { Vacancy } from '@/components/vacancy'
+import { Policy } from '@/components/policy'
 
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
@@ -83,6 +84,8 @@ export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
         switch (page._type) {
           case 'vacancy':
             return <Vacancy {...page} />
+          case 'policy':
+            return <Policy {...page} />
           default:
             return (
               <PageBuilder

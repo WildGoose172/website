@@ -108,7 +108,7 @@ const vacancyPageBlocks = `
 
 export const pageQuery = defineQuery(`
   *[
-    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&
+    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&
     slug.current == $slug &&
     language == $language
   ][0]{
@@ -127,7 +127,7 @@ export const pageQuery = defineQuery(`
 
 export const sitemapQuery = defineQuery(`
   *[
-    _type in ["page", "service", "project", "flockTalk", "vacancy"] &&
+    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&
     defined(slug.current)
   ] {
     "href": slug.current,

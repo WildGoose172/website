@@ -20,14 +20,13 @@ import { CardCarousel } from '@/components/blocks/card-carousel'
 import { Values } from '@/components/blocks/values'
 import { AlternativeHero } from '@/components/blocks/alternative-hero'
 
-import { PageQueryResult } from '@/types/sanity'
-import { Block } from '@/types/blocks'
+import { Block, PageBuilderDocument } from '@/types/blocks'
 import { client } from '@/sanity/client'
 import { createDataAttribute } from 'next-sanity'
 import { useOptimistic } from 'next-sanity/hooks'
 
 interface PageBuilderProps {
-  content: NonNullable<PageQueryResult>['content']
+  content: PageBuilderDocument['content']
   documentId: string
   documentType: string
 }
@@ -45,8 +44,8 @@ export function PageBuilder({
   documentType,
 }: PageBuilderProps) {
   const blocks = useOptimistic<
-    NonNullable<PageQueryResult>['content'] | undefined,
-    NonNullable<PageQueryResult>
+    PageBuilderDocument['content'] | undefined,
+    NonNullable<PageBuilderDocument>
   >(content, (state, action) => {
     if (action.id === documentId) {
       return action?.document?.content?.map(
