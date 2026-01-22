@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 import { VisualEditing } from 'next-sanity/visual-editing'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
+import { ConsentManager } from '@/components/consent-manager'
 
 import { configQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
@@ -62,30 +63,32 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={locale}>
-      <body className={`${inter.variable} ${agrandir.variable} antialiased`}>
-        <NextIntlClientProvider>
-          <div className="flex min-h-dvh flex-col">
-            <Navigation config={config.navigation} />
-            <main className="flex flex-1 flex-col gap-16 pb-40 lg:gap-20">
-              {children}
-              <SanityLive />
-              {isEnabled && (
-                <>
-                  <VisualEditing />
-                  <DisableDraftMode />
-                </>
-              )}
-            </main>
-            <Footer config={config.footer} />
-            <ProgressiveBlur
-              height="50px"
-              position="bottom"
-              className="fixed bottom-0 left-0 right-0"
-            />
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <ConsentManager>
+      <html lang={locale}>
+        <body className={`${inter.variable} ${agrandir.variable} antialiased`}>
+          <NextIntlClientProvider>
+            <div className="flex min-h-dvh flex-col">
+              <Navigation config={config.navigation} />
+              <main className="flex flex-1 flex-col gap-16 pb-40 lg:gap-20">
+                {children}
+                <SanityLive />
+                {isEnabled && (
+                  <>
+                    <VisualEditing />
+                    <DisableDraftMode />
+                  </>
+                )}
+              </main>
+              <Footer config={config.footer} />
+              <ProgressiveBlur
+                height="50px"
+                position="bottom"
+                className="fixed bottom-0 left-0 right-0"
+              />
+            </div>
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </ConsentManager>
   )
 }
