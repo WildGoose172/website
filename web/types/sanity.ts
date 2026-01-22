@@ -953,14 +953,6 @@ export type Services = {
       _key: string
     } & ServiceItem
   >
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
 }
 
 export type ServiceItem = {
@@ -2092,14 +2084,6 @@ export type PageQueryResult =
                 slug: string | null
               }
             }> | null
-            image?: {
-              asset?: SanityImageAssetReference
-              media?: unknown
-              hotspot?: SanityImageHotspot
-              crop?: SanityImageCrop
-              alt?: string
-              _type: 'image'
-            }
           }
         | {
             _key: string
@@ -2521,14 +2505,6 @@ export type PageQueryResult =
                 slug: string | null
               }
             }> | null
-            image?: {
-              asset?: SanityImageAssetReference
-              media?: unknown
-              hotspot?: SanityImageHotspot
-              crop?: SanityImageCrop
-              alt?: string
-              _type: 'image'
-            }
           }
         | {
             _key: string
@@ -2995,14 +2971,6 @@ export type PageQueryResult =
                 slug: string | null
               }
             }> | null
-            image?: {
-              asset?: SanityImageAssetReference
-              media?: unknown
-              hotspot?: SanityImageHotspot
-              crop?: SanityImageCrop
-              alt?: string
-              _type: 'image'
-            }
           }
         | {
             _key: string
@@ -3424,14 +3392,6 @@ export type PageQueryResult =
                 slug: string | null
               }
             }> | null
-            image?: {
-              asset?: SanityImageAssetReference
-              media?: unknown
-              hotspot?: SanityImageHotspot
-              crop?: SanityImageCrop
-              alt?: string
-              _type: 'image'
-            }
           }
         | {
             _key: string

@@ -2,17 +2,12 @@
 
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
-import { SanityImage } from '@/components/sanity-image'
 
 import { cn, normalizeSlug } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { BlockWithMeta } from '@/types/blocks'
 
-export function Services({
-  image,
-  services,
-  className,
-}: BlockWithMeta<'services'>) {
+export function Services({ services, className }: BlockWithMeta<'services'>) {
   const t = useTranslations()
 
   return (
@@ -32,13 +27,10 @@ export function Services({
             WebkitMaskSize: 'contain',
           }}
         >
-          <SanityImage
-            src={image!}
-            alt={image?.alt || ''}
-            width={600}
-            height={300}
-            className="h-auto w-full max-w-full object-cover transition-all duration-300 hover:scale-105"
-          />
+          <video className="object-cover" autoPlay loop muted playsInline>
+            <source src="/videos/goose.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         <div className="order-1 flex flex-col gap-6 lg:order-2">
