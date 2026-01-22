@@ -19,6 +19,7 @@ import { VacancyOverview } from '@/components/blocks/vacancy-overview'
 import { CardCarousel } from '@/components/blocks/card-carousel'
 import { Values } from '@/components/blocks/values'
 import { AlternativeHero } from '@/components/blocks/alternative-hero'
+import { Skills } from '@/components/blocks/skills'
 
 import { Block, PageBuilderDocument } from '@/types/blocks'
 import { client } from '@/sanity/client'
@@ -232,6 +233,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'alternativeHero':
       return (
         <AlternativeHero
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'skills':
+      return (
+        <Skills
           {...block}
           documentId={documentId}
           documentType={documentType}

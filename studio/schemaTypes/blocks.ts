@@ -939,6 +939,46 @@ const valuesType = defineType({
   },
 })
 
+const skillsType = defineType({
+  name: 'skills',
+  title: 'Skills',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'skills',
+      type: 'array',
+      of: [{ type: 'string' }],
+      validation: rule => rule.required() && rule.min(1),
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'Skills',
+        subtitle: 'Skills',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   alternativeHeroType,
@@ -964,4 +1004,5 @@ export const blockTypes = [
   cardCarouselType,
   valuesItemType,
   valuesType,
+  skillsType,
 ]

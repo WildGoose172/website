@@ -22,6 +22,7 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: 'backButton' }),
     defineArrayMember({ type: 'cardCarousel' }),
     defineArrayMember({ type: 'values' }),
+    defineArrayMember({ type: 'skills' }),
     defineArrayMember({ type: 'vacanciesHeader' }),
     defineArrayMember({ type: 'vacanciesAboutUs' }),
     defineArrayMember({ type: 'vacancyOverview' }),

@@ -17,6 +17,7 @@ export const BLOCK_TYPES = [
   'backButton',
   'cardCarousel',
   'values',
+  'skills',
   'vacanciesHeader',
   'vacanciesAboutUs',
   'vacancyOverview',

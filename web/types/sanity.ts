@@ -381,6 +381,13 @@ export type ValuesReference = {
   [internalGroqTypeReferenceTo]?: 'values'
 }
 
+export type SkillsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'skills'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -483,6 +490,7 @@ export type InternationalizedArrayReferenceValue = {
     | CardCarouselReference
     | ValuesItemReference
     | ValuesReference
+    | SkillsReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -545,6 +553,9 @@ export type PageBuilder = Array<
     } & Values)
   | ({
       _key: string
+    } & Skills)
+  | ({
+      _key: string
     } & VacanciesHeader)
   | ({
       _key: string
@@ -603,6 +614,30 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type Skills = {
+  _type: 'skills'
+  title?: string
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  skills?: Array<string>
 }
 
 export type Values = {
@@ -1538,6 +1573,7 @@ export type AllSanitySchemaTypes =
   | CardCarouselReference
   | ValuesItemReference
   | ValuesReference
+  | SkillsReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1552,6 +1588,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | Skills
   | Values
   | ValuesItem
   | CardCarousel
@@ -2064,6 +2101,38 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'skills'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            skills?: Array<string>
+          }
+        | {
+            _key: string
             _type: 'textHero'
             title?: string
             description?: string
@@ -2457,6 +2526,38 @@ export type PageQueryResult =
               alt?: string
               _type: 'image'
             }
+          }
+        | {
+            _key: string
+            _type: 'skills'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            skills?: Array<string>
           }
         | {
             _key: string
@@ -2901,6 +3002,38 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'skills'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            skills?: Array<string>
+          }
+        | {
+            _key: string
             _type: 'textHero'
             title?: string
             description?: string
@@ -3294,6 +3427,38 @@ export type PageQueryResult =
               alt?: string
               _type: 'image'
             }
+          }
+        | {
+            _key: string
+            _type: 'skills'
+            title?: string
+            text?: Array<{
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }>
+            skills?: Array<string>
           }
         | {
             _key: string
