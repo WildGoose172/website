@@ -1,8 +1,10 @@
 'use client'
 
+import { TextAnimate } from '@/components/ui/text-animate'
+import { SanityImage } from '@/components/sanity-image'
+
 import { BlockWithMeta } from '@/types/blocks'
 import { PortableText } from 'next-sanity'
-import { SanityImage } from '@/components/sanity-image'
 
 export function VacanciesHeader({
   title,
@@ -13,7 +15,9 @@ export function VacanciesHeader({
     <div className="bg-primary text-background pt-30 pb-10">
       <div className="container grid gap-10 md:grid-cols-2">
         <div className="flex flex-col justify-center gap-6">
-          <h1>{title}</h1>
+          <TextAnimate animation="blurInUp" by="word" once as="h1">
+            {title ?? ''}
+          </TextAnimate>
           {description && (
             <div className="html-richtext max-w-prose">
               <PortableText value={description || []} />

@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     'types/sanity.ts',
+    'components/ui/text-animate.tsx',
   ]),
   {
     rules: {
@@ -24,6 +25,7 @@ const eslintConfig = defineConfig([
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      'react/no-unstable-nested-components': 'off',
     },
   },
 ])

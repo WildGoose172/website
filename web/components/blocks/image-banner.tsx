@@ -1,6 +1,7 @@
 'use client'
 
 import { SanityImage } from '@/components/sanity-image'
+import { TextAnimate } from '@/components/ui/text-animate'
 
 import { cn } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
@@ -25,7 +26,9 @@ export function ImageBanner({
           <div className="z-1 bg-foreground/50 absolute inset-0" />
           {title && (
             <div className="z-2 text-background relative flex h-full flex-col justify-end p-6">
-              <h1>{title}</h1>
+              <TextAnimate animation="blurInUp" by="word" once as="h1">
+                {title ?? ''}
+              </TextAnimate>
             </div>
           )}
         </div>

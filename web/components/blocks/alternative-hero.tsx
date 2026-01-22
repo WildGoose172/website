@@ -1,6 +1,7 @@
 'use client'
 
 import { PortableText } from 'next-sanity'
+import { TextAnimate } from '@/components/ui/text-animate'
 
 import { cn } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
@@ -20,7 +21,9 @@ export function AlternativeHero({
       )}
     >
       <div className="pt-30 container flex flex-col gap-6 pb-20">
-        <h1>{title}</h1>
+        <TextAnimate animation="blurInUp" by="word" once as="h1">
+          {title ?? ''}
+        </TextAnimate>
         <div className="text-muted html-richtext max-w-prose">
           <PortableText value={description ?? []} />
         </div>
