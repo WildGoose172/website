@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://admin.wildgoose.be
+      url: https://wildgoose.be
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
