@@ -21,6 +21,7 @@ export function ImageBanner({
             fill
             sizes="100vw"
             loading="eager"
+            preload
             className="object-cover"
           />
           <div className="z-1 bg-foreground/50 absolute inset-0" />

@@ -845,6 +845,7 @@ export type Article = {
   >
   constrained?: boolean
   topPadding?: boolean
+  bottomPadding?: boolean
 }
 
 export type ImageText = {
@@ -1896,6 +1897,7 @@ export type PageQueryResult =
             > | null
             constrained?: boolean
             topPadding?: boolean
+            bottomPadding?: boolean
           }
         | {
             _key: string
@@ -2324,6 +2326,7 @@ export type PageQueryResult =
             > | null
             constrained?: boolean
             topPadding?: boolean
+            bottomPadding?: boolean
           }
         | {
             _key: string
@@ -2797,6 +2800,7 @@ export type PageQueryResult =
             > | null
             constrained?: boolean
             topPadding?: boolean
+            bottomPadding?: boolean
           }
         | {
             _key: string
@@ -3225,6 +3229,7 @@ export type PageQueryResult =
             > | null
             constrained?: boolean
             topPadding?: boolean
+            bottomPadding?: boolean
           }
         | {
             _key: string

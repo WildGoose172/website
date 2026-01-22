@@ -454,7 +454,7 @@ const imageTextType = defineType({
 
 const articleType = defineType({
   name: 'article',
-  title: 'Article',
+  title: 'Generic content block',
   type: 'object',
   icon: ComponentIcon,
   fields: [
@@ -466,13 +466,19 @@ const articleType = defineType({
     }),
     defineField({
       name: 'constrained',
-      description: 'Constrain the width of the article for better readability',
+      description: 'Constrain the width of the block for better readability',
       type: 'boolean',
       initialValue: true,
     }),
     defineField({
       name: 'topPadding',
-      description: 'Add top padding to the article for better spacing',
+      description: 'Add top padding to the block for better spacing',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'bottomPadding',
+      description: 'Add bottom padding to the block for better spacing',
       type: 'boolean',
       initialValue: false,
     }),
@@ -480,8 +486,8 @@ const articleType = defineType({
   preview: {
     prepare() {
       return {
-        title: 'Article',
-        subtitle: 'Article content',
+        title: 'Generic content block',
+        subtitle: 'Generic content block',
         icon: ComponentIcon,
       }
     },

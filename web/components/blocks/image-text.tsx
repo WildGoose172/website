@@ -1,7 +1,7 @@
 'use client'
 
 import { SanityImage } from '@/components/sanity-image'
-import { PortableText } from '@portabletext/react'
+import { RichText } from '@/components/richtext'
 
 import { cn } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
@@ -43,7 +43,7 @@ export function ImageText({
       >
         <h2>{title}</h2>
         <div className="html-richtext">
-          <PortableText value={text!} />
+          <RichText text={text!} />
         </div>
       </div>
 

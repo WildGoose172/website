@@ -4363,6 +4363,13 @@
             "type": "boolean"
           },
           "optional": true
+        },
+        "bottomPadding": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         }
       }
     }

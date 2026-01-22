@@ -9,6 +9,7 @@ export function Article({
   text,
   constrained = true,
   topPadding = false,
+  bottomPadding = false,
   className,
 }: BlockWithMeta<'article'>) {
   return (
@@ -17,6 +18,7 @@ export function Article({
         'html-richtext container mx-auto',
         constrained && 'md:max-w-prose',
         topPadding && 'pt-30',
+        bottomPadding && 'pb-30',
         className,
       )}
     >
