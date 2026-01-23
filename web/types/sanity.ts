@@ -3931,6 +3931,23 @@ export type VacancyOverviewQueryResult = Array<{
   language?: string
 }>
 
+// Source: ../web/sanity/queries.ts
+// Variable: localeQuery
+// Query: *[    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&    slug.current == $slug &&    language == $language  ][0]{    "_translations": *[      _type == "translation.metadata" &&      references(^._id)    ].translations[].value->{      language,      "slug": slug.current,    },  }
+export type LocaleQueryResult = {
+  _translations: Array<
+    | null
+    | {
+        language: string | null
+        slug: null
+      }
+    | {
+        language: string | null
+        slug: string | null
+      }
+  >
+} | null
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
@@ -3942,5 +3959,6 @@ declare module '@sanity/client' {
     '\n  *[\n    _type == "flockTalk" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': FlockTalkOverviewQueryResult
     '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult
     '\n  *[\n    _type == "vacancy" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': VacancyOverviewQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&\n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    "_translations": *[\n      _type == "translation.metadata" &&\n      references(^._id)\n    ].translations[].value->{\n      language,\n      "slug": slug.current,\n    },\n  }\n': LocaleQueryResult
   }
 }

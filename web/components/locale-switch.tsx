@@ -1,10 +1,12 @@
 'use client'
 
+import { cn, normalizeSlug } from '@/lib/utils'
 import { Locale, useLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { usePathname, useRouter } from '@/i18n/navigation'
 import { useParams } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { client } from '@/sanity/client'
+import { localeQuery } from '@/sanity/queries'
 
 interface LocaleSwitchProps {
   className?: string
@@ -16,12 +18,20 @@ export function LocaleSwitch({ className }: LocaleSwitchProps) {
   const params = useParams()
   const currentLocale = useLocale()
 
-  function setLocale(nextLocale: Locale) {
+  async function setLocale(nextLocale: Locale) {
+    const data = await client.fetch(localeQuery, {
+      slug: pathname.startsWith('/') ? pathname.slice(1) : pathname,
+      language: currentLocale,
+    })
+
+    const newLocalePage = data?._translations.find(
+      page => page && page.language === nextLocale,
+    )
+    const newSlug = newLocalePage ? normalizeSlug(newLocalePage?.slug) : '/'
+
     router.replace(
       // @ts-expect-error -- TypeScript will validate that only known `params`
-      // are used in combination with a given `pathname`. Since the two will
-      // always match for the current route, we can skip runtime checks.
-      { pathname, params },
+      { pathname: newSlug, params },
       { locale: nextLocale },
     )
   }

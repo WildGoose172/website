@@ -176,3 +176,19 @@ export const vacancyOverviewQuery = defineQuery(`
     "slug": slug.current,
   }
 `)
+
+export const localeQuery = defineQuery(`
+  *[
+    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&
+    slug.current == $slug &&
+    language == $language
+  ][0]{
+    "_translations": *[
+      _type == "translation.metadata" &&
+      references(^._id)
+    ].translations[].value->{
+      language,
+      "slug": slug.current,
+    },
+  }
+`)
