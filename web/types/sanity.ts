@@ -642,6 +642,7 @@ export type Skills = {
 
 export type Values = {
   _type: 'values'
+  title?: string
   values?: Array<
     {
       _key: string
@@ -2201,6 +2202,7 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'values'
+            title?: string
             values?: Array<
               {
                 _key: string
@@ -2630,6 +2632,7 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'values'
+            title?: string
             values?: Array<
               {
                 _key: string
@@ -3104,6 +3107,7 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'values'
+            title?: string
             values?: Array<
               {
                 _key: string
@@ -3533,6 +3537,7 @@ export type PageQueryResult =
         | {
             _key: string
             _type: 'values'
+            title?: string
             values?: Array<
               {
                 _key: string

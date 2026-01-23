@@ -928,6 +928,11 @@ const valuesType = defineType({
   icon: ComponentIcon,
   fields: [
     defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
       name: 'values',
       type: 'array',
       of: [{ type: 'valuesItem' }],

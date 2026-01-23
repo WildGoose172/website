@@ -3147,6 +3147,13 @@
             "value": "values"
           }
         },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "values": {
           "type": "objectAttribute",
           "value": {
