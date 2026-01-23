@@ -42,6 +42,7 @@ export function VacanciesHeader({
               src={image}
               alt={image.alt || ''}
               fill
+              loading="eager"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="rounded-2xl object-cover transition-all duration-300 hover:scale-105"
             />
