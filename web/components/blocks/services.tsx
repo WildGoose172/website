@@ -2,13 +2,21 @@
 
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import { SanityImage } from '@/components/sanity-image'
 
 import { cn, normalizeSlug } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { BlockWithMeta } from '@/types/blocks'
 
-export function Services({ services, className }: BlockWithMeta<'services'>) {
+export function Services({
+  image,
+  services,
+  className,
+}: BlockWithMeta<'services'>) {
   const t = useTranslations()
+
+  const mask =
+    "url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20120%22%3E%3Cpath%20d%3D%22M0%2C0H190A10%2C10%200%2C0%2C1%20200%2C10V90A10%2C10%200%2C0%2C1%20190%2C100H170A10%2C10%200%2C0%2C0%20160%2C110V110A10%2C10%200%2C0%2C1%20150%2C120H30A10%2C10%200%2C0%2C1%2020%2C110V70A10%2C10%200%2C0%2C0%2010%2C60H10A10%2C10%200%2C0%2C1%200%2C50V30A10%2C10%200%2C0%2C1%2010%2C20H50A10%2C10%200%2C0%2C0%2060%2C10V10A10%2C10%200%2C0%2C1%2070%2C0%22%20fill%3D%22%23fff%22%20%2F%3E%3C%2Fsvg%3E')"
 
   return (
     <section className={cn('bg-primary py-20 text-white', className)}>
@@ -17,20 +25,21 @@ export function Services({ services, className }: BlockWithMeta<'services'>) {
           className="relative z-0 order-2 mx-auto max-w-xl overflow-hidden lg:order-1 lg:mx-0 lg:self-center"
           style={{
             aspectRatio: '6/3.29',
-            maskImage:
-              "url(\"data:image/svg+xml,%3Csvg width='221' height='122' viewBox='0 0 221 122' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fillRule='evenodd' clipRule='evenodd' d='M183 4C183 1.79086 184.791 0 187 0H217C219.209 0 221 1.79086 221 4V14V28V99C221 101.209 219.209 103 217 103H182C179.791 103 178 104.791 178 107V118C178 120.209 176.209 122 174 122H28C25.7909 122 24 120.209 24 118V103V94V46C24 43.7909 22.2091 42 20 42H4C1.79086 42 0 40.2091 0 38V18C0 15.7909 1.79086 14 4 14H24H43H179C181.209 14 183 12.2091 183 10V4Z' fill='%23D9D9D9'/%3E%3C/svg%3E%0A\")",
-            WebkitMaskImage:
-              "url(\"data:image/svg+xml,%3Csvg width='221' height='122' viewBox='0 0 221 122' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fillRule='evenodd' clipRule='evenodd' d='M183 4C183 1.79086 184.791 0 187 0H217C219.209 0 221 1.79086 221 4V14V28V99C221 101.209 219.209 103 217 103H182C179.791 103 178 104.791 178 107V118C178 120.209 176.209 122 174 122H28C25.7909 122 24 120.209 24 118V103V94V46C24 43.7909 22.2091 42 20 42H4C1.79086 42 0 40.2091 0 38V18C0 15.7909 1.79086 14 4 14H24H43H179C181.209 14 183 12.2091 183 10V4Z' fill='%23D9D9D9'/%3E%3C/svg%3E%0A\")",
+            maskImage: mask,
+            WebkitMaskImage: mask,
             maskRepeat: 'no-repeat',
             WebkitMaskRepeat: 'no-repeat',
             maskSize: 'contain',
             WebkitMaskSize: 'contain',
           }}
         >
-          <video className="object-cover" autoPlay loop muted playsInline>
-            <source src="/videos/goose.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <SanityImage
+            src={image!}
+            alt={image?.alt || ''}
+            width={600}
+            height={300}
+            className="h-auto w-full max-w-full object-cover transition-all duration-300 hover:scale-105"
+          />
         </div>
 
         <div className="order-1 flex flex-col gap-6 lg:order-2">

@@ -173,6 +173,19 @@ const servicesType = defineType({
       of: [{ type: 'serviceItem' }],
       validation: rule => rule.required() && rule.min(1),
     }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+      validation: rule => rule.required(),
+    }),
   ],
   preview: {
     prepare() {
