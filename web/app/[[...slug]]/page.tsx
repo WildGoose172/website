@@ -1,6 +1,6 @@
 import { PageBuilder } from '@/components/page-builder'
-import { Vacancy } from '@/components/vacancy'
-import { Policy } from '@/components/policy'
+import { Vacancy } from '@/components/templates/vacancy'
+import { Policy } from '@/components/templates/policy'
 
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
