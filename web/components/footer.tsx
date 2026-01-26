@@ -15,7 +15,10 @@ interface FooterProps {
 export function Footer({ config }: FooterProps) {
   return (
     <div className="container mx-auto">
-      <footer className="border-background relative mb-8 overflow-hidden rounded-2xl border shadow">
+      <footer
+        className="border-background relative mb-8 overflow-hidden rounded-2xl border shadow"
+        style={{ clipPath: 'inset(0 round 3rem)' }}
+      >
         <div className="z-1 bg-background/20 relative p-6 lg:p-10">
           <div className="grid gap-x-4 gap-y-6 lg:grid-cols-4">
             <SanityImage
