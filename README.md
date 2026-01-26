@@ -16,6 +16,7 @@ A monorepo project featuring a Next.js 16 frontend with internationalization sup
 wg-website/
 ├── web/                # Next.js frontend application
 ├── studio/             # Sanity CMS studio
+├── .env                # Symlinked env file for both packages
 └── package.json        # Root workspace configuration
 ```
 
@@ -103,6 +104,27 @@ The project supports multiple languages with next-intl:
 - Dutch (`nl`)
 
 Content is managed through Sanity's document internationalization plugin.
+
+## Blocks and Templates
+The CMS uses a block-based approach for building pages. Blocks are defined in the Sanity studio and rendered in the frontend.
+Templates are used for specific pages that need a predefined structure, such as vacancy or policy pages.
+Both blocks and templates can be created by following the steps below.
+
+### How to create new CMS blocks
+1. Define a new schema in the `studio/schemaTypes/blocks` file.
+2. Add the new block to the page builder schema in `studio/schemaTypes/page-builder`.
+3. Run the typegen script at the root of the project or inside the studio folder
+4. Add the new block name to the BLOCK_TYPES array in `web/types/blocks`.
+5. Create a new React component for the block in `web/components/blocks` following the existing structure.
+6. Update the page builder component in `web/components/page-builder` to include the new block component in the switch statement.
+
+### How to create new CMS template (vacancy, policy)
+1. Create a new schema in the `studio/schemaTypes` folder.
+2. Add the new schema to the schemaTypes array in `studio/schemaTypes/index`.
+3. Run the typegen script at the root of the project or inside the studio folder
+4. Add the new template name to the TEMPLATE_TYPES array in `web/types/blocks`.
+5. Create a new React component for the template in `web/components/templates` following the existing structure.
+6. Update the `web/app/[[...slug]]/page.tsx` to include the new template component in the switch statement.
 
 ## Deployment
 
