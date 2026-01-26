@@ -112,7 +112,7 @@ export function Navigation({ config }: NavigationProps) {
           {/* Mobile Navigation */}
           <Sheet>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" aria-label="Menu">
                 <Menu />
               </Button>
             </SheetTrigger>

@@ -11,7 +11,7 @@ import { VacancyOverviewQueryResult } from '@/types/sanity'
 import { vacancyOverviewQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function VacancyOverview({
   title,
@@ -20,6 +20,7 @@ export function VacancyOverview({
 }: BlockWithMeta<'vacancyOverview'>) {
   const [items, setItems] = useState<VacancyOverviewQueryResult>([])
   const locale = useLocale()
+  const t = useTranslations()
 
   useEffect(() => {
     const fetchProjectOverview = async () => {
@@ -60,13 +61,17 @@ export function VacancyOverview({
                 </div>
               )}
             </div>
-            <Button className="mt-4 w-fit self-end">
+            <Button
+              aria-label={item.teaser?.title || t('viewVacancy')}
+              className="mt-4 w-fit self-end"
+            >
               {cta}{' '}
               <ArrowRight className="ml-auto size-5 transition-transform duration-300 group-hover:-rotate-45" />
             </Button>
 
             <Link
               href={normalizeSlug(item.slug)}
+              aria-label={item.teaser?.title || t('viewVacancy')}
               className="absolute inset-0"
             />
           </li>

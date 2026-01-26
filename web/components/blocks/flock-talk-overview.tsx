@@ -10,7 +10,7 @@ import { FlockTalkOverviewQueryResult } from '@/types/sanity'
 import { flockTalkOverviewQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { normalizeSlug } from '@/lib/utils'
 import { PortableText } from 'next-sanity'
 
@@ -20,6 +20,7 @@ export function FlockTalkOverview({
 }: BlockWithMeta<'flockTalkOverview'>) {
   const [items, setItems] = useState<FlockTalkOverviewQueryResult>([])
   const locale = useLocale()
+  const t = useTranslations()
 
   useEffect(() => {
     const fetchProjectOverview = async () => {
@@ -58,7 +59,7 @@ export function FlockTalkOverview({
 
           <div className="flex flex-col gap-8 p-10">
             <div className="flex grow flex-col gap-2">
-              <h3 className="head-2">{item.teaser?.title}</h3>
+              <h2>{item.teaser?.title}</h2>
               {item.teaser?.text && (
                 <div className="html-richtext">
                   <PortableText value={item.teaser.text} />
@@ -66,10 +67,19 @@ export function FlockTalkOverview({
               )}
             </div>
 
-            <Button className="w-fit self-end">{cta}</Button>
+            <Button
+              aria-label={item.teaser?.title || t('viewFlockTalk')}
+              className="w-fit self-end"
+            >
+              {cta}
+            </Button>
           </div>
 
-          <Link href={normalizeSlug(item.slug)} className="absolute inset-0" />
+          <Link
+            href={normalizeSlug(item.slug)}
+            aria-label={item.teaser?.title || t('viewFlockTalk')}
+            className="absolute inset-0"
+          />
         </div>
       ))}
     </section>

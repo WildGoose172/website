@@ -50,9 +50,9 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
-    title: page.seo.title ?? t('title'),
-    description: page.seo.description ?? t('description'),
-    keywords: page.seo.keywords ?? [],
+    title: page.seo.title || t('title'),
+    description: page.seo.description || t('description'),
+    keywords: page.seo.keywords || [],
   }
 
   const url =

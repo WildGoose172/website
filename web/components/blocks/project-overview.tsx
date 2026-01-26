@@ -11,7 +11,7 @@ import { ProjectOverviewQueryResult } from '@/types/sanity'
 import { projectOverviewQuery } from '@/sanity/queries'
 import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function ProjectOverview({
   title,
@@ -21,6 +21,7 @@ export function ProjectOverview({
 }: BlockWithMeta<'projectOverview'>) {
   const [items, setItems] = useState<ProjectOverviewQueryResult>([])
   const locale = useLocale()
+  const t = useTranslations()
 
   useEffect(() => {
     const fetchProjectOverview = async () => {
@@ -77,12 +78,18 @@ export function ProjectOverview({
                 )}
               </div>
 
-              <Button className="w-fit self-end">{cta}</Button>
+              <Button
+                className="w-fit self-end"
+                aria-label={item.teaser?.title || t('viewProject')}
+              >
+                {cta}
+              </Button>
             </div>
 
             <Link
               href={normalizeSlug(item.slug)}
               className="absolute inset-0"
+              aria-label={item.teaser?.title || t('viewProject')}
             />
           </div>
         ))}

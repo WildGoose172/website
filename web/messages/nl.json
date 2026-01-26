@@ -1,6 +1,9 @@
 {
   "services": "Diensten",
   "share": "Delen",
+  "viewProject": "Bekijk project",
+  "viewVacancy": "Bekijk vacature",
+  "viewFlockTalk": "Bekijk Flock Talk",
   "notFound": {
     "title": "Je bent op een wilde ganzenjacht beland",
     "description": "Deze pagina is gevlogen. We hebben overal gezocht, maar niets gevonden.",

@@ -84,7 +84,7 @@ export function RelatedFlockTalk({
                 />
               )}
             </div>
-            <h4 className="group-hover:underline">{item.teaser?.title}</h4>
+            <p className="head-4 group-hover:underline">{item.teaser?.title}</p>
           </Link>
         ))}
       </div>

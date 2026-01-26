@@ -44,25 +44,23 @@ export function Services({
 
         <div className="order-1 flex flex-col gap-6 lg:order-2">
           <h2 className="text-4xl">{t('services')}</h2>
-          <ul className="grid gap-4 min-[500px]:grid-cols-2 2xl:grid-cols-4">
+          <div className="grid gap-4 min-[500px]:grid-cols-2 2xl:grid-cols-4">
             {(services ?? []).map(service => (
               <Link
                 key={service._key}
                 href={normalizeSlug(service.link?.slug)}
                 className="hover:bg-muted/10 hover:scale-102 group w-full rounded-lg border bg-transparent p-3 transition duration-300"
               >
-                <li>
-                  <div className="flex min-h-[200px] flex-col gap-4">
-                    <span className="text-muted text-xs uppercase">
-                      {t('services')}
-                    </span>
-                    <h3>{service.name}</h3>
-                  </div>
-                  <ArrowRight className="ml-auto size-5 transition-transform duration-300 group-hover:-rotate-45" />
-                </li>
+                <div className="flex min-h-[200px] flex-col gap-4">
+                  <span className="text-muted text-xs uppercase">
+                    {t('services')}
+                  </span>
+                  <h3>{service.name}</h3>
+                </div>
+                <ArrowRight className="ml-auto size-5 transition-transform duration-300 group-hover:-rotate-45" />
               </Link>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,9 @@
 {
   "services": "Services",
   "share": "Share",
+  "viewProject": "View Project",
+  "viewVacancy": "View Vacancy",
+  "viewFlockTalk": "View Flock Talk",
   "notFound": {
     "title": "You've gone on a wild goose chase",
     "description": "This page flew the coop. We looked everywhere and it's not here.",

@@ -31,7 +31,7 @@ export function Footer({ config }: FooterProps) {
                 id={(column.name ?? '').toLowerCase()}
                 className="flex flex-col gap-2"
               >
-                <h4 className="font-semibold">{column.name}</h4>
+                <p className="head-4 font-semibold">{column.name}</p>
                 {(column.columnItems ?? []).map(item => {
                   switch (item._type) {
                     case 'footerColumnText':
@@ -72,6 +72,7 @@ export function Footer({ config }: FooterProps) {
                 <Link
                   href={config?.linkedIn}
                   target="_blank"
+                  aria-label="LinkedIn"
                   className="flex items-center gap-2"
                 >
                   <LinkedIn className="size-5 min-w-5" />
@@ -81,6 +82,7 @@ export function Footer({ config }: FooterProps) {
                 <Link
                   href={config?.instagram}
                   target="_blank"
+                  aria-label="Instagram"
                   className="flex items-center gap-2"
                 >
                   <Instagram className="size-5 min-w-5" />
