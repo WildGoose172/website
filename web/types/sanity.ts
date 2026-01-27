@@ -13,6 +13,16 @@
  */
 
 // Source: schema.json
+export type Mail = {
+  title?: string
+  mail?: string
+}
+
+export type Phone = {
+  title?: string
+  number?: string
+}
+
 export type SectionOne = {
   title?: string
   description?: Array<
@@ -388,6 +398,13 @@ export type SkillsReference = {
   [internalGroqTypeReferenceTo]?: 'skills'
 }
 
+export type ContactFormLargeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'contactFormLarge'
+}
+
 export type SeoReference = {
   _ref: string
   _type: 'reference'
@@ -491,6 +508,7 @@ export type InternationalizedArrayReferenceValue = {
     | ValuesItemReference
     | ValuesReference
     | SkillsReference
+    | ContactFormLargeReference
     | SeoReference
     | TeaserReference
     | PageReference
@@ -517,12 +535,6 @@ export type PageBuilder = Array<
     } & Clients)
   | ({
       _key: string
-    } & FlockTalkTeaser)
-  | ({
-      _key: string
-    } & RelatedFlockTalk)
-  | ({
-      _key: string
     } & ImageText)
   | ({
       _key: string
@@ -530,15 +542,6 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & Article)
-  | ({
-      _key: string
-    } & ContactForm)
-  | ({
-      _key: string
-    } & ProjectOverview)
-  | ({
-      _key: string
-    } & FlockTalkOverview)
   | ({
       _key: string
     } & Quote)
@@ -554,6 +557,24 @@ export type PageBuilder = Array<
   | ({
       _key: string
     } & Skills)
+  | ({
+      _key: string
+    } & ContactForm)
+  | ({
+      _key: string
+    } & ContactFormLarge)
+  | ({
+      _key: string
+    } & ProjectOverview)
+  | ({
+      _key: string
+    } & FlockTalkOverview)
+  | ({
+      _key: string
+    } & FlockTalkTeaser)
+  | ({
+      _key: string
+    } & RelatedFlockTalk)
   | ({
       _key: string
     } & VacanciesHeader)
@@ -614,6 +635,15 @@ export type Seo = {
     _type: 'image'
   }
   keywords?: Array<string>
+}
+
+export type ContactFormLarge = {
+  _type: 'contactFormLarge'
+  title?: string
+  subtitle?: string
+  mail?: Mail
+  phone?: Phone
+  emailTo?: string
 }
 
 export type Skills = {
@@ -1532,6 +1562,8 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Mail
+  | Phone
   | SectionOne
   | SectionTwo
   | SanityVercelProtectionBypass
@@ -1576,6 +1608,7 @@ export type AllSanitySchemaTypes =
   | ValuesItemReference
   | ValuesReference
   | SkillsReference
+  | ContactFormLargeReference
   | SeoReference
   | TeaserReference
   | PageReference
@@ -1590,6 +1623,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Teaser
   | Seo
+  | ContactFormLarge
   | Skills
   | Values
   | ValuesItem
@@ -1931,6 +1965,15 @@ export type PageQueryResult =
             _key: string
             _type: 'contactForm'
             title?: string
+            emailTo?: string
+          }
+        | {
+            _key: string
+            _type: 'contactFormLarge'
+            title?: string
+            subtitle?: string
+            mail?: Mail
+            phone?: Phone
             emailTo?: string
           }
         | {
@@ -2361,6 +2404,15 @@ export type PageQueryResult =
             _key: string
             _type: 'contactForm'
             title?: string
+            emailTo?: string
+          }
+        | {
+            _key: string
+            _type: 'contactFormLarge'
+            title?: string
+            subtitle?: string
+            mail?: Mail
+            phone?: Phone
             emailTo?: string
           }
         | {
@@ -2840,6 +2892,15 @@ export type PageQueryResult =
           }
         | {
             _key: string
+            _type: 'contactFormLarge'
+            title?: string
+            subtitle?: string
+            mail?: Mail
+            phone?: Phone
+            emailTo?: string
+          }
+        | {
+            _key: string
             _type: 'flockTalkOverview'
             cta?: string
           }
@@ -3266,6 +3327,15 @@ export type PageQueryResult =
             _key: string
             _type: 'contactForm'
             title?: string
+            emailTo?: string
+          }
+        | {
+            _key: string
+            _type: 'contactFormLarge'
+            title?: string
+            subtitle?: string
+            mail?: Mail
+            phone?: Phone
             emailTo?: string
           }
         | {

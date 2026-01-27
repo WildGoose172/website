@@ -9,6 +9,7 @@ import { ImageText } from '@/components/blocks/image-text'
 import { ImageBanner } from '@/components/blocks/image-banner'
 import { Article } from '@/components/blocks/article'
 import { ContactForm } from '@/components/blocks/contact-form'
+import { ContactFormLarge } from '@/components/blocks/contact-form-large'
 import { ProjectOverview } from '@/components/blocks/project-overview'
 import { FlockTalkOverview } from '@/components/blocks/flock-talk-overview'
 import { Quote } from '@/components/blocks/quote'
@@ -241,6 +242,14 @@ function renderBlock(block: Block, documentId: string, documentType: string) {
     case 'skills':
       return (
         <Skills
+          {...block}
+          documentId={documentId}
+          documentType={documentType}
+        />
+      )
+    case 'contactFormLarge':
+      return (
+        <ContactFormLarge
           {...block}
           documentId={documentId}
           documentType={documentType}

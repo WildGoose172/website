@@ -21,6 +21,7 @@ export const BLOCK_TYPES = [
   'vacanciesHeader',
   'vacanciesAboutUs',
   'vacancyOverview',
+  'contactFormLarge',
 ] as const
 
 export type BlockType = (typeof BLOCK_TYPES)[number]

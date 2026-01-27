@@ -990,6 +990,77 @@ const skillsType = defineType({
   },
 })
 
+const contactFormLargeType = defineType({
+  name: 'contactFormLarge',
+  title: 'Contact Form Large',
+  type: 'object',
+  icon: ComponentIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      type: 'string',
+      validation: rule => rule.required(),
+    }),
+    defineField({
+      name: 'mail',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+        defineField({
+          name: 'mail',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'phone',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+        defineField({
+          name: 'number',
+          type: 'string',
+          validation: rule => rule.required(),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'emailTo',
+      description:
+        'Email address to receive form submissions. Leave empty to use default.',
+      type: 'email',
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection
+
+      return {
+        title: title ?? 'Contact Form Large',
+        subtitle: 'Contact Form Large',
+        icon: ComponentIcon,
+      }
+    },
+  },
+})
+
 export const blockTypes = [
   imageBannerType,
   alternativeHeroType,
@@ -1016,4 +1087,5 @@ export const blockTypes = [
   valuesItemType,
   valuesType,
   skillsType,
+  contactFormLargeType,
 ]
