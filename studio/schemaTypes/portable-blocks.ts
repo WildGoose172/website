@@ -17,7 +17,6 @@ const photoType = defineType({
     defineField({
       name: 'alt',
       type: 'string',
-      validation: rule => rule.required(),
     }),
     defineField({
       name: 'aspectRatio',

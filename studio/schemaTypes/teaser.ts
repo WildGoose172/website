@@ -10,6 +10,7 @@ export const teaserType = defineType({
     defineField({
       name: 'thumbnail',
       type: 'image',
+      options: { hotspot: true },
       validation: Rule => Rule.required(),
     }),
     defineField({
