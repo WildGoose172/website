@@ -117,7 +117,7 @@ export const pageQuery = defineQuery(`
     ${vacancyPageBlocks}
     "seo": {
       "_type": "seo",
-      "title": coalesce(seo.title, title, ""),
+      "title": coalesce(seo.title, ""),
       "description": coalesce(seo.description,  ""),
       "image": seo.image,
       "keywords": coalesce(seo.keywords, []),
