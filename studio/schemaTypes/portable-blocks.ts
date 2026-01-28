@@ -19,6 +19,14 @@ const photoType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'keepOriginalSize',
+      type: 'boolean',
+      description:
+        'If enabled, the image will be displayed in its original size. And the aspect ratio settings will be ignored.',
+      initialValue: false,
+      validation: rule => rule.required(),
+    }),
+    defineField({
       name: 'aspectRatio',
       type: 'string',
       initialValue: 'landscape',

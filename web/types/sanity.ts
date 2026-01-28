@@ -1066,6 +1066,7 @@ export type Photo = {
     _type: 'image'
   }
   alt?: string
+  keepOriginalSize?: boolean
   aspectRatio?: 'square' | 'landscape' | 'portrait'
   centered?: boolean
 }
@@ -1918,6 +1919,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -2068,6 +2070,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -2357,6 +2360,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -2507,6 +2511,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -2841,6 +2846,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -2991,6 +2997,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -3280,6 +3287,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }
@@ -3430,6 +3438,7 @@ export type PageQueryResult =
                     _type: 'image'
                   }
                   alt?: string
+                  keepOriginalSize?: boolean
                   aspectRatio?: 'landscape' | 'portrait' | 'square'
                   centered?: boolean
                 }

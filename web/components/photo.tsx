@@ -3,31 +3,50 @@
 import { SanityImage } from '@/components/sanity-image'
 
 import { cn } from '@/lib/utils'
-import type { Photo } from '@/types/sanity'
+import type { Photo as PhotoProps } from '@/types/sanity'
+import { getImageDimensions, SanityImageSource } from '@sanity/asset-utils'
 
 export function Photo({
   image,
   alt,
+  keepOriginalSize = false,
   aspectRatio = 'landscape',
   centered = true,
-}: Photo) {
+}: PhotoProps) {
+  const dimensions = image
+    ? getImageDimensions(image as SanityImageSource)
+    : null
+
+  const aspectRatios: Record<NonNullable<PhotoProps['aspectRatio']>, string> = {
+    square: 'aspect-square size-80',
+    landscape: 'aspect-video h-80',
+    portrait: 'aspect-[3/4] h-80',
+  }
+
   return (
     <section
       className={cn(
-        'relative my-4 overflow-hidden rounded-2xl',
+        'my-4 overflow-hidden rounded-2xl',
         centered && 'mx-auto',
-        aspectRatio === 'square' && 'aspect-square size-80',
-        aspectRatio === 'landscape' && 'aspect-video h-80',
-        aspectRatio === 'portrait' && 'aspect-[3/4] h-80',
+        keepOriginalSize
+          ? 'inline-block'
+          : `relative ${aspectRatios[aspectRatio]}`,
       )}
     >
       <SanityImage
         src={image!}
         alt={alt ?? ''}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        {...(keepOriginalSize && dimensions
+          ? {
+              width: dimensions.width,
+              height: dimensions.height,
+            }
+          : {
+              fill: true,
+              sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+            })}
         loading="lazy"
-        className="object-cover"
+        className={cn(!keepOriginalSize && 'object-cover')}
       />
     </section>
   )

@@ -5700,6 +5700,13 @@
           },
           "optional": true
         },
+        "keepOriginalSize": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "aspectRatio": {
           "type": "objectAttribute",
           "value": {
