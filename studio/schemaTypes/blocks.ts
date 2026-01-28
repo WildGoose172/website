@@ -891,19 +891,6 @@ const valuesItemType = defineType({
       },
       validation: rule => rule.required(),
     }),
-    defineField({
-      name: 'image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative Text',
-        },
-      ],
-      validation: rule => rule.required(),
-    }),
   ],
   preview: {
     select: {

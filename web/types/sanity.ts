@@ -709,14 +709,6 @@ export type ValuesItem = {
     | 'users'
     | 'bed-double'
     | 'door-open'
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
 }
 
 export type CardCarousel = {
