@@ -31,7 +31,7 @@ export function TextHero({
             by="word"
             once
             as="h1"
-            className="text-balance text-center text-4xl leading-[1.1] tracking-tight md:text-6xl lg:text-7xl"
+            className="max-w-4xl text-balance text-center text-4xl leading-[1.1] tracking-tight md:text-6xl lg:text-7xl"
           >
             {title ?? ''}
           </TextAnimate>

@@ -21,7 +21,13 @@ export function AlternativeHero({
       )}
     >
       <div className="pt-30 container flex flex-col gap-6 pb-20">
-        <TextAnimate animation="blurInUp" by="word" once as="h1">
+        <TextAnimate
+          animation="blurInUp"
+          by="word"
+          once
+          as="h1"
+          className="max-w-4xl"
+        >
           {title ?? ''}
         </TextAnimate>
         <div className="text-muted html-richtext max-w-prose">
