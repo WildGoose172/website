@@ -1,6 +1,7 @@
 'use client'
 
 import { SanityImage } from '@/components/sanity-image'
+import { Link } from '@/i18n/navigation'
 
 import { cn } from '@/lib/utils'
 import { BlockWithMeta } from '@/types/blocks'
@@ -25,9 +26,12 @@ export function Clients({
 
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
         {(clients ?? []).map(client => (
-          <div
+          <Link
             key={client.name}
-            className="bg-muted flex items-center justify-center rounded-2xl p-10"
+            href={client.clientWebsite || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-muted hover:scale-102 relative flex items-center justify-center rounded-2xl p-10 transition-transform duration-300"
           >
             <SanityImage
               src={client.image!}
@@ -37,7 +41,7 @@ export function Clients({
               loading="lazy"
               className="h-auto w-full object-contain grayscale"
             />
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -959,6 +959,7 @@ export type Clients = {
 export type ClientItem = {
   _type: 'clientItem'
   name?: string
+  clientWebsite?: string
   image?: {
     asset?: SanityImageAssetReference
     media?: unknown

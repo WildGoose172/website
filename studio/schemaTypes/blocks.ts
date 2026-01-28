@@ -210,6 +210,11 @@ const clientItemType = defineType({
       validation: rule => rule.required(),
     }),
     defineField({
+      name: 'clientWebsite',
+      type: 'url',
+      validation: rule => rule.required(),
+    }),
+    defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
