@@ -58,7 +58,7 @@ export async function generateMetadata({
   const url =
     'image' in page.seo && page.seo.image
       ? urlForImage(page.seo.image).width(1200).height(630).url()
-      : 'https://cdn.sanity.io/images/uwf1iyke/production/17898bf1deed45584cc5b0bdef9b4603a4422e73-1219x397.webp'
+      : 'https://cdn.sanity.io/images/uwf1iyke/production/df2784fc323401821732b75a8e0f11dcda698165-600x315.png'
 
   metadata.openGraph = {
     images: {
