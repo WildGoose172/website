@@ -22,12 +22,6 @@ export async function POST(request: NextRequest) {
       react: ContactTemplate(body.props),
     })
 
-    console.log('Resend response:', {
-      data,
-      error,
-      key: process.env.NEXT_RESEND_API_KEY,
-    })
-
     if (error) {
       return Response.json({ error }, { status: 500 })
     }
