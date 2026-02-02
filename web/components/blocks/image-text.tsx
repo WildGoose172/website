@@ -42,7 +42,7 @@ export function ImageText({
         )}
       >
         <h2>{title}</h2>
-        <div className="html-richtext">
+        <div className="html-richtext max-w-prose">
           <RichText text={text!} />
         </div>
       </div>
