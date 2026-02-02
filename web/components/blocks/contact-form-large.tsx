@@ -95,7 +95,7 @@ export function ContactFormLarge({
         className,
       )}
     >
-      <div className="flex flex-wrap gap-6 sm:flex-col">
+      <div className="flex flex-wrap gap-6 md:flex-col">
         {mail && (
           <div className="flex gap-4">
             <div className="h-fit w-fit rounded border p-1.5">

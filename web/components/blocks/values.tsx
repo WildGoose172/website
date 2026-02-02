@@ -20,6 +20,7 @@ type ValueItem = NonNullable<BlockWithMeta<'values'>['values']>[number]
 
 export function Values({ title, values, className }: BlockWithMeta<'values'>) {
   const mobile = useIsMobile()
+  const splitTitle = title?.split(' ') || []
 
   return (
     <section
@@ -28,37 +29,43 @@ export function Values({ title, values, className }: BlockWithMeta<'values'>) {
         className,
       )}
     >
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <motion.div
-          className="sm:bg-muted sm:rounded-2xl sm:p-6 lg:p-10"
-          initial={{ opacity: 0, y: 20 }}
+          className="sm:bg-muted sm:rounded-2xl sm:p-6 xl:p-10"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{
             duration: 0.3,
           }}
         >
-          <h2>{title}</h2>
+          <h2 className="flex gap-1 sm:flex-col sm:gap-0">
+            {splitTitle.map((word, index) => (
+              <span key={index} className="md:block">
+                {word}
+              </span>
+            ))}
+          </h2>
         </motion.div>
 
         {(values ?? []).map((value, i) => {
           return (
             <motion.div
               key={value._key}
-              className="hover:bg-muted/10 hover:scale-102 flex h-full flex-col gap-4 rounded-2xl border p-6 transition duration-300 lg:p-10"
-              initial={{ opacity: 0, y: 20 }}
+              className="hover:bg-muted/10 hover:scale-102 flex h-full flex-col gap-4 rounded-2xl border p-6 transition duration-300 xl:p-10"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{
                 duration: 0.3,
-                delay: mobile ? 0 : (i + 1) * 0.15,
+                delay: mobile ? 0 : (i + 1) * 0.1,
               }}
             >
               <div>{renderIcon(value.icon)}</div>
 
               <div className="flex flex-col gap-2">
                 <h3 className="head-4">{value.title}</h3>
-                <div className="html-richtext text-sm">
+                <div className="html-richtext text-sm lg:[&>p]:text-left">
                   <PortableText value={value.text ?? []} />
                 </div>
               </div>
