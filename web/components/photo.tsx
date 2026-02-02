@@ -18,9 +18,9 @@ export function Photo({
     : null
 
   const aspectRatios: Record<NonNullable<PhotoProps['aspectRatio']>, string> = {
-    square: 'aspect-square size-80',
-    landscape: 'aspect-video h-80',
-    portrait: 'aspect-[3/4] h-80',
+    square: 'aspect-square size-80 max-h-80 max-w-80',
+    landscape: 'aspect-video max-h-80',
+    portrait: 'aspect-[3/4] max-h-80',
   }
 
   return (
