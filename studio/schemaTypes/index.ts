@@ -10,6 +10,7 @@ import { serviceType } from './service'
 import { teaserType } from './teaser'
 import { vacancyType } from './vacancy'
 import { policyType } from './policy'
+import { redirectType } from './redirects'
 
 export const schemaTypes = [
   ...navigationTypes,
@@ -24,4 +25,5 @@ export const schemaTypes = [
   flockTalkType,
   vacancyType,
   policyType,
+  redirectType,
 ]

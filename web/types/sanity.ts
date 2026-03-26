@@ -12,6 +12,8 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol
+
 // Source: schema.json
 export type Mail = {
   title?: string
@@ -468,6 +470,13 @@ export type PolicyReference = {
   [internalGroqTypeReferenceTo]?: 'policy'
 }
 
+export type RedirectReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'redirect'
+}
+
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
@@ -518,6 +527,19 @@ export type InternationalizedArrayReferenceValue = {
     | FlockTalkReference
     | VacancyReference
     | PolicyReference
+    | RedirectReference
+}
+
+export type Redirect = {
+  _id: string
+  _type: 'redirect'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  source?: Slug
+  destination?: Slug
+  permanent?: boolean
+  language?: string
 }
 
 export type PageBuilder = Array<
@@ -1612,7 +1634,9 @@ export type AllSanitySchemaTypes =
   | FlockTalkReference
   | VacancyReference
   | PolicyReference
+  | RedirectReference
   | InternationalizedArrayReferenceValue
+  | Redirect
   | PageBuilder
   | SanityImageAssetReference
   | Teaser
@@ -1671,14 +1695,6 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
-
-export declare const internalGroqTypeReferenceTo: unique symbol
-
-type ArrayOf<T> = Array<
-  T & {
-    _key: string
-  }
->
 
 // Source: ../web/sanity/queries.ts
 // Variable: configQuery
@@ -4065,6 +4081,15 @@ export type LocaleQueryResult = {
   >
 } | null
 
+// Source: ../web/sanity/queries.ts
+// Variable: redirectsQuery
+// Query: *[_type == "redirect"]{    "source":source.current,     "destination":destination.current,     permanent  }
+export type RedirectsQueryResult = Array<{
+  source: string | null
+  destination: string | null
+  permanent: boolean | null
+}>
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
@@ -4077,5 +4102,6 @@ declare module '@sanity/client' {
     '\n  *[\n    _type == "project" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': ProjectOverviewQueryResult
     '\n  *[\n    _type == "vacancy" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': VacancyOverviewQueryResult
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&\n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    "_translations": *[\n      _type == "translation.metadata" &&\n      references(^._id)\n    ].translations[].value->{\n      language,\n      "slug": slug.current,\n    },\n  }\n': LocaleQueryResult
+    '\n  *[_type == "redirect"]{\n    "source":source.current, \n    "destination":destination.current, \n    permanent\n  }\n': RedirectsQueryResult
   }
 }

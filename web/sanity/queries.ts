@@ -192,3 +192,11 @@ export const localeQuery = defineQuery(`
     },
   }
 `)
+
+export const redirectsQuery = defineQuery(`
+  *[_type == "redirect"]{
+    "source":source.current, 
+    "destination":destination.current, 
+    permanent
+  }
+`)
