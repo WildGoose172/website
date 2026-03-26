@@ -44,7 +44,10 @@ const agrandir = localFont({
 export default async function RootLayout({
   children,
   params,
-}: LayoutProps<'/[[...slug]]'>) {
+}: {
+  children: React.ReactNode
+  params: Promise<{ slug?: string[] }>
+}) {
   const { isEnabled } = await draftMode()
   const { slug } = await params
   const [locale] = slug || [routing.defaultLocale]

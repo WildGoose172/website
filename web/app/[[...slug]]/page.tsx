@@ -11,10 +11,9 @@ import { urlForImage } from '@/sanity/image'
 import { sanityFetch } from '@/sanity/live'
 import { getTranslations } from 'next-intl/server'
 
-async function getPage(
-  params: PageProps<'/[[...slug]]'>['params'],
-  meta?: boolean,
-) {
+type SlugParams = { params: Promise<{ slug?: string[] }> }
+
+async function getPage(params: SlugParams['params'], meta?: boolean) {
   const { isEnabled } = await draftMode()
   const { slug } = await params
 
@@ -41,7 +40,7 @@ async function getPage(
 
 export async function generateMetadata({
   params,
-}: PageProps<'/[[...slug]]'>): Promise<Metadata> {
+}: SlugParams): Promise<Metadata> {
   const t = await getTranslations('seo')
   const { data: page } = await getPage(params, true)
 
@@ -71,7 +70,7 @@ export async function generateMetadata({
   return metadata
 }
 
-export default async function IndexPage({ params }: PageProps<'/[[...slug]]'>) {
+export default async function IndexPage({ params }: SlugParams) {
   const { data: page } = await getPage(params)
 
   if (!page) {
