@@ -14,7 +14,6 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { draftMode } from 'next/headers'
 import { SanityLive, sanityFetch } from '@/sanity/live'
-import Script from "next/script";
 
 const inter = Inter({
   variable: '--font-inter',
@@ -91,12 +90,6 @@ export default async function RootLayout({
               />
             </div>
           </NextIntlClientProvider>
-        <Script
-            type="text/javascript"
-            id="hs-script-loader"
-            async
-            defer
-            src="//js-eu1.hs-scripts.com/144005286.js"/>
         </body>
       </html>
     </ConsentManager>
