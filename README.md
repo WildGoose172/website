@@ -8,7 +8,7 @@ A monorepo project featuring a Next.js 16 frontend with internationalization sup
 - **CMS**: Sanity v5 with document internationalization
 - **Internationalization**: next-intl
 - **Mailing**: [Resend](https://resend.com/emails)
-- **Consent**: [Consent.io](https://consent.io/dashboard/wild-goose/europe-website)
+- **Consent**: [c15t](https://v3.c15t.com) hosted on [Inth](https://inth.com/dashboard/wild-goose/website/consent/overview)
 - **Package Manager**: pnpm with workspaces
 - **Linting/Formatting**: ESLint, Prettier
 

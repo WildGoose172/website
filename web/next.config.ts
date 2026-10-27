@@ -1,5 +1,6 @@
 import { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
+import { withConsentManifest } from 'c15t/next/build'
 import { redirectsQuery } from '@/sanity/queries'
 import { client } from '@/sanity/client'
 
@@ -29,15 +30,7 @@ const nextConfig: NextConfig = {
         redirect.permanent !== null,
     )
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/c15t/:path*',
-        destination: `${process.env.NEXT_PUBLIC_C15T_URL}/:path*`,
-      },
-    ]
-  },
 }
 
 const withNextIntl = createNextIntlPlugin()
-export default withNextIntl(nextConfig)
+export default withConsentManifest(withNextIntl(nextConfig))

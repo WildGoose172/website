@@ -12,8 +12,7 @@
     "typegen": "next typegen"
   },
   "dependencies": {
-    "@c15t/nextjs": "^1.8.3",
-    "@c15t/scripts": "^1.0.1",
+    "@c15t/integrations": "3.1.0",
     "@hookform/resolvers": "^5.2.2",
     "@portabletext/react": "^6.0.2",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -25,6 +24,7 @@
     "@sanity/asset-utils": "^2.3.0",
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.0.2",
+    "c15t": "3.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",

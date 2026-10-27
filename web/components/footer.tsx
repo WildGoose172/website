@@ -4,6 +4,8 @@ import { Link } from '@/i18n/navigation'
 import { SanityImage } from '@/components/sanity-image'
 import { LinkedIn, Instagram } from '@/components/icons'
 import { Mail, Phone } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { ConsentDialogLink } from 'c15t/next/components/consent-dialog-link'
 
 import { ConfigQueryResult } from '@/types/sanity'
 import { normalizeSlug } from '@/lib/utils'
@@ -13,6 +15,8 @@ interface FooterProps {
 }
 
 export function Footer({ config }: FooterProps) {
+  const t = useTranslations()
+
   return (
     <div className="container mx-auto">
       <footer
@@ -97,7 +101,7 @@ export function Footer({ config }: FooterProps) {
               &copy;{new Date().getFullYear()} Wild Goose BV
             </p>
 
-            <div className="flex flex-col text-sm sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-x-4 gap-y-1 text-sm sm:flex-row sm:items-center">
               {config?.policies?.map(policy => (
                 <Link
                   key={policy._key}
@@ -107,6 +111,9 @@ export function Footer({ config }: FooterProps) {
                   {policy.name}
                 </Link>
               ))}
+              <ConsentDialogLink className="cursor-pointer text-left underline">
+                {t('cookieSettings')}
+              </ConsentDialogLink>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 import { VisualEditing } from 'next-sanity/visual-editing'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
-import { ConsentManager } from '@/components/consent-manager'
+import { ConsentBanner, ConsentDialog, ConsentRoot } from 'c15t/next'
 import { JsonLd } from '@/components/json-ld'
 import { getSchemaOrg } from '@/lib/schema-org'
 
@@ -68,10 +68,12 @@ export default async function RootLayout({
   }
 
   return (
-    <ConsentManager>
-      <html lang={locale}>
-        <body className={`${inter.variable} ${agrandir.variable} antialiased`}>
-          <JsonLd data={getSchemaOrg(locale)} />
+    <html lang={locale}>
+      <body className={`${inter.variable} ${agrandir.variable} antialiased`}>
+        <JsonLd data={getSchemaOrg(locale)} />
+        <ConsentRoot>
+          <ConsentBanner />
+          <ConsentDialog />
           <NextIntlClientProvider>
             <div className="flex min-h-dvh flex-col">
               <Navigation config={config.navigation} />
@@ -93,8 +95,8 @@ export default async function RootLayout({
               />
             </div>
           </NextIntlClientProvider>
-        </body>
-      </html>
-    </ConsentManager>
+        </ConsentRoot>
+      </body>
+    </html>
   )
 }
