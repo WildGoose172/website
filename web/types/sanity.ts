@@ -4090,6 +4090,54 @@ export type RedirectsQueryResult = Array<{
   permanent: boolean | null
 }>
 
+// Source: ../web/sanity/queries.ts
+// Variable: llmsQuery
+// Query: *[    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&    defined(slug.current) &&    slug.current != "/" &&    (      language == "en" ||      (        language == "nl" &&        count(*[          _type == "translation.metadata" &&          references(^._id) &&          "en" in translations[]._key        ]) == 0      )    )  ] | order(_createdAt desc) {    _type,    language,    "slug": slug.current,    "title": coalesce(title, hero.title, teaser.title),    "description": coalesce(seo.description, pt::text(teaser.text)),  }
+export type LlmsQueryResult = Array<
+  | {
+      _type: 'flockTalk'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+  | {
+      _type: 'page'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+  | {
+      _type: 'policy'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+  | {
+      _type: 'project'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+  | {
+      _type: 'service'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+  | {
+      _type: 'vacancy'
+      language: string | null
+      slug: string | null
+      title: string | null
+      description: string
+    }
+>
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
@@ -4103,5 +4151,6 @@ declare module '@sanity/client' {
     '\n  *[\n    _type == "vacancy" &&\n    language == $language\n  ] | order(_createdAt desc) {\n    ...,\n    "slug": slug.current,\n  }\n': VacancyOverviewQueryResult
     '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&\n    slug.current == $slug &&\n    language == $language\n  ][0]{\n    "_translations": *[\n      _type == "translation.metadata" &&\n      references(^._id)\n    ].translations[].value->{\n      language,\n      "slug": slug.current,\n    },\n  }\n': LocaleQueryResult
     '\n  *[_type == "redirect"]{\n    "source":source.current, \n    "destination":destination.current, \n    permanent\n  }\n': RedirectsQueryResult
+    '\n  *[\n    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&\n    defined(slug.current) &&\n    slug.current != "/" &&\n    (\n      language == "en" ||\n      (\n        language == "nl" &&\n        count(*[\n          _type == "translation.metadata" &&\n          references(^._id) &&\n          "en" in translations[]._key\n        ]) == 0\n      )\n    )\n  ] | order(_createdAt desc) {\n    _type,\n    language,\n    "slug": slug.current,\n    "title": coalesce(title, hero.title, teaser.title),\n    "description": coalesce(seo.description, pt::text(teaser.text)),\n  }\n': LlmsQueryResult
   }
 }

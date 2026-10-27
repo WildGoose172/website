@@ -2,6 +2,7 @@
   "private": true,
   "name": "wg-website",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.34.6",
   "workspaces": [
     "studio",
     "web"

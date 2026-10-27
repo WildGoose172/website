@@ -200,3 +200,28 @@ export const redirectsQuery = defineQuery(`
     permanent
   }
 `)
+
+export const llmsQuery = defineQuery(`
+  *[
+    _type in ["page", "service", "project", "flockTalk", "vacancy", "policy"] &&
+    defined(slug.current) &&
+    slug.current != "/" &&
+    (
+      language == "en" ||
+      (
+        language == "nl" &&
+        count(*[
+          _type == "translation.metadata" &&
+          references(^._id) &&
+          "en" in translations[]._key
+        ]) == 0
+      )
+    )
+  ] | order(_createdAt desc) {
+    _type,
+    language,
+    "slug": slug.current,
+    "title": coalesce(title, hero.title, teaser.title),
+    "description": coalesce(seo.description, pt::text(teaser.text)),
+  }
+`)

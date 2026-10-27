@@ -1,6 +1,7 @@
 import { PageBuilder } from '@/components/page-builder'
 import { Vacancy } from '@/components/templates/vacancy'
 import { Policy } from '@/components/templates/policy'
+import { JsonLd } from '@/components/json-ld'
 
 import { routing } from '@/i18n/routing'
 import { pageQuery } from '@/sanity/queries'
@@ -10,6 +11,7 @@ import type { Metadata } from 'next'
 import { urlForImage } from '@/sanity/image'
 import { sanityFetch } from '@/sanity/live'
 import { getTranslations } from 'next-intl/server'
+import { getBlogPostingSchema, getJobPostingSchema } from '@/lib/schema-org'
 
 type SlugParams = { params: Promise<{ slug?: string[] }> }
 
@@ -79,6 +81,10 @@ export default async function IndexPage({ params }: SlugParams) {
 
   return (
     <div className="min-h-screen">
+      {page._type === 'vacancy' && <JsonLd data={getJobPostingSchema(page)} />}
+      {page._type === 'flockTalk' && (
+        <JsonLd data={getBlogPostingSchema(page)} />
+      )}
       {(() => {
         switch (page._type) {
           case 'vacancy':

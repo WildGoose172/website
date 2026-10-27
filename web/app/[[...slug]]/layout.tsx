@@ -8,6 +8,8 @@ import '../globals.css'
 import { VisualEditing } from 'next-sanity/visual-editing'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { ConsentManager } from '@/components/consent-manager'
+import { JsonLd } from '@/components/json-ld'
+import { getSchemaOrg } from '@/lib/schema-org'
 
 import { configQuery } from '@/sanity/queries'
 import { notFound } from 'next/navigation'
@@ -69,6 +71,7 @@ export default async function RootLayout({
     <ConsentManager>
       <html lang={locale}>
         <body className={`${inter.variable} ${agrandir.variable} antialiased`}>
+          <JsonLd data={getSchemaOrg(locale)} />
           <NextIntlClientProvider>
             <div className="flex min-h-dvh flex-col">
               <Navigation config={config.navigation} />
